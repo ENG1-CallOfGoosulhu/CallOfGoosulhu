@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="6">
+ <tileset firstgid="1" source="modular_buildings_32.tsx"/>
+ <tileset firstgid="8289" source="terrains_32.tsx"/>
+ <tileset firstgid="10657" source="city_props_32.tsx"/>
+ <tileset firstgid="17825" source="interior_32.tsx"/>
+ <tileset firstgid="17861" source="land_32.tsx"/>
+ <tileset firstgid="17901" source="restaurant_32.tsx"/>
+ <tileset firstgid="17909" source="quaken_.tsx"/>
+ <tileset firstgid="17958" source="interior.tsx"/>
+ <tileset firstgid="17985" source="graveyard_32.tsx"/>
+ <tileset firstgid="19265" source="Floor_2_16x16.tsx"/>
+ <tileset firstgid="19507" source="city_terrains_32.tsx"/>
+ <tileset firstgid="25584" source="Floor_1_16x16.tsx"/>
+ <tileset firstgid="25826" source="bunch.tsx"/>
+ <tileset firstgid="25912" source="Carpets_1_16x16.tsx"/>
+ <tileset firstgid="26029" source="quaken.tsx"/>
+ <tileset firstgid="26078" source="inter_32.tsx"/>
  <layer id="1" name="Tile Layer 1" width="50" height="50">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
