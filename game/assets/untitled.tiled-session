@@ -1,8 +1,21 @@
 {
-    "activeFile": "",
+    "activeFile": "maps/ron_cooke_Lisa.tmx",
     "expandedProjectPaths": [
+        ".",
+        "maps"
     ],
     "fileStates": {
+        "maps/Carpets_1_16x16.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "maps/Floor_1_16x16.tsx": {
+            "scaleInDock": 1
+        },
+        "maps/Floor_2_16x16.tsx": {
+            "scaleInDock": 1
+        },
         "maps/Outside_campus_MAIN.tmx": {
             "scale": 0.75,
             "selectedLayer": 0,
@@ -34,6 +47,9 @@
             "scaleInDock": 1
         },
         "maps/beach_32.tsx": {
+            "scaleInDock": 1
+        },
+        "maps/bunch.tsx": {
             "scaleInDock": 1
         },
         "maps/camping_32.tsx": {
@@ -83,7 +99,22 @@
                 "y": 250
             }
         },
+        "maps/inter_32.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "maps/interior.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 0.6699,
+            "scaleInEditor": 0.1
+        },
+        "maps/interior_32.tsx": {
+            "scaleInDock": 1
+        },
         "maps/interiors_32.tsx": {
+            "scaleInDock": 1
+        },
+        "maps/land_32.tsx": {
             "scaleInDock": 1
         },
         "maps/main_map.tmx": {
@@ -98,7 +129,7 @@
             "scaleInDock": 1
         },
         "maps/modular_buildings_32.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 0.2119
         },
         "maps/office_32.tsx": {
             "dynamicWrapping": true,
@@ -113,12 +144,34 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "maps/quaken.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "maps/quaken_.tsx": {
+            "scaleInDock": 1
+        },
+        "maps/restaurant_32.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "maps/restaurant_asset/floor_32.tsx": {
+            "scaleInDock": 1
+        },
         "maps/ron_cooke.tmx": {
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 690,
-                "y": 428
+                "x": 1113,
+                "y": 650
+            }
+        },
+        "maps/ron_cooke_Lisa.tmx": {
+            "scale": 0.3983,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 952.7993974391163,
+                "y": 685.4130052724078
             }
         },
         "maps/room_builder_32.tsx": {
@@ -172,9 +225,14 @@
     "map.tileWidth": 32,
     "map.width": 50,
     "openFiles": [
+        "maps/ron_cooke_Lisa.tmx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
+        "maps/ron_cooke_Lisa.tmx",
+        "maps/Carpets_1_16x16.tsx",
+        "maps/interior.tsx",
+        "maps/ron_cooke.tmx",
         "maps/subway_and_train_station_32.tsx",
         "maps/swimming_pool_32.tsx",
         "maps/villas_32.tsx",
