@@ -1,0 +1,740 @@
+{
+ "meta": {
+  "name": "Pixel Spooky Haunted House Icons",
+  "tile_size": 32,
+  "columns": 10,
+  "rows": 10,
+  "image": "spritesheet.png",
+  "count": 91
+ },
+ "frames": {
+  "ghost_white": {
+   "x": 0,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 0
+  },
+  "ghost_blue": {
+   "x": 32,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 1
+  },
+  "ghost_green": {
+   "x": 64,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 2
+  },
+  "ghost_pink": {
+   "x": 96,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 3
+  },
+  "ghost_angry": {
+   "x": 128,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 4
+  },
+  "ghost_surprised": {
+   "x": 160,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 5
+  },
+  "ghost_gentleman": {
+   "x": 192,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 6
+  },
+  "ghost_king": {
+   "x": 224,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 7
+  },
+  "sheet_ghost": {
+   "x": 256,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "ghosts",
+   "index": 8
+  },
+  "haunted_house": {
+   "x": 288,
+   "y": 0,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 9
+  },
+  "haunted_house_green": {
+   "x": 0,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 10
+  },
+  "haunted_house_red": {
+   "x": 32,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 11
+  },
+  "cottage_gray": {
+   "x": 64,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 12
+  },
+  "manor": {
+   "x": 96,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 13
+  },
+  "door_wood": {
+   "x": 128,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 14
+  },
+  "door_purple": {
+   "x": 160,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 15
+  },
+  "window_lit": {
+   "x": 192,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 16
+  },
+  "window_dark": {
+   "x": 224,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 17
+  },
+  "iron_fence": {
+   "x": 256,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 18
+  },
+  "cemetery_gate": {
+   "x": 288,
+   "y": 32,
+   "w": 32,
+   "h": 32,
+   "category": "house",
+   "index": 19
+  },
+  "tombstone_cross": {
+   "x": 0,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 20
+  },
+  "tombstone_round": {
+   "x": 32,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 21
+  },
+  "tombstone_angel": {
+   "x": 64,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 22
+  },
+  "tombstone_broken": {
+   "x": 96,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 23
+  },
+  "tombstone_mossy": {
+   "x": 128,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 24
+  },
+  "tombstone_rip": {
+   "x": 160,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 25
+  },
+  "coffin_wood": {
+   "x": 192,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 26
+  },
+  "coffin_black": {
+   "x": 224,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 27
+  },
+  "jack_o_lantern": {
+   "x": 256,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "pumpkins",
+   "index": 28
+  },
+  "pumpkin": {
+   "x": 288,
+   "y": 64,
+   "w": 32,
+   "h": 32,
+   "category": "pumpkins",
+   "index": 29
+  },
+  "pumpkin_white": {
+   "x": 0,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "pumpkins",
+   "index": 30
+  },
+  "pumpkin_green": {
+   "x": 32,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "pumpkins",
+   "index": 31
+  },
+  "dead_tree": {
+   "x": 64,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "graveyard",
+   "index": 32
+  },
+  "skull": {
+   "x": 96,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 33
+  },
+  "crossbones": {
+   "x": 128,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 34
+  },
+  "ribcage": {
+   "x": 160,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 35
+  },
+  "skeleton_hand": {
+   "x": 192,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 36
+  },
+  "candle": {
+   "x": 224,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 37
+  },
+  "candle_black": {
+   "x": 256,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 38
+  },
+  "candle_melted": {
+   "x": 288,
+   "y": 96,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 39
+  },
+  "candelabra": {
+   "x": 0,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 40
+  },
+  "lantern_yellow": {
+   "x": 32,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 41
+  },
+  "lantern_green": {
+   "x": 64,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 42
+  },
+  "lantern_purple": {
+   "x": 96,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 43
+  },
+  "cauldron": {
+   "x": 128,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 44
+  },
+  "potion_green": {
+   "x": 160,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 45
+  },
+  "potion_purple": {
+   "x": 192,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 46
+  },
+  "potion_red": {
+   "x": 224,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 47
+  },
+  "potion_blue": {
+   "x": 256,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 48
+  },
+  "witch_hat": {
+   "x": 288,
+   "y": 128,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 49
+  },
+  "witch_hat_green": {
+   "x": 0,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 50
+  },
+  "broomstick": {
+   "x": 32,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 51
+  },
+  "spellbook_purple": {
+   "x": 64,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 52
+  },
+  "spellbook_red": {
+   "x": 96,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 53
+  },
+  "crystal_ball": {
+   "x": 128,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "witch",
+   "index": 54
+  },
+  "bat_purple": {
+   "x": 160,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 55
+  },
+  "bat_black": {
+   "x": 192,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 56
+  },
+  "bat_resting": {
+   "x": 224,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 57
+  },
+  "spider_black": {
+   "x": 256,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 58
+  },
+  "spider_purple": {
+   "x": 288,
+   "y": 160,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 59
+  },
+  "spiderweb": {
+   "x": 0,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 60
+  },
+  "black_cat": {
+   "x": 32,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 61
+  },
+  "zombie": {
+   "x": 64,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 62
+  },
+  "vampire": {
+   "x": 96,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 63
+  },
+  "mummy": {
+   "x": 128,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 64
+  },
+  "frankenstein": {
+   "x": 160,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 65
+  },
+  "werewolf": {
+   "x": 192,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 66
+  },
+  "grim_reaper": {
+   "x": 224,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 67
+  },
+  "eyeball": {
+   "x": 256,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 68
+  },
+  "slime_green": {
+   "x": 288,
+   "y": 192,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 69
+  },
+  "slime_purple": {
+   "x": 0,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 70
+  },
+  "crow": {
+   "x": 32,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "creatures",
+   "index": 71
+  },
+  "key_old": {
+   "x": 64,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 72
+  },
+  "key_skeleton": {
+   "x": 96,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 73
+  },
+  "padlock": {
+   "x": 128,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 74
+  },
+  "old_scroll": {
+   "x": 160,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 75
+  },
+  "street_lamp": {
+   "x": 192,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 76
+  },
+  "crescent_moon": {
+   "x": 224,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 77
+  },
+  "ghost_mask": {
+   "x": 256,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 78
+  },
+  "halloween_candy": {
+   "x": 288,
+   "y": 224,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 79
+  },
+  "swirl_lollipop": {
+   "x": 0,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 80
+  },
+  "candy_bucket": {
+   "x": 32,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 81
+  },
+  "cursed_chest": {
+   "x": 64,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 82
+  },
+  "cursed_shield": {
+   "x": 96,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 83
+  },
+  "rusty_dagger": {
+   "x": 128,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 84
+  },
+  "spirit_board": {
+   "x": 160,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 85
+  },
+  "gallows": {
+   "x": 192,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 86
+  },
+  "church_bell": {
+   "x": 224,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 87
+  },
+  "chain": {
+   "x": 256,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 88
+  },
+  "lightning_bolt": {
+   "x": 288,
+   "y": 256,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 89
+  },
+  "fog_cloud": {
+   "x": 0,
+   "y": 288,
+   "w": 32,
+   "h": 32,
+   "category": "items",
+   "index": 90
+  }
+ }
+}
