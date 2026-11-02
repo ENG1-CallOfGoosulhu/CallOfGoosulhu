@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared;
+package io.github.goldengoose.ui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

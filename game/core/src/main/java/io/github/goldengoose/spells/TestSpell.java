@@ -1,9 +1,8 @@
 package io.github.goldengoose.spells;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.player.Player;
-import io.github.goldengoose.shared.Assets;
+import io.github.goldengoose.assets.Assets;
 
 public class TestSpell extends Spell{
 

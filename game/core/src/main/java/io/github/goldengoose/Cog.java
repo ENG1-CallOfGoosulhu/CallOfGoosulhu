@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.goldengoose.screen.MainMenuScreen;
-import io.github.goldengoose.shared.Assets;
+import io.github.goldengoose.assets.Assets;
 
 public class Cog extends Game {
     public SpriteBatch batch;

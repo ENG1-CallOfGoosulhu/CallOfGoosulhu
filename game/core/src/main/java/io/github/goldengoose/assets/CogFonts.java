@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared.enums;
+package io.github.goldengoose.assets;
 
 public enum CogFonts {
     CRISTOFORO("fonts/Cristoforo.ttf");

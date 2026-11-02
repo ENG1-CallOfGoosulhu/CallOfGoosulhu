@@ -3,8 +3,8 @@ package io.github.goldengoose.player;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import io.github.goldengoose.shared.Entity;
-import io.github.goldengoose.shared.InputManager;
+import io.github.goldengoose.world.Entity;
+import io.github.goldengoose.util.InputManager;
 
 public class Player extends Entity {
     private static final float SPEED = 50f;

@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared;
+package io.github.goldengoose;
 
 /**
  * Countdown for the match. (UR_GAME_TIMER)

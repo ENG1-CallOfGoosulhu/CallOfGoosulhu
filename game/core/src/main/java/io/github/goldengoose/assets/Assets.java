@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared;
+package io.github.goldengoose.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;

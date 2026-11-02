@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared;
+package io.github.goldengoose.world;
 
 public final class RenderLayer {
     public static final int GROUND = 0;

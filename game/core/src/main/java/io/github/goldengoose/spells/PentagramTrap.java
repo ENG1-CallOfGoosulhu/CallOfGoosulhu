@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.goose.Goose;
-import io.github.goldengoose.shared.Entity;
-import io.github.goldengoose.shared.RenderLayer;
+import io.github.goldengoose.world.Entity;
+import io.github.goldengoose.world.RenderLayer;
 
 public class PentagramTrap extends Entity {
 

@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared;
+package io.github.goldengoose.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -11,7 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.goldengoose.Cog;
 import io.github.goldengoose.screen.MainMenuScreen;
-import io.github.goldengoose.shared.enums.CogFonts;
+import io.github.goldengoose.assets.CogFonts;
+import io.github.goldengoose.util.Utilities;
 
 public class PauseMenu {
     private final Stage stage;

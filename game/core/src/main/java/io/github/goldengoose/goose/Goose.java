@@ -1,16 +1,15 @@
 package io.github.goldengoose.goose;
 
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.player.Player;
-import io.github.goldengoose.shared.Assets;
-import io.github.goldengoose.shared.Entity;
-import io.github.goldengoose.shared.Utilities;
+import io.github.goldengoose.assets.Assets;
+import io.github.goldengoose.world.Entity;
+import io.github.goldengoose.util.Utilities;
 
 public class Goose extends Entity {
     //------------

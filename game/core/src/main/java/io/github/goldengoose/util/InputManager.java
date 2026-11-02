@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared;
+package io.github.goldengoose.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
