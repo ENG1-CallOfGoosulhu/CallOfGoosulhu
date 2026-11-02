@@ -20,163 +20,19 @@ import io.github.goldengoose.screen.MainMenuScreen;
 import io.github.goldengoose.shared.enums.CogFonts;
 
 /** Game timer, press p to pause and unpause. (UR_GAME_TIMER, UR_PAUSE_GAME) */
+/** Countdown for the match. (UR_GAME_TIMER) */
 public class GameTimer {
+    private float secondsRemaining;
 
-    /** Time left, starts at 5 mins. (UR_GAME_TIMER) */
-    private float secondsRemaining = 5 * 60;
-
-    /** Game starts paused, also check. (UR_PAUSE_GAME) */
-    private boolean isPaused = true;
-
-    private final float xPos;
-    private final float yPos;
-
-    BitmapFont font;
-    OrthographicCamera camera;
-    private final Stage stage;
-    private BitmapFont pauseFont;
-    private BitmapFont buttonFont;
-    private final Cog game;
-
-    public GameTimer(OrthographicCamera camera, Cog game) {
-        font = new BitmapFont();
-        this.camera = camera;
-        this.game = game;
-
-        xPos = 20;
-        yPos = Gdx.graphics.getHeight() - 20;
-
-        stage = new Stage(new ScreenViewport(), game.batch);
-        Gdx.input.setInputProcessor(stage);
-        createPauseMenu();
+    public GameTimer(float seconds) {
+        secondsRemaining = seconds;
     }
 
-    /** Every frame, check pause key (P) and run timer. (UR_GAME_TIMER, UR_PAUSE_GAME) */
     public void update(float deltaTime) {
-        if (InputManager.pause()) {
-            isPaused = !isPaused;
-        }
-
-        if (!isPaused) {
-            secondsRemaining -= deltaTime;
-        }
-
-        if (secondsRemaining < 0) {
-            secondsRemaining = 0;
-        }
-        stage.act(deltaTime);
+        secondsRemaining = Math.max(0f, secondsRemaining - deltaTime);
     }
 
-    public void draw(SpriteBatch batch) {
-        batch.setProjectionMatrix(camera.combined);
+    public boolean isTimeUp() { return secondsRemaining <= 0f; }
 
-        font.draw(batch, String.format("%.1f", secondsRemaining), xPos, yPos);
-        font.draw(batch, "Press P to pause", xPos, yPos - 20);
-    }
-
-    public void drawPauseOverlay(ShapeRenderer shapeRenderer) {
-        if (isPaused) {
-            Gdx.gl.glEnable(GL20.GL_BLEND);
-            Gdx.gl.glBlendFunc(
-                GL20.GL_SRC_ALPHA,
-                GL20.GL_ONE_MINUS_SRC_ALPHA
-            );
-
-            shapeRenderer.setProjectionMatrix(camera.combined);
-            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-            shapeRenderer.setColor(0f, 0f, 0f, 0.5f);
-            shapeRenderer.rect(
-                0,
-                0,
-                camera.viewportWidth,
-                camera.viewportHeight
-            );
-
-            shapeRenderer.end();
-
-            stage.draw();
-        }
-    }
-
-    private void createPauseMenu() {
-        pauseFont = Utilities.createFont(CogFonts.CRISTOFORO, 48);
-        buttonFont = Utilities.createFont(CogFonts.CRISTOFORO, 16);
-
-        com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle titleStyle = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
-        titleStyle.font = pauseFont;
-        titleStyle.fontColor = Color.WHITE;
-
-        Label title = new Label("Press 'P' to unpause", titleStyle);
-
-        TextButton.TextButtonStyle buttonStyle =
-            new TextButton.TextButtonStyle();
-
-        buttonStyle.font = buttonFont;
-        buttonStyle.fontColor = Color.WHITE;
-        buttonStyle.overFontColor = Color.YELLOW;
-
-        buttonStyle.up = new BaseDrawable();
-        buttonStyle.down = new BaseDrawable();
-        buttonStyle.over = new BaseDrawable();
-
-        TextButton quitMenu =
-            new TextButton("QUIT TO MENU", buttonStyle);
-
-        TextButton quitDesktop =
-            new TextButton("QUIT TO DESKTOP", buttonStyle);
-
-        quitMenu.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new MainMenuScreen(game));
-                dispose();
-            }
-        });
-
-        quitDesktop.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
-                dispose();
-            }
-        });
-
-        Table table = new Table();
-        table.setFillParent(true);
-
-        table.add(title).padBottom(50).colspan(2);
-        table.row();
-
-        table.add(quitMenu);
-        table.add(quitDesktop);
-
-        stage.addActor(table);
-    }
-
-    public Stage getStage() {
-        return stage;
-    }
-    public void setPaused(boolean paused) {
-        isPaused = paused;
-    }
-
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
-
-    public void dispose() {
-        stage.dispose();
-        pauseFont.dispose();
-        buttonFont.dispose();
-    }
-
-    /** True while game is paused. (UR_PAUSE_GAME) */
-    public boolean isPaused() { return isPaused; }
-
-    /** True once clock reaches zero. (UR_GAME_TIMER, UR_WIN, FR_TIMER_COUNTDOWN) */
-    public boolean isTimeUp() { return secondsRemaining <= 0; }
-
-    /** How many seconds left. (UR_SCORE) */
     public float getSecondsRemaining() { return secondsRemaining; }
 }

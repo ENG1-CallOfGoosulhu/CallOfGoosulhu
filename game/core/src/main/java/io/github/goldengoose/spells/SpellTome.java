@@ -1,124 +1,82 @@
 package io.github.goldengoose.spells;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import io.github.goldengoose.Cog;
-import io.github.goldengoose.shared.InputManager;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SpellTome {
+    private static final float REFERENCE_WIDTH = 800f;
+    private static final float SCALE_X = 2f;
+    private static final float SCALE_Y = 1.5f;
+    private static final float PADDING = 20f;
 
-    OrthographicCamera camera;
-    private final Stage stage;
-    private final Cog game;
+    private static final float ICON_OFFSET_X = 11f;
+    private static final float ICON_OFFSET_Y = 19f;
+
+    private static final float BAR_OFFSET_RIGHT = 100f;
+    private static final float BAR_OFFSET_Y = 57f;
+    private static final float BAR_SIZE = 60f;
+
     private Texture texture;
-
     private final List<Spell> spells = new ArrayList<>();
     private int selectedSpell = 0;
 
-    private final ShapeRenderer shapes;
 
-    public SpellTome(
-        OrthographicCamera camera,
-        Cog game,
-        ShapeRenderer shapes
-    ) {
-        this.camera = camera;
-        this.game = game;
-        this.shapes = shapes;
+    public SpellTome(Texture texture) {
+        this.texture = texture;
 
-        texture = new Texture("spell_tome_w_writing.png");
-
-        stage = new Stage(new ScreenViewport(), game.batch);
     }
 
-    public void draw(SpriteBatch batch) {
-        batch.setProjectionMatrix(stage.getCamera().combined);
-
-        float screenWidth = stage.getViewport().getWorldWidth();
-
-        float scale = screenWidth / 800f;
-
-        float width = texture.getWidth() * scale * 2f;
-        float height = texture.getHeight() * scale * 1.5f;
-
-        float padding = 20f * scale;
-
-        float x = screenWidth - width - padding;
-        float y = padding;
-
+    public void drawShapes(ShapeRenderer shapes, Viewport hud) {
         Spell currentSpell = getSelectedSpell();
+        if (currentSpell == null) return;
 
-        batch.end();
-        drawCooldownBar();
-        batch.begin();
+        float screenWidth = hud.getWorldWidth();
+        float scale = screenWidth / REFERENCE_WIDTH;
+
+        float barX = screenWidth - BAR_OFFSET_RIGHT * scale;
+        float barY = BAR_OFFSET_Y * scale;
+        float barSize = BAR_SIZE * scale;
+
+        shapes.setColor(0f, 0f, 0f, 0.5f);
+        shapes.rect(barX, barY, barSize, barSize);
+
+        float cooldownPercent = currentSpell.getCooldownPercent();
+        if (cooldownPercent > 0f) {
+            shapes.setColor(1f, 0f, 0f, 1f);
+            shapes.rect(barX, barY, barSize, barSize * cooldownPercent);
+        }
+    }
+
+    public void drawSprites(SpriteBatch batch, Viewport hud) {
+        float screenWidth = hud.getWorldWidth();
+        float scale = screenWidth / REFERENCE_WIDTH;
+
+        float width = texture.getWidth() * scale * SCALE_X;
+        float height = texture.getHeight() * scale * SCALE_Y;
+        float x = screenWidth - width - PADDING * scale;
+        float y = PADDING * scale;
 
         batch.draw(texture, x, y, width, height);
 
-        if (currentSpell != null) {
-            Texture spellTexture = currentSpell.getTexture();
-            if (spellTexture == null) return;
-
-            float spellX = x + 11f * scale * 2f;
-            float spellY = y + 19f * scale * 1.5f;
-
-            float spellWidth = spellTexture.getWidth() * scale * 2f;
-            float spellHeight = spellTexture.getHeight() * scale * 1.5f;
-
-            batch.draw(
-                spellTexture,
-                spellX,
-                spellY,
-                spellWidth,
-                spellHeight
-            );
-        }
-    }
-
-    private void drawCooldownBar() {
         Spell currentSpell = getSelectedSpell();
+        if (currentSpell == null || currentSpell.getTexture() == null) return;
 
-        if (currentSpell == null) return;
-
-        float screenWidth = stage.getViewport().getWorldWidth();
-
-        float scale = screenWidth / 800f;
-
-        float barX = screenWidth - 100f * scale;
-        float barY = 57f * scale;
-        float barWidth = 60f * scale;
-        float barHeight = 60f * scale;
-
-        float cooldownPercent = currentSpell.getCooldownPercent();
-
-        shapes.setProjectionMatrix(stage.getCamera().combined);
-        shapes.begin(ShapeRenderer.ShapeType.Filled);
-
-        shapes.setColor(0f, 0f, 0f, 0.5f);
-        shapes.rect(barX, barY, barWidth, barHeight);
-
-        if (cooldownPercent > 0f) {
-            shapes.setColor(1f, 0f, 0f, 1f);
-            shapes.rect(
-                barX,
-                barY,
-                barWidth,
-                barHeight * cooldownPercent
-            );
-        }
-
-        shapes.end();
+        Texture spellTexture = currentSpell.getTexture();
+        batch.draw(
+            spellTexture,
+            x + ICON_OFFSET_X * scale * SCALE_X,
+            y + ICON_OFFSET_Y * scale * SCALE_Y,
+            spellTexture.getWidth() * scale * SCALE_X,
+            spellTexture.getHeight() * scale * SCALE_Y
+        );
     }
 
     /**
@@ -167,8 +125,6 @@ public class SpellTome {
     }
 
     public void update(float deltaTime) {
-        stage.act(deltaTime);
-
         for (Spell spell : spells) {
             spell.reduceCooldown(deltaTime);
         }
@@ -193,13 +149,5 @@ public class SpellTome {
                 return false;
             }
         };
-    }
-
-    public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
-    }
-
-    public void dispose() {
-        stage.dispose();
     }
 }
