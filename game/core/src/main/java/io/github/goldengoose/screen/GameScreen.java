@@ -57,10 +57,9 @@ public class GameScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
         shapeRenderer = new ShapeRenderer();
-        player = new Player();
 
-        world.addEntity(player);
         world.init();
+        player = world.getPlayer();
 
         PentagramTrapSpell pentagramTrapSpell = new PentagramTrapSpell(this.player, world, game.assets);
         TestSpell testSpell = new TestSpell(this.player, game.assets);

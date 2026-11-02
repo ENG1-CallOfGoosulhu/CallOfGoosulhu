@@ -8,18 +8,28 @@ import io.github.goldengoose.player.Player;
 import io.github.goldengoose.spells.PentagramTrap;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class GameWorld {
     private final List<Entity> entities = new ArrayList<>();
-    private Assets assets;
+    private final List<Entity> pendingEntities = new ArrayList<>();
+    private final Player player;
+    private final Assets assets;
 
     public GameWorld(Assets assets) {
         this.assets = assets;
+        player = new Player(assets.getTexture(Assets.PLAYER));
+        entities.add(player);
+        entities.add(new Goose(player, new Vector2(200, 200), assets));
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public void addEntity(Entity entity) {
-        entities.add(entity);
+        pendingEntities.add(entity);
     }
 
     public void init() {
@@ -34,44 +44,25 @@ public class GameWorld {
             entity.update(deltaTime);
         }
 
-        updateTraps();
-
-        entities.removeIf(entity -> {
-            if (entity instanceof PentagramTrap trap) {
-                if (trap.isExpired()) {
-                    return true;
-                }
-            }
-
-            return false;
-        });
-    }
-
-    private void updateTraps() {
         for (Entity entity : entities) {
-            if (!(entity instanceof PentagramTrap trap)) {
-                continue;
-            }
-
             for (Entity other : entities) {
-                if (other instanceof Goose goose) {
-                    trap.checkGoose(goose);
+                if (entity != other) {
+                    entity.interact(other);
                 }
             }
+        }
+        entities.removeIf(Entity::isExpired);
+
+        if (!pendingEntities.isEmpty()) {
+            entities.addAll(pendingEntities);
+            pendingEntities.clear();
+            entities.sort(Comparator.comparingInt(Entity::getRenderLayer));
         }
     }
 
     public void render(SpriteBatch batch) {
         for (Entity entity : entities) {
-            if (entity instanceof PentagramTrap) {
-                entity.render(batch);
-            }
-        }
-
-        for (Entity entity : entities) {
-            if (!(entity instanceof PentagramTrap)) {
-                entity.render(batch);
-            }
+            entity.render(batch);
         }
     }
 

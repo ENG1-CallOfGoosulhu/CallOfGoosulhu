@@ -11,8 +11,8 @@ public class Player extends Entity {
 
     private final Vector2 velocity = new Vector2();
 
-    public Player() {
-        texture = new Texture("test_player.png");
+    public Player(Texture texture) {
+        this.texture = texture;
     }
 
     @Override
