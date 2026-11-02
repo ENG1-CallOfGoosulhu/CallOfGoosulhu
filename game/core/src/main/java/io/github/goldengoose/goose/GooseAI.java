@@ -1,6 +1,7 @@
 package io.github.goldengoose.goose;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -45,10 +46,12 @@ public class GooseAI {
 
 
     private GooseState state = GooseState.IDLE;
-    private Vector2 idleTarget;
     private final Goose goose;
     private final Vector2 velocity = new Vector2();
     private final Vector2 direction = new Vector2();
+
+    private final Vector2 idleTarget = new Vector2();
+    private boolean hasIdleTarget = false;
 
     private boolean idleWaiting = false;
     private float waitTimer;
@@ -87,7 +90,8 @@ public class GooseAI {
         velocity.setZero();
 
         if (state == GooseState.CHASING) {
-            idleTarget = null;
+            hasIdleTarget = false;
+            idleWaiting = false;
 
             if (playerDist2 > HONK_RANGE * HONK_RANGE) {
                 moveTo(playerCentre);
@@ -106,7 +110,7 @@ public class GooseAI {
     }
 
     private void wander(float deltaTime) {
-        if (idleTarget == null) {
+        if (!hasIdleTarget) {
             chooseNewTarget();
             return;
         }
@@ -116,7 +120,7 @@ public class GooseAI {
             velocity.setZero();
 
             if (waitTimer <= 0f) {
-                idleTarget = null;
+                hasIdleTarget = false;
                 idleWaiting = false;
             }
 
@@ -127,21 +131,18 @@ public class GooseAI {
             velocity.setZero();
             idleWaiting = true;
 
-            waitTimer = MIN_IDLE_WAIT
-                + (float) Math.random() * (MAX_IDLE_WAIT - MIN_IDLE_WAIT);
+            waitTimer = MathUtils.random(MIN_IDLE_WAIT, MAX_IDLE_WAIT);
         }
     }
 
 
     private void chooseNewTarget() {
-        float angle = (float) (Math.random() * 2 * Math.PI);
-        float distance = MIN_WANDER_RANGE
-            + (float) Math.random() * (MAX_WANDER_RANGE - MIN_WANDER_RANGE);
+        float angle = MathUtils.random(MathUtils.PI2);
+        float distance = MathUtils.random(MIN_WANDER_RANGE, MAX_WANDER_RANGE);
 
-        idleTarget = new Vector2(
-            goose.getPosition().x + (float) Math.cos(angle) * distance,
-            goose.getPosition().y + (float) Math.sin(angle) * distance
-        );
+        idleTarget.set(gooseCentre).add(MathUtils.cos(angle) * distance, MathUtils.sin(angle) * distance);
+
+        hasIdleTarget = true;
         idleWaiting = false;
     }
 
@@ -166,9 +167,9 @@ public class GooseAI {
     }
 
     private boolean moveTo(Vector2 target) {
-        direction.set(target.cpy().sub(goose.getPosition()));
+        direction.set(target).sub(gooseCentre);
 
-        if (direction.len() < 3f) {
+        if (direction.len2() < 3f * 3f) {
             velocity.setZero();
             return true;
         }
@@ -191,6 +192,8 @@ public class GooseAI {
     }
 
     public void renderDebug(ShapeRenderer shapes) {
+        goose.getCentre(gooseCentre);
+        
         float x = gooseCentre.x;
         float y = gooseCentre.y;
 

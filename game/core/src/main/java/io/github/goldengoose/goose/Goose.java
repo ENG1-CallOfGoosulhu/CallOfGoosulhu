@@ -40,7 +40,7 @@ public class Goose extends Entity {
 
     public Goose(Player player, Vector2 position, Assets assets) {
         walkAnimations = Utilities.createAnimations(assets.getTexture(Assets.GOOSE_WALK), WALK_FRAME_TIME, FRAME_SIZE);
-        runAnimations = Utilities.createAnimations(assets.getTexture(Assets.GOOSE_WALK), RUN_FRAME_TIME, FRAME_SIZE);
+        runAnimations = Utilities.createAnimations(assets.getTexture(Assets.GOOSE_RUN), RUN_FRAME_TIME, FRAME_SIZE);
 
         this.player = player;
         this.position.set(position);
