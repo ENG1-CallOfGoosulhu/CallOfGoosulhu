@@ -59,16 +59,18 @@ public class GooseAI {
     private static final float VISION_DOT_THRESHOLD =
         (float) Math.cos(Math.toRadians(VISION_HALF_ANGLE_DEGREES));
 
+    private final Vector2 gooseCentre = new Vector2();
+    private final Vector2 playerCentre = new Vector2();
+
     public GooseAI(Goose goose) {
         this.goose = goose;
     }
 
 
     public void update(float deltaTime) {
-        Vector2 playerPosition = goose.getPlayer().getPosition();
-        Vector2 goosePosition = goose.getPosition();
-
-        float playerDist2 = goosePosition.dst2(playerPosition);
+        goose.getCentre(gooseCentre);
+        goose.getPlayer().getCentre(playerCentre);
+        float playerDist2 = gooseCentre.dst2(playerCentre);
 
         // TODO: Once we determine how player makes noise, replace true with variable:
         boolean detected = canSeePlayer()
@@ -88,7 +90,7 @@ public class GooseAI {
             idleTarget = null;
 
             if (playerDist2 > HONK_RANGE * HONK_RANGE) {
-                moveTo(playerPosition);
+                moveTo(playerCentre);
             } else {
                 // TODO: Honk at the player.
             }
@@ -100,7 +102,7 @@ public class GooseAI {
             ? CHASING_SPEED
             : IDLE_SPEED;
 
-        goosePosition.mulAdd(velocity, speed * deltaTime);
+        goose.getPosition().mulAdd(velocity, speed * deltaTime);
     }
 
     private void wander(float deltaTime) {
@@ -148,14 +150,11 @@ public class GooseAI {
             return false;
         }
 
-        return goose.getPosition().dst2(goose.getPlayer().getPosition()) <= HEARING_RANGE * HEARING_RANGE;
+        return gooseCentre.dst2(playerCentre) <= HEARING_RANGE * HEARING_RANGE;
     }
 
     private boolean canSeePlayer() {
-        Vector2 goosePosition = goose.getPosition();
-        Vector2 playerPosition = goose.getPlayer().getPosition();
-
-        toPlayer.set(playerPosition).sub(goosePosition);
+        toPlayer.set(playerCentre).sub(gooseCentre);
 
         if (toPlayer.len2() > VISION_RANGE * VISION_RANGE) {
             return false;
@@ -192,10 +191,8 @@ public class GooseAI {
     }
 
     public void renderDebug(ShapeRenderer shapes) {
-        Vector2 position = goose.getPosition();
-
-        float x = position.x;
-        float y = position.y;
+        float x = gooseCentre.x;
+        float y = gooseCentre.y;
 
         // Hearing radius: circular range.
         shapes.setColor(0f, 0.7f, 1f, 1f);
