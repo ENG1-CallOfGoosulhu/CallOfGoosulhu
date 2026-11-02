@@ -17,9 +17,7 @@ public class Player extends Entity {
 
     @Override
     public void update(float deltaTime) {
-        velocity.set(0f, 0f);
-        velocity.y = InputManager.getVertical();
-        velocity.x = InputManager.getHorizontal();
+        velocity.set(InputManager.getHorizontal(), InputManager.getVertical()).nor();
         position.mulAdd(velocity, SPEED * deltaTime);
     }
 
