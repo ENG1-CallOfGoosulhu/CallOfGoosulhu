@@ -1,8 +1,7 @@
 package io.github.goldengoose.shared;
 
 /**
- * Game timer, press p to pause and unpause. (UR\_GAME\_TIMER, UR\_PAUSE\_GAME)
- * Countdown for the match. (UR\_GAME\_TIMER)
+ * Countdown for the match. (UR_GAME_TIMER)
  */
 public class GameTimer {
     private float secondsRemaining;

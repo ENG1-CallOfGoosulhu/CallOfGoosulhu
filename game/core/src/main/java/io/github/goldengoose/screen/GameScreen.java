@@ -59,8 +59,6 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(pauseMenu.getStage());
         multiplexer.addProcessor(spellTome.getInputProcessor());
         multiplexer.addProcessor(gameInput);
-
-        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
@@ -82,7 +80,8 @@ public class GameScreen implements Screen {
             timer.update(delta);
         }
 
-        Vector2 playerPos = world.getPlayer().getPosition();
+        Vector2 playerPos = new Vector2();
+        world.getPlayer().getCentre(playerPos);
 
         worldViewport.getCamera().position.set(playerPos.x, playerPos.y, 0f);
         worldViewport.apply();

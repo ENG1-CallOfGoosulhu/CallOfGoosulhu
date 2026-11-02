@@ -34,7 +34,7 @@ public abstract class Spell {
         cooldownCounter = cooldown;
         triggerEffect(worldPos);
         return true;
-    };
+    }
 
     /**
      * Called to trigger actual effect of spell
