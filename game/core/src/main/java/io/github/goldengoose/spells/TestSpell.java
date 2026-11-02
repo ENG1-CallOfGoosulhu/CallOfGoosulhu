@@ -9,7 +9,7 @@ public class TestSpell extends Spell{
 
     public TestSpell(Player player, Assets assets) {
         super(player, assets);
-        texture = new Texture("test_spell.png");
+        texture = assets.getTexture(Assets.TEST_SPELL);
     }
 
     @Override

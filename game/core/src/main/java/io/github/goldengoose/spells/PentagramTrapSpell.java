@@ -12,6 +12,7 @@ public class PentagramTrapSpell extends Spell {
 
     public PentagramTrapSpell(Player player, GameWorld world, Assets assets) {
         super(player, assets);
+        texture = assets.getTexture(Assets.PENTAGRAM_SPELL);
 
         this.world = world;
 
