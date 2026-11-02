@@ -15,8 +15,8 @@ public class PentagramTrap extends Entity {
     private float lifetime = LIFETIME;
     private boolean triggered = false;
 
-    public PentagramTrap(Vector2 position, Texture texture) {
-        this.position.set(position);
+    public PentagramTrap(Vector2 centre, Texture texture) {
+        this.position.set(centre.x - RADIUS, centre.y - RADIUS);
         this.texture = texture;
     }
 
@@ -29,23 +29,17 @@ public class PentagramTrap extends Entity {
     public void render(SpriteBatch batch) {
         float size = RADIUS * 2f;
 
-        batch.draw(
-            texture,
-            position.x - size / 2f,
-            position.y - size / 2f,
-            size,
-            size
-        );
+        batch.draw(texture, position.x, position.y, size, size);
     }
 
     @Override
     public float getWidth() {
-        return texture.getWidth();
+        return RADIUS * 2;
     }
 
     @Override
     public float getHeight() {
-        return texture.getHeight();
+        return RADIUS * 2;
     }
 
     @Override
