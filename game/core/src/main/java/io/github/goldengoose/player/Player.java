@@ -16,10 +16,6 @@ public class Player extends Entity {
     }
 
     @Override
-    public void gameStart() {
-    }
-
-    @Override
     public void update(float deltaTime) {
         velocity.set(0f, 0f);
         velocity.y = InputManager.getVertical();

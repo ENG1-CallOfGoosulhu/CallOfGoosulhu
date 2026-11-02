@@ -43,7 +43,6 @@ public class GameScreen implements Screen {
     public GameScreen(final Cog game) {
         this.game = game;
         world = new GameWorld(game.assets);
-        world.init();
 
         pauseMenu = new PauseMenu(game);
 

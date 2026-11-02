@@ -32,13 +32,6 @@ public class GameWorld {
         pendingEntities.add(entity);
     }
 
-    public void init() {
-        entities.add(new Goose((Player) entities.get(0), new Vector2(200, 200), assets));
-        for (Entity entity : entities) {
-            entity.gameStart();
-        }
-    }
-
     public void update(float deltaTime) {
         for (Entity entity : entities) {
             entity.update(deltaTime);

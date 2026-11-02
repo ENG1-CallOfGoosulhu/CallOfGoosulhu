@@ -16,11 +16,6 @@ public abstract class Entity {
     //----------------
 
     /**
-     * Called on game start
-     */
-    public abstract void gameStart();
-
-    /**
      * Called every frame, use for updating logic
      * @param deltaTime The time in seconds since the last frame. Used so framerate doesn't impact movement speed for example
      */

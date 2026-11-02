@@ -47,10 +47,6 @@ public class Goose extends Entity {
     }
 
     @Override
-    public void gameStart() {
-    }
-
-    @Override
     public void update(float deltaTime) {
         if (trappedTimer > 0f) {
             trappedTimer -= deltaTime;

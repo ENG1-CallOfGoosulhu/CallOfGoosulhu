@@ -21,10 +21,6 @@ public class PentagramTrap extends Entity {
     }
 
     @Override
-    public void gameStart() {
-    }
-
-    @Override
     public void update(float deltaTime) {
         lifetime -= deltaTime;
     }
