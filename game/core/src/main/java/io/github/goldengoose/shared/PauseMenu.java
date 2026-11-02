@@ -38,7 +38,6 @@ public class PauseMenu {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
-                dispose();
             }
         });
 
