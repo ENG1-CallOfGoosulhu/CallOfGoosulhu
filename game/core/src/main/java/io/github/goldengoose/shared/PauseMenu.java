@@ -18,6 +18,8 @@ public class PauseMenu {
     private final BitmapFont titleFont = Utilities.createFont(CogFonts.CRISTOFORO, 48);
     private final BitmapFont buttonFont = Utilities.createFont(CogFonts.CRISTOFORO, 16);
 
+    private final Table table = new Table();
+
     public PauseMenu(Cog game) {
         stage = new Stage(new ScreenViewport(), game.batch);
 
@@ -41,7 +43,6 @@ public class PauseMenu {
             }
         });
 
-        Table table = new Table();
         table.setFillParent(true);
 
         table.add(title).padBottom(50).colspan(2);
@@ -51,6 +52,10 @@ public class PauseMenu {
         table.add(quitDesktop);
 
         stage.addActor(table);
+    }
+
+    public void setVisible(boolean visible) {
+        table.setVisible(visible);
     }
 
     public Stage getStage() { return stage; }

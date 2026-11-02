@@ -70,7 +70,10 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (InputManager.pause()) paused = !paused;
+        if (InputManager.pause()) {
+            paused = !paused;
+            pauseMenu.setVisible(paused);
+        }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) debug = !debug;
 
         if (!paused) {
