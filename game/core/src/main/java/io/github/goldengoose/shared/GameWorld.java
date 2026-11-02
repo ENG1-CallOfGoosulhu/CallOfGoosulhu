@@ -12,13 +12,18 @@ import java.util.List;
 
 public class GameWorld {
     private final List<Entity> entities = new ArrayList<>();
+    private Assets assets;
+
+    public GameWorld(Assets assets) {
+        this.assets = assets;
+    }
 
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
 
     public void init() {
-        entities.add(new Goose((Player) entities.get(0), new Vector2(200, 200)));
+        entities.add(new Goose((Player) entities.get(0), new Vector2(200, 200), assets));
         for (Entity entity : entities) {
             entity.gameStart();
         }
@@ -34,7 +39,6 @@ public class GameWorld {
         entities.removeIf(entity -> {
             if (entity instanceof PentagramTrap trap) {
                 if (trap.isExpired()) {
-                    entity.dispose();
                     return true;
                 }
             }
@@ -80,12 +84,6 @@ public class GameWorld {
     }
 
     public void dispose() {
-        for (Entity entity : entities) {
-            entity.dispose();
-        }
-
         entities.clear();
-
-        PentagramTrap.disposeTexture();
     }
 }

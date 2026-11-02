@@ -32,6 +32,21 @@ public abstract class Entity {
      */
     public abstract void render(SpriteBatch batch);
 
+    public abstract float getWidth();
+    public abstract float getHeight();
+
+    public int getRenderLayer() {
+        return RenderLayer.ENTITIES;
+    }
+
+    /** Return true to have the world remove this entity. */
+    public boolean isExpired() {
+        return false;
+    }
+
+    /** Called once per frame for every other entity in the world. */
+    public void interact(Entity other) {}
+
     //----------------
     // Position
     //----------------
@@ -44,17 +59,14 @@ public abstract class Entity {
         return position;
     }
 
+    public Vector2 getCentre(Vector2 out) {
+        return out.set(position.x + getWidth() / 2f, position.y + getHeight() / 2f);
+    }
+
     /**
      * Sets the world position of the entity
      */
     public void setPosition(float x, float y) {
         position.set(x, y);
-    }
-
-    public void dispose() {
-        if (texture != null) {
-            texture.dispose();
-            texture = null;
-        }
     }
 }

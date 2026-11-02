@@ -31,4 +31,14 @@ public class Player extends Entity {
     public void render(SpriteBatch batch) {
         batch.draw(texture, position.x, position.y);
     }
+
+    @Override
+    public float getWidth() {
+        return texture.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return texture.getHeight();
+    }
 }

@@ -18,8 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SpellTome {
-    private final float xPos;
-    private final float yPos;
 
     OrthographicCamera camera;
     private final Stage stage;
@@ -41,9 +39,6 @@ public class SpellTome {
         this.shapes = shapes;
 
         texture = new Texture("spell_tome_w_writing.png");
-
-        xPos = 20;
-        yPos = Gdx.graphics.getHeight() - 20;
 
         stage = new Stage(new ScreenViewport(), game.batch);
     }
@@ -73,6 +68,7 @@ public class SpellTome {
 
         if (currentSpell != null) {
             Texture spellTexture = currentSpell.getTexture();
+            if (spellTexture == null) return;
 
             float spellX = x + 11f * scale * 2f;
             float spellY = y + 19f * scale * 1.5f;

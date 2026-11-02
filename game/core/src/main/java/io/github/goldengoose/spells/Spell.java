@@ -3,6 +3,7 @@ package io.github.goldengoose.spells;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.player.Player;
+import io.github.goldengoose.shared.Assets;
 
 public abstract class Spell {
     protected Texture texture;
@@ -10,9 +11,11 @@ public abstract class Spell {
     protected float cooldown;
 
     protected Player player;
+    protected Assets assets;
 
-    public Spell(Player player) {
+    public Spell(Player player, Assets assets) {
         this.player = player;
+        this.assets = assets;
     }
 
     private float cooldownCounter;

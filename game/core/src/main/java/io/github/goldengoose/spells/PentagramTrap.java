@@ -5,21 +5,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.goose.Goose;
 import io.github.goldengoose.shared.Entity;
+import io.github.goldengoose.shared.RenderLayer;
 
 public class PentagramTrap extends Entity {
 
     private static final float RADIUS = 15f;
     private static final float LIFETIME = 8f;
 
-    private static final Texture TEXTURE =
-        new Texture("pentagram.png");
-
     private float lifetime = LIFETIME;
     private boolean triggered = false;
 
-    public PentagramTrap(Vector2 position) {
+    public PentagramTrap(Vector2 position, Texture texture) {
         this.position.set(position);
-        texture = TEXTURE;
+        this.texture = texture;
     }
 
     @Override
@@ -44,6 +42,21 @@ public class PentagramTrap extends Entity {
         );
     }
 
+    @Override
+    public float getWidth() {
+        return texture.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return texture.getHeight();
+    }
+
+    @Override
+    public int getRenderLayer() {
+        return RenderLayer.GROUND;
+    }
+
     public void checkGoose(Goose goose) {
         if (triggered || lifetime <= 0f) return;
 
@@ -58,8 +71,23 @@ public class PentagramTrap extends Entity {
 
     }
 
+    @Override
     public boolean isExpired() {
         return lifetime <= 0f;
+    }
+
+    @Override
+    public void interact(Entity other) {
+        if (!(other instanceof Goose goose) || triggered || isExpired()) return;
+
+        Vector2 trapCenter = getCentre(new Vector2());
+        Vector2 gooseCenter = goose.getCentre(new Vector2());
+
+        if (trapCenter.dst2(gooseCenter) <= RADIUS * RADIUS) {
+            goose.setPosition(trapCenter.x - goose.getWidth() / 2f, trapCenter.y - goose.getHeight() / 2f);
+            goose.trap(lifetime);
+            triggered = true;
+        }
     }
 
     public boolean isTriggered() {
@@ -68,14 +96,5 @@ public class PentagramTrap extends Entity {
 
     public float getLifetime() {
         return lifetime;
-    }
-
-    public static void disposeTexture() {
-        TEXTURE.dispose();
-    }
-
-    @Override
-    public void dispose() {
-        // Do nothing: TEXTURE is shared between all pentagrams.
     }
 }

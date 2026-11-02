@@ -34,7 +34,7 @@ public class GameScreen implements Screen {
     OrthographicCamera hudCamera;
 
 
-    GameWorld world = new GameWorld();
+    GameWorld world;
     GameTimer timer;
     SpellTome spellTome;
     Player player;
@@ -46,6 +46,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(final Cog game) {
         this.game = game;
+        world = new GameWorld(game.assets);
 
         hudCamera = new OrthographicCamera();
         hudCamera.setToOrtho(false, Gdx.graphics.getWidth(),
@@ -61,9 +62,9 @@ public class GameScreen implements Screen {
         world.addEntity(player);
         world.init();
 
+        PentagramTrapSpell pentagramTrapSpell = new PentagramTrapSpell(this.player, world, game.assets);
+        TestSpell testSpell = new TestSpell(this.player, game.assets);
         spellTome = new SpellTome(hudCamera, this.game, shapeRenderer);
-        PentagramTrapSpell pentagramTrapSpell = new PentagramTrapSpell(this.player, world);
-        TestSpell testSpell = new TestSpell(this.player);
         spellTome.addSpell(pentagramTrapSpell);
         spellTome.addSpell(testSpell);
 
