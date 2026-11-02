@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import io.github.goldengoose.shared.enums.CogFonts;
-import org.w3c.dom.Text;
 
 public class Utilities {
     public static BitmapFont createFont(CogFonts fontPath, int size) {

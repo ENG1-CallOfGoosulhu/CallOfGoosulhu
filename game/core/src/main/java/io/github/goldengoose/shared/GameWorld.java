@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.goose.Goose;
 import io.github.goldengoose.player.Player;
-import io.github.goldengoose.spells.PentagramTrap;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,10 +14,8 @@ public class GameWorld {
     private final List<Entity> entities = new ArrayList<>();
     private final List<Entity> pendingEntities = new ArrayList<>();
     private final Player player;
-    private final Assets assets;
 
     public GameWorld(Assets assets) {
-        this.assets = assets;
         player = new Player(assets.getTexture(Assets.PLAYER));
         entities.add(player);
         entities.add(new Goose(player, new Vector2(200, 200), assets));
