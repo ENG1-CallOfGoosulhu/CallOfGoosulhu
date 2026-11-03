@@ -1,99 +1,156 @@
 @startwbs
 <style>
-' Milan
+' Ownership colours
 .milan {
   BackgroundColor #ffaa77;
 }
-.milan_prog {
-  BackgroundColor #ffaa77;
-  LineColor #BBBB00;
-  LineThickness 5.0
-}
-.milan_done {
-  BackgroundColor #ffaa77;
-  LineColor #00FF00;
-  LineThickness 5.0
-}
-' Charlie
 .charlie {
-  BackgroundColor #ffffff;
+  BackgroundColor #bbeeff;
 }
-.charlie_prog {
-  BackgroundColor #ffffff;
-  LineColor #BBBB00;
-  LineThickness 5.0
-}
-.charlie_done {
-  BackgroundColor #ffffff;
-  LineColor #00FF00;
-  LineThickness 5.0
-}
-' Jack
 .jack {
-  BackgroundColor #ffffff;
+  BackgroundColor #aa88bb;
 }
-.jack_prog {
-  BackgroundColor #ffffff;
-  LineColor #BBBB00;
-  LineThickness 5.0
-}
-.jack_done {
-  BackgroundColor #ffffff;
-  LineColor #00FF00;
-  LineThickness 5.0
-}
-' Lisa
 .lisa {
-  BackgroundColor #ffffff;
-}
-.lisa_prog {
-  BackgroundColor #ffffff;
-  LineColor #BBBB00;
-  LineThickness 5.0
-}
-.lisa_done {
-  BackgroundColor #ffffff;
-  LineColor #00FF00;
-  LineThickness 5.0
+  BackgroundColor #f7fc51;
 }
 
+' Shared ownership colours
+.milan_charlie {
+  BackgroundColor #ffaa77/#bbeeff;
+}
+.milan_jack {
+  BackgroundColor #ffaa77/#aa88bb;
+}
+.milan_lisa {
+  BackgroundColor #ffaa77/#f7fc51;
+}
+.charlie_jack {
+  BackgroundColor #bbeeff/#aa88bb;
+}
+.charlie_lisa {
+  BackgroundColor #bbeeff/#f7fc51;
+}
+.jack_lisa {
+  BackgroundColor #aa88bb/#f7fc51;
+}
+
+' Progress indicators
+.prog {
+  LineColor #BBBB00;
+  LineThickness 5.0;
+}
+.done {
+  LineColor #00FF00;
+  LineThickness 5.0;
+}
 </style>
 legend right
   |= People |
   |<#ffaa77> Milan |
-  |<#ffffff> Charlie |
-  |<#ffffff> Jack |
-  |<#ffffff> Lisa |
+  |<#bbeeff> Charlie |
+  |<#aa88bb> Jack |
+  |<#f7fc51> Lisa |
 
-  |= Colours |
+  |= Progress |
   |<#0000000> Unstarted |
   |<#BBBB00> In Progress |
   |<#00FF00> Complete |
 endlegend
 * Development Work Breakdown Structure
-** Player
-*** "Player animation" as pAnim
-*** Player movement <<milan_prog>>
-*** Inventory
-**** Picking up and using items
-** "Animation Controller" as anim
-** Enemies
-***< "Enemy animation" as eAnim
-*** Enemy AI <<milan_prog>>
-** Map
-*** Tileset
-*** Base map
-*** Buildings
-** Interface
-*** Start screen
-*** Game screen
-**** Inventory
-**** Timer
-** Sound
-*** Music
-*** Subtitles/Speech bubbles
 
-' Arrows here
-anim -> pAnim
-anim -> eAnim
+** 1. Player
+*** Player movement <<milan>><<prog>><<done>>
+*** Player collision\n and environmental interaction
+*** Player state management
+*** Player animation
+
+** 2. Enemy System
+*** Goose AI <<milan_jack>><<prog>>
+**** Visual detection <<milan>><<done>>
+**** Auditory detection <<milan>><<done>>
+**** Pursuit and\n stopping distance <<milan_jack>><<prog>>
+**** Honking behaviour <<lisa>>
+**** Goose response to spells\n and environmental effects
+*** Goose types
+**** Normal goose
+**** Student goose
+**** Security goose
+*** Goose animation <<milan>><<prog>>
+*** Goose audio
+
+** 3. Map and\n Environment
+*** Tileset <<charlie>><<prog>>
+*** Base map <<charlie_lisa>><<prog>>
+*** Buildings and\n environmental decoration
+**** Entering/leaving\n buildings
+**** Goose-building/environment\n behaviour
+*** Collision boundaries\n and obstacles
+*** Environmental hazards
+**** Mud puddles
+**** Tall grass\n concealment
+*** Escape destination\n and objective location
+
+** 4. Core Game Flow
+*** Game state\n management <<milan>><<prog>>
+**** Start screen state <<milan>><<prog>>
+**** Introduction/cutscene
+**** Alternate-world transition
+**** Active gameplay <<milan>><<prog>>
+**** Victory state
+**** Defeat state
+*** Win/lose\n conditions
+**** Escape destination detection
+**** Five-minute time limit
+**** End-of-game transition
+*** Game restart
+
+** 5. Timer
+*** Timer logic <<charlie>><<done>>
+*** Timer integration\n with game states
+*** Timer UI
+*** Timer expiry\n and defeat handling
+
+** 6. Spell System \n To be decided\n which spells <<milan>><<prog>>
+*** Spell system\n foundation <<milan>><<done>>
+**** Spell selection <<milan>><<done>>
+**** Spell activation <<milan>><<done>>
+**** Spell effects <<milan>><<prog>>
+**** Cooldowns/charges <<milan>><<done>>
+*** Initial spell availability <<milan>><<prog>>
+*** Pentagram spell <<milan>><<prog>>
+*** Spell feedback and effects <<milan>><<prog>>
+*** Spell integration with goose AI
+
+** 7. Patience System <<lisa>>
+*** Patience value\n and initial state <<lisa>>
+*** Patience reduction\n from honking <<lisa>>
+*** Patience bar UI\n integration
+*** Patience thresholds\n and effects
+
+** 8. Events\n and Interactions <<jack>>
+*** Event triggers and effects <<jack>>
+*** Event 1 <<jack>>
+*** Event 2 <<jack>>
+
+** 9. User Interface
+*** Start screen <<milan>><<prog>>
+*** Gameplay HUD
+**** Timer
+**** Patience bar
+**** Spell-tome\n interface <<milan>><<prog>>
+*** Victory screen
+*** Defeat screen
+*** Restart interface
+
+** 10. Audio and\n Dialogue
+*** Background music
+*** Goose honking
+*** Environmental sound effects
+*** Spell sound effects
+*** Event and transition sound effects
+*** Speech bubbles/subtitles
+
+** 11. Animation
+*** Player animation integration
+*** Goose animation integration <<milan>><<prog>>
 @endwbs

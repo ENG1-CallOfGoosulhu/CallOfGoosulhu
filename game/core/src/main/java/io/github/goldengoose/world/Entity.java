@@ -1,4 +1,4 @@
-package io.github.goldengoose.shared;
+package io.github.goldengoose.world;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,11 +16,6 @@ public abstract class Entity {
     //----------------
 
     /**
-     * Called on game start
-     */
-    public abstract void gameStart();
-
-    /**
      * Called every frame, use for updating logic
      * @param deltaTime The time in seconds since the last frame. Used so framerate doesn't impact movement speed for example
      */
@@ -32,6 +27,21 @@ public abstract class Entity {
      */
     public abstract void render(SpriteBatch batch);
 
+    public abstract float getWidth();
+    public abstract float getHeight();
+
+    public int getRenderLayer() {
+        return RenderLayer.ENTITIES;
+    }
+
+    /** Return true to have the world remove this entity. */
+    public boolean isExpired() {
+        return false;
+    }
+
+    /** Called once per frame for every other entity in the world. */
+    public void interact(Entity other) {}
+
     //----------------
     // Position
     //----------------
@@ -42,6 +52,10 @@ public abstract class Entity {
      */
     public Vector2 getPosition() {
         return position;
+    }
+
+    public Vector2 getCentre(Vector2 out) {
+        return out.set(position.x + getWidth() / 2f, position.y + getHeight() / 2f);
     }
 
     /**
