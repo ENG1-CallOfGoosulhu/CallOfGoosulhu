@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.player.Player;
 import io.github.goldengoose.shared.GameWorld;
 import io.github.goldengoose.shared.GameTimer;
@@ -24,8 +25,8 @@ public class Main extends ApplicationAdapter {
     private Texture image;
     BitmapFont font;
     private final Viewport viewport = new FitViewport(
-        400,
-        300,
+        600,
+        450,
         new OrthographicCamera()
     );
 
@@ -36,18 +37,23 @@ public class Main extends ApplicationAdapter {
     TiledMap tiledMap;
     TiledMapRenderer tiledMapRenderer;
 
+    /** Spooky night lighting. (UR_ALTER_CAMPUS) */
+    GameLighting lighting;
+
     @Override
     public void create() {
         batch = new SpriteBatch();
         player = new Player();
+        player.setPosition(23 * 32, 2 * 32);
         world.addEntity(player);
         world.init();
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
-        tiledMap = new TmxMapLoader().load("maps/base_map.tmx");
+        tiledMap = new TmxMapLoader().load("maps/Outside_campus_cthulhu.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+        lighting = new GameLighting(tiledMap, viewport);
 
         font = new BitmapFont();
 
@@ -75,9 +81,14 @@ public class Main extends ApplicationAdapter {
 
         batch.begin();
         world.render(batch);
+        batch.end();
 
-        float x = camera.position.x - 190;
-        float y = camera.position.y + 140;
+        // Lighting goes over the map and player, but not the HUD. (UR_ALTER_CAMPUS)
+        lighting.render();
+
+        batch.begin();
+        float x = camera.position.x - 290;
+        float y = camera.position.y + 215;
 
         String timeLeft = String.format("%.1f", timer.getSecondsRemaining());
 
@@ -95,6 +106,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
+        lighting.dispose();
         image.dispose();
     }
 

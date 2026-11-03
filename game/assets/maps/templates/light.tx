@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="Glow" type="light" width="336" height="336">
+  <properties>
+   <property name="brightness" type="float" value="0.75"/>
+   <property name="colour" type="color" value="#ff94e84f"/>
+  </properties>
+  <ellipse/>
+ </object>
+</template>
