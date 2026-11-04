@@ -54,10 +54,10 @@ public class GameScreen implements Screen {
         pauseMenu = new PauseMenu(game);
 
         PentagramTrapSpell pentagramTrapSpell = new PentagramTrapSpell(world.getPlayer(), world, game.assets);
-        ElderSignSpell testSpell = new ElderSignSpell(world.getPlayer(), game.assets);
+        ElderSignSpell elderSignSpell = new ElderSignSpell(world.getPlayer(),world, game.assets);
         spellTome = new SpellTome(game.assets.getTexture(Assets.SPELL_TOME));
         spellTome.addSpell(pentagramTrapSpell);
-        spellTome.addSpell(testSpell);
+        spellTome.addSpell(elderSignSpell);
 
         tiledMap = new TmxMapLoader().load("maps/Outside_campus_cthulhu.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
