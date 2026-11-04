@@ -4,11 +4,11 @@ import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.player.Player;
 import io.github.goldengoose.assets.Assets;
 
-public class TestSpell extends Spell{
+public class ElderSignSpell extends Spell{
 
-    public TestSpell(Player player, Assets assets) {
+    public ElderSignSpell(Player player, Assets assets) {
         super(player, assets);
-        texture = assets.getTexture(Assets.TEST_SPELL);
+        texture = assets.getTexture(Assets.ELDER_SIGN_SPELL);
     }
 
     @Override

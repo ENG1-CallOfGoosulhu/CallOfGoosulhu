@@ -22,7 +22,7 @@ import io.github.goldengoose.util.InputManager;
 import io.github.goldengoose.world.*;
 import io.github.goldengoose.spells.PentagramTrapSpell;
 import io.github.goldengoose.spells.SpellTome;
-import io.github.goldengoose.spells.TestSpell;
+import io.github.goldengoose.spells.ElderSignSpell;
 
 public class GameScreen implements Screen {
     private final Cog game;
@@ -54,7 +54,7 @@ public class GameScreen implements Screen {
         pauseMenu = new PauseMenu(game);
 
         PentagramTrapSpell pentagramTrapSpell = new PentagramTrapSpell(world.getPlayer(), world, game.assets);
-        TestSpell testSpell = new TestSpell(world.getPlayer(), game.assets);
+        ElderSignSpell testSpell = new ElderSignSpell(world.getPlayer(), game.assets);
         spellTome = new SpellTome(game.assets.getTexture(Assets.SPELL_TOME));
         spellTome.addSpell(pentagramTrapSpell);
         spellTome.addSpell(testSpell);
