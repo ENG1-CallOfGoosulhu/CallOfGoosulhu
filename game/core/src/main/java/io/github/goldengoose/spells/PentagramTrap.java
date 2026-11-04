@@ -9,7 +9,7 @@ import io.github.goldengoose.world.RenderLayer;
 
 public class PentagramTrap extends Entity {
 
-    private static final float RADIUS = 15f;
+    private static final float RADIUS = 24f;
     private static final float LIFETIME = 8f;
 
     private float lifetime = LIFETIME;
