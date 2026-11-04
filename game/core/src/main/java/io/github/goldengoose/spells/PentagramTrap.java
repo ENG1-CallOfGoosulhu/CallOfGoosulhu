@@ -1,13 +1,20 @@
 package io.github.goldengoose.spells;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.goose.Goose;
+import io.github.goldengoose.util.Utilities;
 import io.github.goldengoose.world.Entity;
 import io.github.goldengoose.world.RenderLayer;
 
 public class PentagramTrap extends Entity {
+    private static final int FRAME_SIZE = 48;
+    private static final float GROW_FRAME_TIME = 0.07f;
+    private static final float SHIMMER_FRAME_TIME = 0.12f;
+    private static final float GROW_DURATION = GROW_FRAME_TIME * 6;
 
     private static final float RADIUS = 24f;
     private static final float LIFETIME = 8f;
@@ -15,9 +22,22 @@ public class PentagramTrap extends Entity {
     private float lifetime = LIFETIME;
     private boolean triggered = false;
 
+    static Animation<TextureRegion>[] rows;
+    static Animation<TextureRegion> grow;
+    static Animation<TextureRegion> shimmer;
+
     public PentagramTrap(Vector2 centre, Texture texture) {
         this.position.set(centre.x - RADIUS, centre.y - RADIUS);
         this.texture = texture;
+        if (rows == null) {
+            System.out.println("TEST, INNER");
+            rows = Utilities.createAnimations(texture, GROW_FRAME_TIME, FRAME_SIZE);
+            grow = rows[0];
+            shimmer = rows[1];
+            grow.setPlayMode(Animation.PlayMode.NORMAL);
+            shimmer.setFrameDuration(SHIMMER_FRAME_TIME);
+        }
+        System.out.println("TEST, OUTER");
     }
 
     @Override
@@ -29,7 +49,17 @@ public class PentagramTrap extends Entity {
     public void render(SpriteBatch batch) {
         float size = RADIUS * 2f;
 
-        batch.draw(texture, position.x, position.y, size, size);
+        TextureRegion frame;
+
+        float age = LIFETIME - lifetime;
+        if (age < GROW_DURATION) {
+            frame = grow.getKeyFrame(age);
+        } else if (lifetime < GROW_DURATION) {
+            frame = grow.getKeyFrame(lifetime);
+        } else {
+            frame = shimmer.getKeyFrame(age - GROW_DURATION);
+        }
+        batch.draw(frame, position.x, position.y, FRAME_SIZE, FRAME_SIZE);
     }
 
     @Override

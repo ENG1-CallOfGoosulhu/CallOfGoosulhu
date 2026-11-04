@@ -7,7 +7,7 @@ public class Assets {
     public static final String GOOSE_WALK = "cthulhu_goose_walking.png";
     public static final String GOOSE_RUN = "cthulhu_goose_running.png";
     public static final String PLAYER = "Characters/idle_32x32_2.png";
-    public static final String PENTAGRAM = "pentagram.png";
+    public static final String PENTAGRAM = "pentagram_sheet.png";
     public static final String PENTAGRAM_SPELL = "pentagram_spell.png";
     public static final String ELDER_SIGN_SPELL = "elder_sign_spell.png";
     public static final String SPELL_TOME = "spell_tome_w_writing.png";
