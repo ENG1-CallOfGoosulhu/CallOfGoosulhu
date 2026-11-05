@@ -12,6 +12,7 @@ public class Assets {
     public static final String PENTAGRAM_SPELL = "pentagram_spell.png";
     public static final String ELDER_SIGN_SPELL = "elder_sign_spell.png";
     public static final String SPELL_TOME = "spell_tome_w_writing.png";
+    public static final String SPELL_TOME_EMPTY = "spell_tome.png";
 
     private final AssetManager manager = new AssetManager();
 
@@ -24,6 +25,7 @@ public class Assets {
         manager.load(PENTAGRAM_SPELL, Texture.class);
         manager.load(ELDER_SIGN_SPELL, Texture.class);
         manager.load(SPELL_TOME, Texture.class);
+        manager.load(SPELL_TOME_EMPTY, Texture.class);
         manager.finishLoading();
     }
 

@@ -24,17 +24,24 @@ public class SpellTome {
     private static final float BAR_OFFSET_Y = 57f;
     private static final float BAR_SIZE = 60f;
 
-    private Texture texture;
+    private final Texture texture;
     private final List<Spell> spells = new ArrayList<>();
     private int selectedSpell = 0;
 
+    private boolean visible = true;
 
     public SpellTome(Texture texture) {
         this.texture = texture;
 
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public void drawShapes(ShapeRenderer shapes, Viewport hud) {
+        if (!visible) return;
+
         Spell currentSpell = getSelectedSpell();
         if (currentSpell == null) return;
 
@@ -56,6 +63,8 @@ public class SpellTome {
     }
 
     public void drawSprites(SpriteBatch batch, Viewport hud) {
+        if (!visible) return;
+
         float screenWidth = hud.getWorldWidth();
         float scale = screenWidth / REFERENCE_WIDTH;
 

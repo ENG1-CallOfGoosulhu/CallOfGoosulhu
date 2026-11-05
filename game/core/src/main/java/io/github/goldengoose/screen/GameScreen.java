@@ -18,6 +18,7 @@ import io.github.goldengoose.GameTimer;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.ui.PauseMenu;
+import io.github.goldengoose.ui.TomeMenu;
 import io.github.goldengoose.util.InputManager;
 import io.github.goldengoose.world.*;
 import io.github.goldengoose.spells.PentagramTrapSpell;
@@ -36,6 +37,7 @@ public class GameScreen implements Screen {
     private final GameWorld world;
     private final GameTimer timer = new GameTimer(5 * 60);
     private final PauseMenu pauseMenu;
+    private final TomeMenu tomeMenu;
     private final SpellTome spellTome;
     private final BitmapFont hudFont = new BitmapFont();
 
@@ -44,14 +46,13 @@ public class GameScreen implements Screen {
     private final GameLighting lighting;
 
     private boolean paused = true;
+    private boolean tomeOpen = false;
     private boolean debug = false;
 
     public GameScreen(final Cog game) {
         this.game = game;
         world = new GameWorld(game.assets);
         world.getPlayer().setPosition(23 * 32, 2 * 32);
-
-        pauseMenu = new PauseMenu(game);
 
         PentagramTrapSpell pentagramTrapSpell = new PentagramTrapSpell(world.getPlayer(), world, game.assets);
         ElderSignSpell elderSignSpell = new ElderSignSpell(world.getPlayer(),world, game.assets);
@@ -63,8 +64,11 @@ public class GameScreen implements Screen {
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         lighting = new GameLighting(tiledMap, worldViewport);
 
+        pauseMenu = new PauseMenu(game);
+        tomeMenu = new TomeMenu(game, game.assets.getTexture(Assets.SPELL_TOME_EMPTY), spellTome);
 
         multiplexer.addProcessor(pauseMenu.getStage());
+        multiplexer.addProcessor(tomeMenu.getStage());
         multiplexer.addProcessor(spellTome.getInputProcessor());
         multiplexer.addProcessor(gameInput);
     }
@@ -76,10 +80,17 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if (InputManager.pause()) {
+        if (!tomeOpen && InputManager.pause()) {
             paused = !paused;
             pauseMenu.setVisible(paused);
         }
+        if ((paused == tomeOpen) && InputManager.tome()) {
+            tomeOpen = !tomeOpen;
+            paused = tomeOpen;
+            tomeMenu.setVisible(tomeOpen);
+            spellTome.setVisible(!tomeOpen);
+        }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) debug = !debug;
 
         if (!paused) {
@@ -134,6 +145,14 @@ public class GameScreen implements Screen {
             pauseMenu.act(delta);
             pauseMenu.draw();
         }
+        if (tomeOpen) {
+            game.batch.begin();
+            tomeMenu.draw(game.batch, hudViewport);
+            game.batch.end();
+        }
+        if (tomeOpen) {
+            tomeMenu.drawText();
+        }
 
         //TODO: Remove once game has proper exit feature, this is just for testing
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
@@ -175,6 +194,7 @@ public class GameScreen implements Screen {
         worldViewport.update(width, height);
         hudViewport.update(width, height, true);
         pauseMenu.resize(width, height);
+        tomeMenu.resize(width, height);
     }
 
     @Override
@@ -184,6 +204,7 @@ public class GameScreen implements Screen {
         mapRenderer.dispose();
         lighting.dispose();
         pauseMenu.dispose();
+        tomeMenu.dispose();
         hudFont.dispose();
     }
 
