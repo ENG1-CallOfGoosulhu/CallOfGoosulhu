@@ -35,8 +35,8 @@ public class GameLighting {
     /** All the lights on the map. */
     private final List<Light> lights = new ArrayList<>();
 
-    /** Lights that are temporary. Cleared after each render. */
-    private final List<Light> temporaryLights = new ArrayList<>();
+    /** Lights that are "temporary". Cleared after each render. */
+    private final List<Light> dynamicLights = new ArrayList<>();
 
     /** How dark it is away from the lights. */
     private Color darkness = new Color(0.3f, 0.25f, 0.4f, 1f);
@@ -92,7 +92,7 @@ public class GameLighting {
     /** Draws the lighting over the map and player. (UR_ALTER_CAMPUS) */
     public void render() {
         if (!isLit) {
-            temporaryLights.clear();
+            dynamicLights.clear();
             return;
         }
         OrthographicCamera camera = (OrthographicCamera) viewport.getCamera();
@@ -107,11 +107,11 @@ public class GameLighting {
             batch.setColor(light.colour.r, light.colour.g, light.colour.b, light.brightness);
             batch.draw(glow, light.x - light.radius, light.y - light.radius, light.radius * 2, light.radius * 2);
         }
-        for (Light light : temporaryLights) {
+        for (Light light : dynamicLights) {
             batch.setColor(light.colour.r, light.colour.g, light.colour.b, light.brightness);
             batch.draw(glow, light.x - light.radius, light.y - light.radius, light.radius * 2, light.radius * 2);
         }
-        temporaryLights.clear();
+        dynamicLights.clear();
 
         if (roofs != null) {
             useNormalBlending();
@@ -155,7 +155,7 @@ public class GameLighting {
         light.radius = radius;
         light.colour = colour;
         light.brightness = brightness;
-        temporaryLights.add(light);
+        dynamicLights.add(light);
     }
 
     /** Frees up memory when the game closes. */
