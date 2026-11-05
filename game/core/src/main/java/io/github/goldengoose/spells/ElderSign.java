@@ -35,14 +35,12 @@ public class ElderSign extends Entity {
         this.position.set(centre.x - RADIUS, centre.y - RADIUS);
         this.texture = texture;
         if (rows == null) {
-            System.out.println("TEST, INNER");
             rows = Utilities.createAnimations(texture, GROW_FRAME_TIME, FRAME_SIZE);
             grow = rows[0];
             shimmer = rows[1];
             grow.setPlayMode(Animation.PlayMode.NORMAL);
             shimmer.setFrameDuration(SHIMMER_FRAME_TIME);
         }
-        System.out.println("TEST, OUTER");
     }
 
     @Override
