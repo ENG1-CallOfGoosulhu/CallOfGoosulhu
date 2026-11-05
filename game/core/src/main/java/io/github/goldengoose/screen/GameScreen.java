@@ -103,6 +103,8 @@ public class GameScreen implements Screen {
         game.batch.begin();
         world.render(game.batch);
         game.batch.end();
+
+        world.emitLights(lighting);
         lighting.render();
 
         if (debug) renderDebug();

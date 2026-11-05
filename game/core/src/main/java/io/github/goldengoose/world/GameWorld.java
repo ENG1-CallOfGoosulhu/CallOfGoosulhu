@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.goose.Goose;
+import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.player.Player;
 
 import java.util.ArrayList;
@@ -62,6 +63,12 @@ public class GameWorld {
             if (entity instanceof Goose goose) {
                 goose.renderDebug(shapes);
             }
+        }
+    }
+
+    public void emitLights(GameLighting lighting) {
+        for (Entity entity : entities) {
+            entity.emitLight(lighting);
         }
     }
 

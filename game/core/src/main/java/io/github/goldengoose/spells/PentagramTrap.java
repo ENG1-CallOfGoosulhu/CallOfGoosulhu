@@ -1,11 +1,14 @@
 package io.github.goldengoose.spells;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.goose.Goose;
+import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.util.Utilities;
 import io.github.goldengoose.world.Entity;
 import io.github.goldengoose.world.RenderLayer;
@@ -15,6 +18,7 @@ public class PentagramTrap extends Entity {
     private static final float GROW_FRAME_TIME = 0.07f;
     private static final float SHIMMER_FRAME_TIME = 0.12f;
     private static final float GROW_DURATION = GROW_FRAME_TIME * 6;
+    private static final Color LIGHT_COLOUR = Color.RED;
 
     private static final float RADIUS = 24f;
     private static final float LIFETIME = 8f;
@@ -60,6 +64,19 @@ public class PentagramTrap extends Entity {
             frame = shimmer.getKeyFrame(age - GROW_DURATION);
         }
         batch.draw(frame, position.x, position.y, FRAME_SIZE, FRAME_SIZE);
+    }
+
+    private final Vector2 centre = new Vector2();
+    @Override
+    public void emitLight(GameLighting lighting) {
+        float age = LIFETIME - lifetime;
+
+        float size = MathUtils.clamp(Math.min(age, lifetime) / GROW_DURATION, 0f, 1f);
+
+        float pulse = 1f + 0.15f * MathUtils.sin((age - GROW_DURATION) / SHIMMER_FRAME_TIME * MathUtils.PI2);
+
+        getCentre(centre);
+        lighting.addLight(centre.x, centre.y, RADIUS * size * 2.5f, LIGHT_COLOUR, 0.9f * size * pulse);
     }
 
     @Override

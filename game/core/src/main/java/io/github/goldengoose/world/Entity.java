@@ -3,6 +3,7 @@ package io.github.goldengoose.world;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import io.github.goldengoose.lighting.GameLighting;
 
 /**
  * Abstract class for entities, basically anything with an in-game position and a texture
@@ -41,6 +42,9 @@ public abstract class Entity {
 
     /** Called once per frame for every other entity in the world. */
     public void interact(Entity other) {}
+
+    /** Called every frame before lighting is drawn. Override to give off light. */
+    public void emitLight(GameLighting lighting) {}
 
     //----------------
     // Position
