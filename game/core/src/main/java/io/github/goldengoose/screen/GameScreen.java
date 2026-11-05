@@ -68,7 +68,6 @@ public class GameScreen implements Screen {
         tomeMenu = new TomeMenu(game, game.assets.getTexture(Assets.SPELL_TOME_EMPTY), spellTome);
 
         multiplexer.addProcessor(pauseMenu.getStage());
-        multiplexer.addProcessor(tomeMenu.getStage());
         multiplexer.addProcessor(spellTome.getInputProcessor());
         multiplexer.addProcessor(gameInput);
     }
@@ -150,9 +149,6 @@ public class GameScreen implements Screen {
             tomeMenu.draw(game.batch, hudViewport);
             game.batch.end();
         }
-        if (tomeOpen) {
-            tomeMenu.drawText();
-        }
 
         //TODO: Remove once game has proper exit feature, this is just for testing
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
@@ -194,7 +190,6 @@ public class GameScreen implements Screen {
         worldViewport.update(width, height);
         hudViewport.update(width, height, true);
         pauseMenu.resize(width, height);
-        tomeMenu.resize(width, height);
     }
 
     @Override

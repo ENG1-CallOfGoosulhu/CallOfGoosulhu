@@ -12,6 +12,8 @@ public class ElderSignSpell extends Spell {
     public ElderSignSpell(Player player, GameWorld world, Assets assets) {
         super(player, assets);
         texture = assets.getTexture(Assets.ELDER_SIGN_SPELL);
+        name = "Elder Sign";
+        description = "Inscribe a dispersing circle on the ground. Geese flee the symbol until it fades.";
 
         this.world = world;
 

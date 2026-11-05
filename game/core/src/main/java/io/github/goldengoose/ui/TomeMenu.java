@@ -22,7 +22,13 @@ public class TomeMenu {
     private static final float ICON_OFFSET_X = 11f;
     private static final float ICON_OFFSET_Y = 19f;
 
-    private final Stage stage;
+    private static final float PAGE_X = 51f;
+    private static final float PAGE_Y = 18f;
+    private static final float PAGE_WIDTH = 28f;
+    private static final float PAGE_HEIGHT = 46f;
+    private static final float PAGE_PADDING = 2f;
+    private static final Color INK = new Color(0.23f, 0.15f, 0.2f, 1f);
+
     private final BitmapFont titleFont = Utilities.createFont(CogFonts.CRISTOFORO, 48);
     private final Table table = new Table();
 
@@ -30,7 +36,6 @@ public class TomeMenu {
     private final SpellTome spellTome;
 
     public TomeMenu(Cog game, Texture texture, SpellTome spellTome) {
-        stage = new Stage(new ScreenViewport(), game.batch);
         this.texture = texture;
         this.spellTome = spellTome;
 
@@ -40,19 +45,12 @@ public class TomeMenu {
 
         table.add(title).padBottom(50).colspan(2);
         table.row();
-
-        stage.addActor(table);
     }
 
     public void setVisible(boolean visible) {
         table.setVisible(visible);
     }
 
-    public Stage getStage() { return stage; }
-
-    public void drawText() {
-        stage.draw();
-    }
 
     public void draw(SpriteBatch batch, Viewport hud) {
         float screenWidth = hud.getWorldWidth();
@@ -80,10 +78,7 @@ public class TomeMenu {
         );
     }
 
-    public void resize(int width, int height) { stage.getViewport().update(width, height, true); }
-
     public void dispose() {
-        stage.dispose();
         titleFont.dispose();
     }
 }

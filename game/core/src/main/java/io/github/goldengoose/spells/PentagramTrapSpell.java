@@ -12,6 +12,8 @@ public class PentagramTrapSpell extends Spell {
     public PentagramTrapSpell(Player player, GameWorld world, Assets assets) {
         super(player, assets);
         texture = assets.getTexture(Assets.PENTAGRAM_SPELL);
+        name = "Pentagram";
+        description = "Inscribe a binding circle on the ground. The first goose to step inside is held until the circle fades.";
 
         this.world = world;
 

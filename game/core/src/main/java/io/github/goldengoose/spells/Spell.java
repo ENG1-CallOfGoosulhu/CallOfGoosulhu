@@ -13,6 +13,9 @@ public abstract class Spell {
     protected Player player;
     protected Assets assets;
 
+    protected String name = "";
+    protected String description = "";
+
     public Spell(Player player, Assets assets) {
         this.player = player;
         this.assets = assets;
@@ -55,6 +58,9 @@ public abstract class Spell {
     public Texture getTexture() {
         return texture;
     }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+
 
     public float getCooldownPercent() {
         if (cooldown <= 0) return 0f;
