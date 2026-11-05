@@ -86,7 +86,6 @@ public class GameScreen implements Screen {
         if ((paused == tomeOpen) && InputManager.tome()) {
             tomeOpen = !tomeOpen;
             paused = tomeOpen;
-            tomeMenu.setVisible(tomeOpen);
             spellTome.setVisible(!tomeOpen);
         }
 

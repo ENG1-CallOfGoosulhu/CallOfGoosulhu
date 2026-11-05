@@ -3,10 +3,12 @@ package io.github.goldengoose.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.goldengoose.Cog;
@@ -29,8 +31,9 @@ public class TomeMenu {
     private static final float PAGE_PADDING = 2f;
     private static final Color INK = new Color(0.23f, 0.15f, 0.2f, 1f);
 
-    private final BitmapFont titleFont = Utilities.createFont(CogFonts.CRISTOFORO, 48);
-    private final Table table = new Table();
+    private final BitmapFont titleFont = Utilities.createFont(CogFonts.CRISTOFORO, 28);
+    private final BitmapFont bodyFont = Utilities.createFont(CogFonts.CRISTOFORO, 16);
+    private final GlyphLayout layout = new GlyphLayout();
 
     private final Texture texture;
     private final SpellTome spellTome;
@@ -38,27 +41,18 @@ public class TomeMenu {
     public TomeMenu(Cog game, Texture texture, SpellTome spellTome) {
         this.texture = texture;
         this.spellTome = spellTome;
-
-        Label title = new Label("Test description ", UiStyles.label(titleFont));
-
-        table.setFillParent(true);
-
-        table.add(title).padBottom(50).colspan(2);
-        table.row();
     }
-
-    public void setVisible(boolean visible) {
-        table.setVisible(visible);
-    }
-
 
     public void draw(SpriteBatch batch, Viewport hud) {
         float screenWidth = hud.getWorldWidth();
         float screenHeight = hud.getWorldHeight();
         float scale = screenWidth / REFERENCE_WIDTH;
 
-        float width = texture.getWidth() * scale * SCALE_X;
-        float height = texture.getHeight() * scale * SCALE_Y;
+        float sx = scale * SCALE_X;
+        float sy = scale * SCALE_Y;
+
+        float width = texture.getWidth() * sx;
+        float height = texture.getHeight() * sy;
 
         float x = (screenWidth - width) / 2f;
         float y = (screenHeight - height) / 2f;
@@ -68,14 +62,30 @@ public class TomeMenu {
         Spell currentSpell = spellTome.getSelectedSpell();
         if (currentSpell == null || currentSpell.getTexture() == null) return;
 
+        // Left page: icon
         Texture spellTexture = currentSpell.getTexture();
         batch.draw(
             spellTexture,
-            x + ICON_OFFSET_X * scale * SCALE_X,
-            y + ICON_OFFSET_Y * scale * SCALE_Y,
-            spellTexture.getWidth() * scale * SCALE_X,
-            spellTexture.getHeight() * scale * SCALE_Y
+            x + ICON_OFFSET_X * sx,
+            y + ICON_OFFSET_Y * sy,
+            spellTexture.getWidth() * sx,
+            spellTexture.getHeight() * sy
         );
+
+        // Right page: description text
+        float pageX = x + (PAGE_X + PAGE_PADDING) * sx;
+        float pageTop = y + (PAGE_Y + PAGE_HEIGHT - PAGE_PADDING) * sy;
+        float pageWidth = (PAGE_WIDTH - PAGE_PADDING * 2) * sx;
+
+        titleFont.getData().setScale(scale);
+        bodyFont.getData().setScale(scale);
+
+        layout.setText(titleFont, currentSpell.getName(), INK, pageWidth, Align.center, true);
+        titleFont.draw(batch, layout, pageX, pageTop);
+
+        float bodyTop = pageTop - layout.height - 10f * scale;
+        layout.setText(bodyFont, currentSpell.getDescription(), INK, pageWidth, Align.left, true);
+        bodyFont.draw(batch, layout, pageX, bodyTop);
     }
 
     public void dispose() {
