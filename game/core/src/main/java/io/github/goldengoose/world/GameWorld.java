@@ -14,6 +14,7 @@ import java.util.List;
 
 public class GameWorld {
     private final List<Entity> entities = new ArrayList<>();
+    private final List<Entity> depthEntities = new ArrayList<>();
     private final List<Entity> pendingEntities = new ArrayList<>();
     private final Player player;
 
@@ -58,6 +59,12 @@ public class GameWorld {
         }
     }
 
+    public void renderGround(SpriteBatch batch) {
+        for (Entity entity : entities) {
+            if (entity.getRenderLayer() == RenderLayer.GROUND) entity.render(batch);
+        }
+    }
+
     public void renderDebug(ShapeRenderer shapes) {
         for (Entity entity : entities) {
             if (entity instanceof Goose goose) {
@@ -72,7 +79,11 @@ public class GameWorld {
         }
     }
 
-    public void dispose() {
-        entities.clear();
+    public List<Entity> getDepthEntities() {
+        depthEntities.clear();
+        for (Entity entity : entities) {
+            if (entity.getRenderLayer() != RenderLayer.GROUND) depthEntities.add(entity);
+        }
+        return depthEntities;
     }
 }

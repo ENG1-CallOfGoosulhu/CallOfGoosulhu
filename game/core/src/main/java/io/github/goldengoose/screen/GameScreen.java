@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -44,6 +45,7 @@ public class GameScreen implements Screen {
     private final TiledMap tiledMap;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final GameLighting lighting;
+    private final DepthRenderer depthRenderer;
 
     private boolean paused = true;
     private boolean tomeOpen = false;
@@ -63,6 +65,7 @@ public class GameScreen implements Screen {
         tiledMap = new TmxMapLoader().load("maps/Outside_campus_cthulhu.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         lighting = new GameLighting(tiledMap, worldViewport);
+        depthRenderer = new DepthRenderer(tiledMap);
 
         pauseMenu = new PauseMenu(game);
         tomeMenu = new TomeMenu(game, game.assets.getTexture(Assets.SPELL_TOME_EMPTY), spellTome);
@@ -104,13 +107,20 @@ public class GameScreen implements Screen {
         worldViewport.apply();
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+        OrthographicCamera camera = (OrthographicCamera) worldViewport.getCamera();
 
         // World
         mapRenderer.setView((OrthographicCamera) worldViewport.getCamera());
-        mapRenderer.render();
+        mapRenderer.render(depthRenderer.getFlatLayers());
+        java.awt.Rectangle viewRect = new java.awt.Rectangle();
+
+        viewRect.setRect(camera.position.x - camera.viewportWidth / 2, camera.position.y - camera.viewportHeight / 2,
+            camera.viewportWidth, camera.viewportHeight);
+
         game.batch.setProjectionMatrix(worldViewport.getCamera().combined);
         game.batch.begin();
-        world.render(game.batch);
+        world.renderGround(game.batch);
+        depthRenderer.render(game.batch, world.getDepthEntities(), viewRect);
         game.batch.end();
 
         world.emitLights(lighting);

@@ -68,4 +68,12 @@ public abstract class Entity {
     public void setPosition(float x, float y) {
         position.set(x, y);
     }
+
+    /**
+     * Where this entity touches the ground. If texture has space below, override and add as many pixels to the pos.y
+     * @return the y coordinate of the bottom of the sprite
+     */
+    public float getSortY() {
+        return position.y;
+    }
 }
