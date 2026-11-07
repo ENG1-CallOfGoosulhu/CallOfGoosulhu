@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -25,6 +24,7 @@ import io.github.goldengoose.world.*;
 import io.github.goldengoose.spells.PentagramTrapSpell;
 import io.github.goldengoose.spells.SpellTome;
 import io.github.goldengoose.spells.ElderSignSpell;
+import com.badlogic.gdx.math.Rectangle;
 
 public class GameScreen implements Screen {
     private final Cog game;
@@ -46,6 +46,7 @@ public class GameScreen implements Screen {
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final GameLighting lighting;
     private final DepthRenderer depthRenderer;
+    private final Rectangle viewRect = new Rectangle();
 
     private boolean paused = true;
     private boolean tomeOpen = false;
@@ -62,7 +63,7 @@ public class GameScreen implements Screen {
         spellTome.addSpell(pentagramTrapSpell);
         spellTome.addSpell(elderSignSpell);
 
-        tiledMap = new TmxMapLoader().load("maps/Outside_campus_cthulhu.tmx");
+        tiledMap = new TmxMapLoader().load("maps/Outside_campus_cthulhu_props.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         lighting = new GameLighting(tiledMap, worldViewport);
         depthRenderer = new DepthRenderer(tiledMap);
@@ -112,9 +113,8 @@ public class GameScreen implements Screen {
         // World
         mapRenderer.setView((OrthographicCamera) worldViewport.getCamera());
         mapRenderer.render(depthRenderer.getFlatLayers());
-        java.awt.Rectangle viewRect = new java.awt.Rectangle();
 
-        viewRect.setRect(camera.position.x - camera.viewportWidth / 2, camera.position.y - camera.viewportHeight / 2,
+        viewRect.set(camera.position.x - camera.viewportWidth / 2, camera.position.y - camera.viewportHeight / 2,
             camera.viewportWidth, camera.viewportHeight);
 
         game.batch.setProjectionMatrix(worldViewport.getCamera().combined);
