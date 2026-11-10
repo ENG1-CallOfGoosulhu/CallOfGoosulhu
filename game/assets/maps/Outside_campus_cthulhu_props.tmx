@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="985">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="989">
  <properties>
   <property name="based_on" value="Outside_campus_MAIN.tmx"/>
   <property name="theme" value="cthulhu"/>
@@ -776,6 +776,19 @@
 1225,890,890,889,1226,890,1226,1226,889,889,1226,890,1226,890,1226,889,1226,889,890,890,889,890,1226,890,1227,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="18" name="Spawns">
+  <object id="988" name="start" x="783.881" y="1454.02">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="19" name="Doors">
+  <object id="987" x="363.077" y="1332.87" width="76.8477" height="22.4404">
+   <properties>
+    <property name="target_map" value="ian_wand.tmx"/>
+    <property name="target_spawn" value="front"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup id="5" name="Collision" visible="0">
   <object id="195" name="Lake 1" type="water" x="1504" y="1056" width="96" height="32"/>
   <object id="196" name="Lake 2" type="water" x="1440" y="1088" width="160" height="32"/>

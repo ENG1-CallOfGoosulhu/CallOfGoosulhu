@@ -2,6 +2,9 @@ package io.github.goldengoose.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.goose.Goose;
@@ -18,14 +21,28 @@ public class GameWorld {
     private final List<Entity> pendingEntities = new ArrayList<>();
     private final Player player;
 
-    public GameWorld(Assets assets) {
-        player = new Player(assets.getTexture(Assets.PLAYER));
+    public GameWorld(Player player, TiledMap map, Assets assets) {
+        this.player = player;
         entities.add(player);
-        entities.add(new Goose(player, new Vector2(200, 200), assets));
 
+        MapLayer spawns = map.getLayers().get("GooseSpawns");
+        if (spawns != null) {
+            for (MapObject spawn : spawns.getObjects()) {
+                float x = spawn.getProperties().get("x", Float.class);
+                float y = spawn.getProperties().get("y", Float.class);
+                entities.add(new Goose(player, new Vector2(x, y), assets));
+            }
+        }
     }
     public Player getPlayer() {
         return player;
+    }
+
+    public void removePlayer() {
+        entities.remove(player);
+    }
+    public void addPlayer() {
+        if (!entities.contains(player)) entities.add(player);
     }
 
     public void addEntity(Entity entity) {
