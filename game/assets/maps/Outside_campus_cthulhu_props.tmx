@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="989">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="990">
  <properties>
   <property name="based_on" value="Outside_campus_MAIN.tmx"/>
   <property name="theme" value="cthulhu"/>
@@ -778,6 +778,9 @@
  </layer>
  <objectgroup id="18" name="Spawns">
   <object id="988" name="start" x="783.881" y="1454.02">
+   <point/>
+  </object>
+  <object id="989" name="ian_wand_front" x="385.131" y="1422.63">
    <point/>
   </object>
  </objectgroup>

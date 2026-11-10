@@ -20,6 +20,7 @@ import io.github.goldengoose.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Area implements Disposable {
     private final String name;
     private final TiledMap map;
