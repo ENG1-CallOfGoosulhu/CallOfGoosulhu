@@ -17,6 +17,9 @@ public class Assets {
     public static final String HOURGLASS_FRAME = "ui/hourglass_frame.png";
     public static final String PATIENCE_FRAME = "ui/patience_frame.png";
     public static final String PATIENCE_EYES = "ui/patience_eye_sheet.png";
+    public static final String KEYCARD = "ui/keycard.png";
+    public static final String KEYCARD_MAGNETISED = "ui/keycard_magnetised.png";
+    public static final String KEYCARD_ITEM = "keycard_item.png";
     public static final String VIGNETTE_0 = "ui/vignette_0.png";
     public static final String VIGNETTE_1 = "ui/vignette_1.png";
     public static final String VIGNETTE_2 = "ui/vignette_2.png";
@@ -37,6 +40,9 @@ public class Assets {
         manager.load(HOURGLASS_FRAME, Texture.class);
         manager.load(PATIENCE_FRAME, Texture.class);
         manager.load(PATIENCE_EYES, Texture.class);
+        manager.load(KEYCARD, Texture.class);
+        manager.load(KEYCARD_MAGNETISED, Texture.class);
+        manager.load(KEYCARD_ITEM, Texture.class);
         manager.load(VIGNETTE_0, Texture.class);
         manager.load(VIGNETTE_1, Texture.class);
         manager.load(VIGNETTE_2, Texture.class);
