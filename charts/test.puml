@@ -13,6 +13,9 @@
 .lisa {
   BackgroundColor #f7fc51;
 }
+.gefen {
+  BackgroundColor #88dd99;
+}
 
 ' Shared ownership colours
 .milan_charlie {
@@ -33,6 +36,18 @@
 .jack_lisa {
   BackgroundColor #aa88bb/#f7fc51;
 }
+.milan_gefen {
+  BackgroundColor #ffaa77/#88dd99;
+}
+.charlie_gefen {
+  BackgroundColor #bbeeff/#88dd99;
+}
+.jack_gefen {
+  BackgroundColor #aa88bb/#88dd99;
+}
+.lisa_gefen {
+  BackgroundColor #f7fc51/#88dd99;
+}
 
 ' Progress indicators
 .prog {
@@ -50,6 +65,7 @@ legend right
   |<#bbeeff> Charlie |
   |<#aa88bb> Jack |
   |<#f7fc51> Lisa |
+  |<#88dd99> Gefen |
 
   |= Progress |
   |<#0000000> Unstarted |
@@ -58,57 +74,63 @@ legend right
 endlegend
 * Development Work Breakdown Structure
 
-** 1. Player
+** 1. Player <<prog>>
 *** Player movement <<milan>><<prog>><<done>>
-*** Player collision\n and environmental interaction
-*** Player state management
-*** Player animation
+*** Player collision\n and environmental interaction <<charlie>>
+*** Player animation <<jack>>
 
-** 2. Enemy System
+** 2. Enemy System <<prog>>
 *** Goose AI <<milan_jack>><<prog>>
 **** Visual detection <<milan>><<done>>
 **** Auditory detection <<milan>><<done>>
-**** Pursuit and\n stopping distance <<milan_jack>><<prog>>
+**** Pursuit and\n stopping distance <<milan_jack>><<done>>
 **** Honking behaviour <<lisa>>
-**** Goose response to spells\n and environmental effects
-*** Goose types
-**** Normal goose
-**** Student goose
-**** Security goose
-*** Goose animation <<milan>><<prog>>
-*** Goose audio
+*** Goose animation <<milan>><<done>>
+*** Goose spawning <<milan>><<done>>
 
-** 3. Map and\n Environment
-*** Tileset <<charlie>><<prog>>
-*** Base map <<charlie_lisa>><<prog>>
-*** Buildings and\n environmental decoration
-**** Entering/leaving\n buildings
-**** Goose-building/environment\n behaviour
-*** Collision boundaries\n and obstacles
-*** Environmental hazards
-**** Mud puddles
-**** Tall grass\n concealment
+** 3. Map and\n Environment <<prog>>
+*** Tileset <<charlie>><<done>>
+*** Exterior map <<charlie>><<done>>
+*** Uncthulhu exterior map (small) <<charlie>>
+*** Render ordering <<milan>><<done>>
+*** Buildings and\n environmental decoration <<charlie>><<done>>
+**** Entering/leaving\n buildings <<milan>><<prog>>
+***** Saving map state\n (reset goose positions) <<milan>><<done>>
+**** Ian Wand building <<jack>><<prog>>
+***** Escape feature
+**** Ron Cooke Hub <<charlie>><<prog>>
+***** Key magnetisation
+*** Collision boundaries\n and obstacles <<charlie>><<done>>
+*** Mud puddles
+**** Functionality
+**** Map <<charlie>><<done>>
 *** Escape destination\n and objective location
+*** Keys
+**** Key assets\n and visibility (e.g. glowing)
+**** Key pickup\n and possession
 
-** 4. Core Game Flow
+** 4. Core Game Flow <<prog>>
 *** Game state\n management <<milan>><<prog>>
 **** Start screen state <<milan>><<prog>>
-**** Introduction/cutscene
-**** Alternate-world transition
+**** Introduction/cutscene <<charlie>>
+**** Alternate-world transitions <<charlie>><<prog>>
 **** Active gameplay <<milan>><<prog>>
 **** Victory state
-**** Defeat state
+**** Defeat state <<gefen>>
+**** Defeat/game over cutscene <<charlie>>
 *** Win/lose\n conditions
 **** Escape destination detection
 **** Five-minute time limit
 **** End-of-game transition
-*** Game restart
+*** Objective system <<lisa>>
+**** Objective tracking <<lisa>>
+**** Objective display
+*** Game restart <<charlie>>
 
-** 5. Timer
+** 5. Timer <<charlie_gefen>><<prog>>
 *** Timer logic <<charlie>><<done>>
-*** Timer integration\n with game states
-*** Timer UI
-*** Timer expiry\n and defeat handling
+*** Timer UI <<charlie>><<done>>
+*** Timer expiry\n and defeat handling <<gefen>>
 
 ** 6. Spell System \n To be decided\n which spells <<milan>><<prog>>
 *** Spell system\n foundation <<milan>><<done>>
@@ -118,25 +140,24 @@ endlegend
 **** Cooldowns/charges <<milan>><<done>>
 *** Initial spell availability <<milan>><<done>>
 *** Pentagram spell <<milan>><<done>>
-*** Elder sign spell <<milan>><<done>>
-*** Spell feedback and effects <<milan>><<prog>>
+*** Elder sign spell <<milan>><<prog>>
 
-** 7. Patience System <<lisa>>
-*** Patience value\n and initial state <<lisa>>
-*** Patience reduction\n from honking <<lisa>>
-*** Patience bar UI\n integration
-*** Patience thresholds\n and effects
+** 7. Patience System <<charlie_lisa>><<prog>>
+*** Patience value\n and initial state <<lisa>><<prog>>
+*** Patience reduction\n from honking <<lisa>><<prog>>
+*** patience ring UI\n integration <<charlie>><<done>>
+*** Patience thresholds\n and effects <<charlie>><<prog>>
 
-** 8. Events\n and Interactions <<jack>>
-*** Event triggers and effects <<jack>>
-*** Event 1 <<jack>>
-*** Event 2 <<jack>>
+** 8. Events\n and Interactions <<jack>><<prog>>
+*** Bread dispenser <<jack>><<prog>>
+*** Tall grass <<jack>><<prog>>
 
-** 9. User Interface
+** 9. User Interface <<prog>>
 *** Start screen <<milan>><<prog>>
-*** Gameplay HUD
-**** Timer
-**** Patience bar
+*** Controls/tutorial screen <<gefen>>
+*** Gameplay HUD <<milan_charlie>><<done>>
+**** Timer <<charlie>><<done>>
+**** patience ring <<charlie>><<done>>
 **** Spell-tome\n interface <<milan>><<done>>
 *** Victory screen
 *** Defeat screen
@@ -148,8 +169,4 @@ endlegend
 *** Spell sound effects
 *** Event and transition sound effects
 *** Speech bubbles/subtitles
-
-** 11. Animation
-*** Player animation integration
-*** Goose animation integration <<milan>><<prog>>
 @endwbs

@@ -4,20 +4,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.player.Player;
 import io.github.goldengoose.assets.Assets;
+import io.github.goldengoose.world.GameSession;
 
 public abstract class Spell {
     protected Texture texture;
     protected float range;
     protected float cooldown;
 
-    protected Player player;
+    protected final GameSession session;
     protected Assets assets;
 
     protected String name = "";
     protected String description = "";
 
-    public Spell(Player player, Assets assets) {
-        this.player = player;
+    public Spell(GameSession session, Assets assets) {
+        this.session = session;
         this.assets = assets;
     }
 
@@ -30,7 +31,7 @@ public abstract class Spell {
      */
     public boolean activate(Vector2 worldPos) {
         if (cooldownCounter > 0 ||
-            player.getPosition().dst2(worldPos) > range * range) {
+            session.getPlayer().getPosition().dst2(worldPos) > range * range) {
             return false;
         }
 

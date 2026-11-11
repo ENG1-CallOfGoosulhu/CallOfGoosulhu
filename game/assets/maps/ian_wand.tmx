@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="44" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="61">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="44" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="62">
  <properties>
   <property name="name" value="Ian Wand Building"/>
  </properties>
@@ -322,9 +322,6 @@
   <object id="47" name="from_courtyard" type="player_spawn" x="640" y="352">
    <point/>
   </object>
-  <object id="48" name="from_south" type="player_spawn" x="528" y="1184">
-   <point/>
-  </object>
   <object id="49" name="geese_nw" type="goose_spawn" x="224" y="288" width="128" height="128">
    <properties>
     <property name="count" type="int" value="2"/>
@@ -342,6 +339,9 @@
     <property name="count" type="int" value="2"/>
    </properties>
    <ellipse/>
+  </object>
+  <object id="61" name="front" x="527.494" y="1229.59">
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="9" name="Objectives">
@@ -397,10 +397,10 @@
     <property name="target_spawn" value="ian_wand_courtyard"/>
    </properties>
   </object>
-  <object id="60" name="to_campus_south" type="door" x="512" y="1248" width="64" height="32">
+  <object id="60" name="to_campus_south" type="door" x="511.727" y="1248.27" width="64" height="32">
    <properties>
-    <property name="target_map" value="campus.tmx"/>
-    <property name="target_spawn" value="ian_wand_south"/>
+    <property name="target_map" value="Outside_campus_cthulhu_props.tmx"/>
+    <property name="target_spawn" value="ian_wand_front"/>
    </properties>
   </object>
  </objectgroup>
