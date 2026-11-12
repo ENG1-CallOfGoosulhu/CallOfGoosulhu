@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import io.github.goldengoose.util.InputManager;
 import io.github.goldengoose.world.Entity;
 import io.github.goldengoose.world.GameWorld;
 
@@ -18,6 +19,7 @@ public class KeycardMagnetiser extends HiddenEvent {
     private float pulseTime = 0f;
 
     private final GameWorld world;
+    private float stateTime = 0f;
     private final Animation<TextureRegion> prompt;
     private final float zoneX, zoneY, zoneWidth;
 
@@ -39,6 +41,15 @@ public class KeycardMagnetiser extends HiddenEvent {
     @Override protected void onEnter(Entity entity) { playerInside = true; }
     @Override protected void onExit(Entity entity) { playerInside = false; }
     @Override protected void onUpdate(float deltaTime) { pulseTime += deltaTime; }
+
+
+    @Override
+    protected void onStay(Entity entity, float deltaTime) {
+        if (state == State.AVAILABLE && InputManager.interact() && trigger()) {
+            state = State.UNAVAILABLE;
+            stateTime = 0f;
+        }
+    }
 
     @Override
     public void render(SpriteBatch batch) {
