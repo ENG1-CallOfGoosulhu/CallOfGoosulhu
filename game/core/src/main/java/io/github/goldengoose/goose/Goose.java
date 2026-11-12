@@ -97,6 +97,15 @@ public class Goose extends Entity {
         }
     }
 
+    public void distractBy(Bread bread) {
+        gooseAI.distractBy(bread);
+    }
+
+    // True if standing on honk ring on piece of bread
+    public boolean isSettled() {
+        return gooseAI.isSettled();
+    }
+
     // True whilst this goose is standing on the honk ring
     public boolean isSwarming(){
         return gooseAI.isSwarming();

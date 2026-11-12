@@ -14,8 +14,13 @@ public class InputManager {
     public static boolean pause() {
         return Gdx.input.isKeyJustPressed(Input.Keys.P);
     }
+
     public static boolean tome() {
         return Gdx.input.isKeyJustPressed(Input.Keys.T);
+    }
+
+    public static boolean interact(){
+        return Gdx.input.isKeyJustPressed(Input.Keys.E);
     }
 
     public static boolean isUp(boolean justPressed) {

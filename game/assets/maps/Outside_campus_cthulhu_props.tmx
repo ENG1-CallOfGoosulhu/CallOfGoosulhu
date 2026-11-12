@@ -230,6 +230,7 @@
  </layer>
  <layer id="13" name="Tall Grass (extra layer)" width="50" height="50">
   <properties>
+   <property name="tall_grass" type="bool" value="true"/>
    <property name="ySort" type="bool" value="true"/>
   </properties>
   <data encoding="csv">
@@ -287,6 +288,7 @@
  </layer>
  <layer id="14" name="Tall Grass (extra layer 1)" width="50" height="50">
   <properties>
+   <property name="tall_grass" type="bool" value="true"/>
    <property name="ySort" type="bool" value="true"/>
   </properties>
   <data encoding="csv">
@@ -344,6 +346,7 @@
  </layer>
  <layer id="12" name="Tall Grass" width="50" height="50">
   <properties>
+   <property name="tall_grass" type="bool" value="true"/>
    <property name="ySort" type="bool" value="true"/>
   </properties>
   <data encoding="csv">

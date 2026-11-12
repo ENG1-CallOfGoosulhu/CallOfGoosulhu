@@ -9,27 +9,58 @@ import io.github.goldengoose.util.InputManager;
 
 public class Player extends Entity {
     private static final float SPEED = 120f;
+    private static final float MUD_SPEED = 40f;
 
     private final Vector2 velocity = new Vector2();
-
-    /** The student facing forwards, from the 32x32 character sheet. (UR_AVATAR) */
-    private final TextureRegion sprite;
+    private TextureRegion sprite;
+    private int hidingCount = 0;
+    private boolean transformed = false;
+    private boolean inMud = false;
 
     public Player(Texture texture) {
         this.texture = texture;
-        // The sheet has 4 poses (right, up, left, down), each 32 wide and 64 tall. We use "down".
         sprite = new TextureRegion(texture, 96, 0, 32, 64);
+    }
+
+    public void transformIntoGoose(Texture gooseTexture) {
+        if (!transformed) {
+            transformed = true;
+            sprite = new TextureRegion(gooseTexture, 0, 0, 32, 32);
+        }
+    }
+
+    public boolean isTransformed() {
+        return transformed;
+    }
+
+    public void setInMud(boolean inMud) {
+        this.inMud = inMud;
     }
 
     @Override
     public void update(float deltaTime) {
+        float speed = inMud ? MUD_SPEED : SPEED;
         velocity.set(InputManager.getHorizontal(), InputManager.getVertical()).nor();
-        position.mulAdd(velocity, SPEED * deltaTime);
+        position.mulAdd(velocity, speed * deltaTime);
     }
 
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(sprite, position.x, position.y);
+    }
+
+    public void beginHiding() {
+        hidingCount++;
+    }
+
+    public void endHiding() {
+        if (hidingCount > 0) {
+            hidingCount--;
+        }
+    }
+
+    public boolean isHidden() {
+        return hidingCount > 0;
     }
 
     @Override

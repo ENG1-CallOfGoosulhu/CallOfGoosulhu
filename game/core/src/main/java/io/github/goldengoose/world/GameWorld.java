@@ -10,6 +10,8 @@ import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.goose.Goose;
 import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.player.Player;
+import io.github.goldengoose.hidden_events.HiddenEvent;
+import io.github.goldengoose.goose.Bread;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -36,6 +38,16 @@ public class GameWorld {
     }
     public Player getPlayer() {
         return player;
+    }
+
+    public List<Goose> getGeese() {
+        List<Goose> geese = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (entity instanceof Goose goose) {
+                geese.add(goose);
+            }
+        }
+        return geese;
     }
 
     public void removePlayer() {
@@ -73,7 +85,9 @@ public class GameWorld {
     public void render(SpriteBatch batch) {
         for (Entity entity : entities) {
             entity.render(batch);
+
         }
+
     }
 
     public void renderGround(SpriteBatch batch) {
@@ -86,6 +100,12 @@ public class GameWorld {
         for (Entity entity : entities) {
             if (entity instanceof Goose goose) {
                 goose.renderDebug(shapes);
+            }
+            if (entity instanceof HiddenEvent event) {
+                event.renderDebug(shapes);
+            }
+            if (entity instanceof Bread bread) {
+                bread.renderDebug(shapes);
             }
         }
     }

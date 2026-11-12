@@ -2,6 +2,7 @@ package io.github.goldengoose.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class Assets {
     public static final String GOOSE_WALK = "cthulhu_goose_walking.png";
@@ -13,6 +14,10 @@ public class Assets {
     public static final String ELDER_SIGN_SPELL = "elder_sign_spell.png";
     public static final String SPELL_TOME = "spell_tome_w_writing.png";
     public static final String SPELL_TOME_EMPTY = "spell_tome.png";
+    public static final String BREAD_DISPENSER = "events/bread_dispenser.atlas";
+    public static final String INTERACT_KEY = "events/interact_key.png";
+    public static final String BREAD = "events/bread.png";
+    public static final String BREAD_SPIN = "events/bread_spin.atlas";
     public static final String HOURGLASS_GLASS = "ui/hourglass_glass.png";
     public static final String HOURGLASS_FRAME = "ui/hourglass_frame.png";
     public static final String PATIENCE_FRAME = "ui/patience_frame.png";
@@ -36,6 +41,10 @@ public class Assets {
         manager.load(ELDER_SIGN_SPELL, Texture.class);
         manager.load(SPELL_TOME, Texture.class);
         manager.load(SPELL_TOME_EMPTY, Texture.class);
+        manager.load(BREAD_DISPENSER, TextureAtlas.class);
+        manager.load(INTERACT_KEY, Texture.class);
+        manager.load(BREAD, Texture.class);
+        manager.load(BREAD_SPIN, TextureAtlas.class);
         manager.load(HOURGLASS_GLASS, Texture.class);
         manager.load(HOURGLASS_FRAME, Texture.class);
         manager.load(PATIENCE_FRAME, Texture.class);
@@ -51,6 +60,10 @@ public class Assets {
 
     public Texture getTexture(String path) {
         return manager.get(path, Texture.class);
+    }
+
+    public TextureAtlas getAtlas(String path){
+        return manager.get(path, TextureAtlas.class);
     }
 
     public void dispose() {

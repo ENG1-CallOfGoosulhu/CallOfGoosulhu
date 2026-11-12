@@ -20,7 +20,6 @@ public class Hud implements Disposable {
     private final float totalSeconds;
     private final Hourglass hourglass;
     private final PatienceRing ring;
-    private final KeyCard keyCard;
     private final Texture[] vignettes;
     private float secondsLeft, patience = 1f, clock;
 
@@ -60,8 +59,15 @@ public class Hud implements Disposable {
         float glassY = height - margin - Hourglass.HEIGHT * pixel;
         hourglass.draw(batch, margin, glassY, pixel);
         int seconds = MathUtils.ceil(secondsLeft);
-        font.draw(batch, String.format("%d:%02d", seconds / 60, seconds % 60), margin, glassY - pixel, Hourglass.WIDTH * pixel, Align.center, false);
 
+        if (secondsLeft <= 29f) {
+            float pulse = 0.6f + 0.4f * MathUtils.sin(clock * 6f);
+            font.setColor(0f, pulse, 0f, 1f);
+        } else {
+            font.setColor(Color.WHITE);
+        }
+        font.draw(batch, String.format("%d:%02d", seconds / 60, seconds % 60), glassX, glassY - pixel, Hourglass.WIDTH * pixel, Align.center, false);
+        font.setColor(Color.WHITE);
         float ringSize = PatienceRing.SIZE * pixel;
         ring.draw(batch, width - margin - ringSize, height - margin - ringSize, pixel);
 
