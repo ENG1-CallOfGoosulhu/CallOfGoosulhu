@@ -18,6 +18,7 @@ public class Hud implements Disposable {
     private final float totalSeconds;
     private final Hourglass hourglass;
     private final PatienceRing ring;
+    private final KeyCard keyCard;
     private final Texture[] vignettes;
     private float secondsLeft, patience = 1f, clock;
 
@@ -26,6 +27,7 @@ public class Hud implements Disposable {
         secondsLeft = totalSeconds;
         hourglass = new Hourglass(assets);
         ring = new PatienceRing(assets);
+        keyCard = new KeyCard(assets);
         vignettes = new Texture[] {
             assets.getTexture(Assets.VIGNETTE_0), assets.getTexture(Assets.VIGNETTE_1), assets.getTexture(Assets.VIGNETTE_2) };
     }
