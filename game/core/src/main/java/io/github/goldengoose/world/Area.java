@@ -124,7 +124,8 @@ public class Area implements Disposable {
             if (targetMap == null || targetSpawn == null) {
                 throw new IllegalStateException("Door '" + object.getName() + "' in " + name + " needs target_map and target_spawn");
             }
-            doors.add(new Door(rect.getRectangle(), targetMap.replace(".tmx", ""), targetSpawn));
+            boolean locked = p.get("locked", false, Boolean.class);
+            doors.add(new Door(rect.getRectangle(), targetMap.replace(".tmx", ""), targetSpawn, locked));
         }
     }
 

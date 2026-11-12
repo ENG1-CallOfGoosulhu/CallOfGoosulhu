@@ -1,5 +1,6 @@
 package io.github.goldengoose.world;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
@@ -16,10 +17,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GameSession implements Disposable {
+    private static final float DOOR_RANGE = 48f;
+
     private final Assets assets;
     private final Viewport worldViewport;
 
     private final Player player;
+    private final Vector2 playerCentre = new Vector2();
     private final GameTimer timer = new GameTimer(5 * 60);
     private final SpellTome spellTome;
     private final PatienceSystem patienceSystem = new PatienceSystem();
@@ -51,18 +55,27 @@ public class GameSession implements Disposable {
         currentArea.update(delta);
         spellTome.update(delta);
         timer.update(delta);
-        checkDoors();
         patienceSystem.update(delta, currentArea.getWorld().getGeese());
     }
 
-    private void checkDoors() {
-        Rectangle feet = new Rectangle(player.position.x, player.position.y, player.getWidth(), player.getHeight());
+    public boolean clickDoor(Vector2 worldPos) {
         for (Door door : currentArea.getDoors()) {
-            if (door.bounds().overlaps(feet)) {
+            if (!door.bounds().contains(worldPos)) continue;
+
+            if (isInRange(door) && (!door.locked() || keyState == KeyState.MAGNETISED)) {
                 pendingDoor = door;
-                return;
             }
+            return true;
         }
+        return false;
+    }
+
+    private boolean isInRange(Door door) {
+        player.getCentre(playerCentre);
+        Rectangle r = door.bounds();
+        float nearestX = MathUtils.clamp(playerCentre.x, r.x, r.x + r.width);
+        float nearestY = MathUtils.clamp(playerCentre.y, r.y, r.y + r.height);
+        return playerCentre.dst2(nearestX, nearestY) <= DOOR_RANGE * DOOR_RANGE;
     }
 
     private void enter(String areaName, String spawnName) {
