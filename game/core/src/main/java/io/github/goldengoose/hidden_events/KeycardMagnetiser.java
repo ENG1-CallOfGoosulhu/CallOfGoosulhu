@@ -31,13 +31,14 @@ public class KeycardMagnetiser extends HiddenEvent {
 
         this.world = world;
         this.prompt = prompt;
-        this.zoneX = rect.x;
-        this.zoneY = rect.y;
+        this.zoneX = rect.x - rect.width/4;
+        this.zoneY = rect.y + rect.height;
         this.zoneWidth = rect.width;
     }
 
     @Override protected void onEnter(Entity entity) { playerInside = true; }
     @Override protected void onExit(Entity entity) { playerInside = false; }
+    @Override protected void onUpdate(float deltaTime) { pulseTime += deltaTime; }
 
     @Override
     public void render(SpriteBatch batch) {

@@ -39,7 +39,7 @@ public class Area implements Disposable {
     private final TallGrass tallGrass;
     private KeycardMagnetiser magnetiser;
 
-    Animation<TextureRegion> prompt;
+    private final Animation<TextureRegion> prompt;
     private final List<Door> doors = new ArrayList<>();
     private Door ignoredDoor;
 
@@ -58,10 +58,10 @@ public class Area implements Disposable {
         Bread.setSprite(new TextureRegion(assets.getTexture(Assets.BREAD)));
         Bread.setSpinAnimation(new Animation<TextureRegion>(0.05f, assets.getAtlas(Assets.BREAD_SPIN).findRegions("bread_spin"), Animation.PlayMode.LOOP));
 
+        TextureRegion[] keyFrames = TextureRegion.split(assets.getTexture(Assets.INTERACT_KEY), 16, 16)[0];
+        prompt = new Animation<TextureRegion>(0.5f, keyFrames);
+        prompt.setPlayMode(Animation.PlayMode.LOOP);
         if (name.equals("Outside_campus_cthulhu_props")) {
-            TextureRegion[] keyFrames = TextureRegion.split(assets.getTexture(Assets.INTERACT_KEY), 16, 16)[0];
-            prompt = new Animation<TextureRegion>(0.5f, keyFrames);
-            prompt.setPlayMode(Animation.PlayMode.LOOP);
             eventManager.register(new BreadDispenser(world, assets.getAtlas(Assets.BREAD_DISPENSER), prompt, 500, 150, 64, 64));
         }
         loadDoors();
@@ -140,6 +140,7 @@ public class Area implements Disposable {
         if (!(magnetiserObject instanceof RectangleMapObject rect)) throw new IllegalStateException("'keycard_magnetiser' is not a Rectangle");
 
         magnetiser = new KeycardMagnetiser(world, prompt, rect.getRectangle());
+        eventManager.register(magnetiser);
     }
 
     public GameWorld getWorld() {
