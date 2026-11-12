@@ -139,6 +139,20 @@ public class SpellTome {
         }
     }
 
+    public float getPixel(Viewport hud) {
+        return hud.getWorldWidth() / REFERENCE_WIDTH * SCALE_X;
+    }
+
+    public float getTop(Viewport hud) {
+        float scale = hud.getWorldWidth() / REFERENCE_WIDTH;
+        return PADDING * scale + texture.getHeight() * scale * SCALE_Y;
+    }
+
+    public float getRight(Viewport hud) {
+        float scale = hud.getWorldWidth() / REFERENCE_WIDTH;
+        return hud.getWorldWidth() - PADDING * scale;
+    }
+
     public InputAdapter getInputProcessor() {
         return new InputAdapter() {
             @Override

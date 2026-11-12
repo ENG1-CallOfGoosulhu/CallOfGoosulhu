@@ -99,7 +99,7 @@ public class GameScreen implements Screen {
 
         // HUD
         hudViewport.apply();
-        hud.draw(game.batch, hudViewport, hudFont);
+        hud.draw(game.batch, hudViewport, hudFont, session.getSpellTome(),session.getKeyState());
 
         shapes.setProjectionMatrix(hudViewport.getCamera().combined);
         shapes.begin(ShapeRenderer.ShapeType.Filled);
