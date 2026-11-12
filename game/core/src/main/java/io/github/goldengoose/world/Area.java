@@ -39,13 +39,13 @@ public class Area implements Disposable {
     private final List<Door> doors = new ArrayList<>();
     private Door ignoredDoor;
 
-    public Area(String name, Player player, Assets assets, Viewport viewport) {
+    public Area(String name, GameSession session, Assets assets, Viewport viewport) {
         this.name = name;
         map = new TmxMapLoader().load("maps/" + name + ".tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map);
         depthRenderer = new DepthRenderer(map);
         lighting = new GameLighting(map, viewport);
-        world = new GameWorld(player, map, assets);
+        world = new GameWorld(session, map, assets);
 
         // Hidden events for this area
         eventManager = new HiddenEventsHandler(world);

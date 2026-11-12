@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.assets.Assets;
@@ -12,6 +13,7 @@ import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.player.Player;
 import io.github.goldengoose.hidden_events.HiddenEvent;
 import io.github.goldengoose.goose.Bread;
+import io.github.goldengoose.ui.KeyCard;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,18 +25,28 @@ public class GameWorld {
     private final List<Entity> pendingEntities = new ArrayList<>();
     private final Player player;
 
-    public GameWorld(Player player, TiledMap map, Assets assets) {
-        this.player = player;
+    public GameWorld(GameSession session, TiledMap map, Assets assets) {
+        this.player = session.getPlayer();
         entities.add(player);
 
-        MapLayer spawns = map.getLayers().get("GooseSpawns");
-        if (spawns != null) {
-            for (MapObject spawn : spawns.getObjects()) {
+        MapLayer gooseSpawns = map.getLayers().get("GooseSpawns");
+        if (gooseSpawns != null) {
+            for (MapObject spawn : gooseSpawns.getObjects()) {
                 float x = spawn.getProperties().get("x", Float.class);
                 float y = spawn.getProperties().get("y", Float.class);
                 entities.add(new Goose(player, new Vector2(x, y), assets));
             }
         }
+        MapLayer spawns = map.getLayers().get("Spawns");
+        if (spawns == null) throw new IllegalStateException("No 'Spawns' layer");
+
+        MapObject keyCard = spawns.getObjects().get("keyCard");
+        if (keyCard == null) return;
+        if (!(keyCard instanceof RectangleMapObject rect)) throw new IllegalStateException("'keyCard' is not a Rectangle");
+
+        KeyCardItem keyCardItem = new KeyCardItem(session, rect.getRectangle(), assets.getTexture(Assets.KEYCARD_ITEM));
+        addEntity(keyCardItem);
+
     }
     public Player getPlayer() {
         return player;
