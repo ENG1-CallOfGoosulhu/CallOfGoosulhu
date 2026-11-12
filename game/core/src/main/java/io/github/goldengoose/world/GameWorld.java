@@ -24,8 +24,10 @@ public class GameWorld {
     private final List<Entity> depthEntities = new ArrayList<>();
     private final List<Entity> pendingEntities = new ArrayList<>();
     private final Player player;
+    private final GameSession session;
 
     public GameWorld(GameSession session, TiledMap map, Assets assets) {
+        this.session = session;
         this.player = session.getPlayer();
         entities.add(player);
 
@@ -51,6 +53,8 @@ public class GameWorld {
     public Player getPlayer() {
         return player;
     }
+    public KeyState getKeyState() { return session.getKeyState(); }
+    public void setKeyState(KeyState state) { session.setKeyState(state); }
 
     public List<Goose> getGeese() {
         List<Goose> geese = new ArrayList<>();

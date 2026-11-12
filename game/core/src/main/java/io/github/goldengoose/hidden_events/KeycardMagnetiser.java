@@ -7,10 +7,9 @@ import com.badlogic.gdx.math.Rectangle;
 import io.github.goldengoose.util.InputManager;
 import io.github.goldengoose.world.Entity;
 import io.github.goldengoose.world.GameWorld;
+import io.github.goldengoose.world.KeyState;
 
 public class KeycardMagnetiser extends HiddenEvent {
-    private enum State { AVAILABLE, UNAVAILABLE }
-
     // Prompt animation
     private static final float PROMPT_GAP = -20f;
     private static final float PROMPT_BOB = 2f;
@@ -23,8 +22,6 @@ public class KeycardMagnetiser extends HiddenEvent {
     private final Animation<TextureRegion> prompt;
     private final float zoneX, zoneY, zoneWidth;
 
-
-    private KeycardMagnetiser.State state = State.AVAILABLE;
     private boolean playerInside = false;
 
 
@@ -40,24 +37,24 @@ public class KeycardMagnetiser extends HiddenEvent {
 
     @Override protected void onEnter(Entity entity) { playerInside = true; }
     @Override protected void onExit(Entity entity) { playerInside = false; }
-    @Override protected void onUpdate(float deltaTime) { pulseTime += deltaTime; }
+    @Override protected void onUpdate(float deltaTime) { pulseTime += deltaTime;}
 
 
     @Override
     protected void onStay(Entity entity, float deltaTime) {
-        if (state == State.AVAILABLE && InputManager.interact() && trigger()) {
-            state = State.UNAVAILABLE;
+        if (world.getKeyState() == KeyState.UNMAGNETISED && InputManager.interact() && trigger()) {
             stateTime = 0f;
+            world.setKeyState(KeyState.MAGNETISED);
         }
     }
 
     @Override
     public void render(SpriteBatch batch) {
-        if (state == State.UNAVAILABLE) {
+        if (world.getKeyState() != KeyState.UNMAGNETISED) {
             return;
         }
 
-        boolean showPrompt = state == State.AVAILABLE && playerInside;
+        boolean showPrompt = world.getKeyState() == KeyState.UNMAGNETISED && playerInside;
         if (showPrompt) {
             batch.setColor(1f, 1f, 1f, 1f);
         }
