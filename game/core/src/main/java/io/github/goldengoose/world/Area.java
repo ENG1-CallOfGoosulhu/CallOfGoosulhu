@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import io.github.goldengoose.assets.Assets;
+import io.github.goldengoose.hidden_events.KeycardMagnetiser;
 import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.player.Player;
 import io.github.goldengoose.goose.Bread;
@@ -36,6 +37,9 @@ public class Area implements Disposable {
     private final GameWorld world;
     private final HiddenEventsHandler eventManager;
     private final TallGrass tallGrass;
+    private KeycardMagnetiser magnetiser;
+
+    Animation<TextureRegion> prompt;
     private final List<Door> doors = new ArrayList<>();
     private Door ignoredDoor;
 
@@ -56,11 +60,12 @@ public class Area implements Disposable {
 
         if (name.equals("Outside_campus_cthulhu_props")) {
             TextureRegion[] keyFrames = TextureRegion.split(assets.getTexture(Assets.INTERACT_KEY), 16, 16)[0];
-            Animation<TextureRegion> prompt = new Animation<TextureRegion>(0.5f, keyFrames);
+            prompt = new Animation<TextureRegion>(0.5f, keyFrames);
             prompt.setPlayMode(Animation.PlayMode.LOOP);
             eventManager.register(new BreadDispenser(world, assets.getAtlas(Assets.BREAD_DISPENSER), prompt, 500, 150, 64, 64));
         }
         loadDoors();
+        loadMagnetiser(assets);
     }
 
     public void update(float delta) {
@@ -125,6 +130,17 @@ public class Area implements Disposable {
         }
     }
 
+
+    private void loadMagnetiser(Assets assets) {
+        MapLayer layer = map.getLayers().get("Interactables");
+        if (layer == null) return;
+
+        MapObject magnetiserObject = layer.getObjects().get("keycard_magnetiser");
+        if (magnetiserObject == null) return;
+        if (!(magnetiserObject instanceof RectangleMapObject rect)) throw new IllegalStateException("'keycard_magnetiser' is not a Rectangle");
+
+        magnetiser = new KeycardMagnetiser(world, prompt, rect.getRectangle());
+    }
 
     public GameWorld getWorld() {
         return world;
