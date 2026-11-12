@@ -18,7 +18,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.hidden_events.KeycardMagnetiser;
 import io.github.goldengoose.lighting.GameLighting;
-import io.github.goldengoose.player.Player;
 import io.github.goldengoose.goose.Bread;
 import io.github.goldengoose.hidden_events.BreadDispenser;
 import io.github.goldengoose.hidden_events.HiddenEventsHandler;
@@ -37,7 +36,6 @@ public class Area implements Disposable {
     private final GameWorld world;
     private final HiddenEventsHandler eventManager;
     private final TallGrass tallGrass;
-    private KeycardMagnetiser magnetiser;
 
     private final Animation<TextureRegion> prompt;
     private final List<Door> doors = new ArrayList<>();
@@ -65,7 +63,7 @@ public class Area implements Disposable {
             eventManager.register(new BreadDispenser(world, assets.getAtlas(Assets.BREAD_DISPENSER), prompt, 500, 150, 64, 64));
         }
         loadDoors();
-        loadMagnetiser(assets);
+        loadMagnetiser();
     }
 
     public void update(float delta) {
@@ -131,7 +129,7 @@ public class Area implements Disposable {
     }
 
 
-    private void loadMagnetiser(Assets assets) {
+    private void loadMagnetiser() {
         MapLayer layer = map.getLayers().get("Interactables");
         if (layer == null) return;
 
@@ -139,7 +137,7 @@ public class Area implements Disposable {
         if (magnetiserObject == null) return;
         if (!(magnetiserObject instanceof RectangleMapObject rect)) throw new IllegalStateException("'keycard_magnetiser' is not a Rectangle");
 
-        magnetiser = new KeycardMagnetiser(world, prompt, rect.getRectangle());
+        KeycardMagnetiser magnetiser = new KeycardMagnetiser(world, prompt, rect.getRectangle());
         eventManager.register(magnetiser);
     }
 
