@@ -15,12 +15,14 @@ public class GooseAI {
     enum GooseState {
         IDLE,
         CHASING,
-        SWARMING
+        SWARMING,
+        // Walking to / At a piece of bread
+        DISTRACTED
     }
 
-    //------------
+    //------------------------------------------------------------------
     // CONSTANTS
-    //------------
+    //------------------------------------------------------------------
     private static final float IDLE_SPEED = 20f;
     private static final float CHASING_SPEED = 40f;
 
@@ -57,9 +59,13 @@ public class GooseAI {
     private static final float RING_TOLERANCE = 1f;
     // How strongly geese push each other around the player
     private static final float SWARM_SLIDE_WEIGHT = 1f;
-    //------------
+    // A goose counts as "eating bread" if they are within this distance
+    private static final float EAT_DISTANCE = 12f;
+    // A goose will only go back to walking if it's pushed this far off the bread (due to separation behaviour)
+    private static final float EAT_RELEASE_MARGIN = 8f;
+    //------------------------------------------------------------------
     // END CONSTANTS
-    //------------
+    //------------------------------------------------------------------
 
 
     private GooseState state = GooseState.IDLE;
@@ -83,8 +89,11 @@ public class GooseAI {
     // The point on the ring this goose is heading for
     private final Vector2 ringTarget = new Vector2();
     private final Vector2 radial = new Vector2();
-    private static final float VISION_DOT_THRESHOLD =
-        (float) Math.cos(Math.toRadians(VISION_HALF_ANGLE_DEGREES));
+    private Bread bread;
+    private boolean eating = false;
+    private final Vector2 breadCentre = new Vector2();
+    private final Vector2 toBread = new Vector2();
+    private static final float VISION_DOT_THRESHOLD = (float) Math.cos(Math.toRadians(VISION_HALF_ANGLE_DEGREES));
 
     private final Vector2 gooseCentre = new Vector2();
     private final Vector2 playerCentre = new Vector2();
@@ -99,10 +108,21 @@ public class GooseAI {
         goose.getPlayer().getCentre(playerCentre);
         float playerDist2 = gooseCentre.dst2(playerCentre);
 
-        // TODO: Once we determine how player makes noise, replace true with variable:
+        // When the bread is gone
+        if (bread != null && bread.isExpired()) {
+            bread = null;
+            eating = false;
+            if (state == GooseState.DISTRACTED) {
+                // Goose goes back to IDLE behaviour once the bread has disappeared
+                state = GooseState.IDLE;
+            } // NEW
+        } // NEW
 
-        boolean detected = canSeePlayer()
-            || canHearPlayer(true);
+        // Geese can no longer hear/see the player when they are hiding in the tall grass (isHidden())
+        boolean playerHidden = goose.getPlayer().isHidden();
+        boolean detected = !playerHidden && (canSeePlayer() || canHearPlayer(true));
+
+        // TODO: Once we determine how player makes noise, replace true with variable:
 
         if (state != GooseState.IDLE) {
             if (playerDist2 > FOLLOW_RANGE * FOLLOW_RANGE) {
@@ -120,6 +140,17 @@ public class GooseAI {
             state = GooseState.CHASING;
         }
 
+        // Geese give up chasing the player when they're hiding
+        // Returning to their IDLE state
+        if (playerHidden) {
+            state = GooseState.IDLE;
+        }
+
+        // Bread is more enticing than the player
+        if (bread != null) {
+            state = GooseState.DISTRACTED;
+        }
+
         velocity.setZero();
 
         if (state == GooseState.CHASING) {
@@ -132,11 +163,18 @@ public class GooseAI {
             if (radial.isZero()) {
                 radial.set(1f, 0f);
             }
+
             radial.nor();
             ringTarget.set(playerCentre).mulAdd(radial, CHASE_TARGET_RADIUS);
             moveTo(ringTarget);
-            // Chasing geese get the full push seperation
+            // Chasing geese get the full push separation
             applySeparation();
+
+        } else if (state == GooseState.DISTRACTED) {
+            hasIdleTarget = false;
+            idleWaiting = false;
+            feed();
+
         } else if (state == GooseState.SWARMING) {
             hasIdleTarget = false;
             idleWaiting = false;
@@ -230,7 +268,7 @@ public class GooseAI {
     // Keep geese from stacking on top of each other and turning into a "blob"
     // Works by comparing distance between each goose every other frame and pushing them apart if so
     public void addSeparationFrom(Goose other) {
-        boolean eitherSwarming = state == GooseState.SWARMING || other.isSwarming();
+        boolean eitherSwarming = isSettled() || other.isSettled();
         // Crowds stand closer together than running geese
         float radius = eitherSwarming ? SEPARATION_RADIUS_STANDING : SEPARATION_RADIUS_RUNNING;
         other.getCentre(otherCentre);
@@ -265,7 +303,7 @@ public class GooseAI {
             radial.scl(1f / dist);
         }
 
-        // Keeps the geese seperation to only trying to offset each other around the ring by removing any push towards/away from player.
+        // Keeps the geese separation to only trying to offset each other around the ring by removing any push towards/away from player.
         separation.mulAdd(radial, -separation.dot(radial));
         if (separation.len2() < SEPARATION_DEADZONE * SEPARATION_DEADZONE) {
             separation.setZero();
@@ -280,7 +318,59 @@ public class GooseAI {
         separation.setZero();
     }
 
-    // Allows other geese to see if this one is setted in on the ring.
+
+    public void distractBy(Bread newBread) {
+        if (bread != null && !bread.isExpired()) {
+            return;
+        }
+        // Only accepted if bread has a free eating slot
+        if (newBread.tryClaim(goose)) {
+            bread = newBread;
+            eating = false;
+        }
+    }
+
+    // Geese behaviour whilst distracted: Walking to bread, then standing by it (eating)
+    private void feed() {
+        bread.getCentre(breadCentre);
+        toBread.set(breadCentre).sub(gooseCentre);
+        float dist = toBread.len();
+        if (dist > 0.001f) {
+            facingDirection.set(toBread).nor();
+        }
+        if (dist <= EAT_DISTANCE) {
+            eating = true;
+        } else if (dist > EAT_DISTANCE + EAT_RELEASE_MARGIN) {
+            eating = false;
+        }
+
+        if (!eating) {
+            velocity.set(toBread).nor();
+            applySeparation();
+            return;
+        }
+
+        if (separation.len2() < SEPARATION_DEADZONE * SEPARATION_DEADZONE) {
+            separation.setZero();
+        }
+        velocity.set(separation);
+        if (dist > EAT_DISTANCE) {
+            velocity.mulAdd(toBread.nor(), 1f);
+        }
+        velocity.limit(1f);
+        separation.setZero();
+    }
+
+    public boolean isSettled() {
+        return state == GooseState.SWARMING || (state == GooseState.DISTRACTED && eating);
+    }
+
+    // Run animation play when gong to bread?
+    public boolean isRunning() {
+        return state == GooseState.CHASING || (state == GooseState.DISTRACTED && !eating);
+    }
+
+    // Allows other geese to see if this one is settled in on the ring.
     public boolean isSwarming() {
         return state == GooseState.SWARMING;
     }
@@ -357,6 +447,13 @@ public class GooseAI {
         shapes.circle(x, y, (state == GooseState.SWARMING ? SEPARATION_RADIUS_STANDING : SEPARATION_RADIUS_RUNNING) / 2f, 24); // CHANGED: ...two geese's circles touch when they are the separation distance apart (depends on state)
         shapes.setColor(0.2f, 1f, 0.2f, 1f); // green honk ring around the player
         shapes.circle(playerCentre.x, playerCentre.y, HONK_RANGE, 64); // where swarming geese should stand
+
+        // Draws line from distracted goose to bread
+        if (bread != null) {
+            bread.getCentre(breadCentre);
+            shapes.setColor(1f, 0.5f, 0f, 1f);
+            shapes.line(x, y, breadCentre.x, breadCentre.y);
+        }
 
         // Facing direction: short white line.
         shapes.setColor(1f, 1f, 1f, 1f);

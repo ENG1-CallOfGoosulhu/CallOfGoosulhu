@@ -77,14 +77,14 @@ endlegend
 ** 1. Player <<prog>>
 *** Player movement <<milan>><<prog>><<done>>
 *** Player collision\n and environmental interaction <<charlie>>
-*** Player animation <<jack>>
+*** Player animation <<charlie>><<prog>>
 
 ** 2. Enemy System <<prog>>
 *** Goose AI <<milan_jack>><<prog>>
 **** Visual detection <<milan>><<done>>
 **** Auditory detection <<milan>><<done>>
 **** Pursuit and\n stopping distance <<milan_jack>><<done>>
-**** Honking behaviour <<lisa>>
+**** Honking behaviour <<lisa>><<done>>
 *** Goose animation <<milan>><<done>>
 *** Goose spawning <<milan>><<done>>
 
@@ -99,15 +99,15 @@ endlegend
 **** Ian Wand building <<jack>><<prog>>
 ***** Escape feature
 **** Ron Cooke Hub <<charlie>><<prog>>
-***** Key magnetisation
+***** Key magnetisation <<milan>><<prog>>
 *** Collision boundaries\n and obstacles <<charlie>><<done>>
-*** Mud puddles
-**** Functionality
+*** Mud puddles <<charlie_lisa>><<done>>
+**** Functionality <<lisa>><<done>>
 **** Map <<charlie>><<done>>
 *** Escape destination\n and objective location
-*** Keys
-**** Key assets\n and visibility (e.g. glowing)
-**** Key pickup\n and possession
+*** Keys <<milan>><<done>>
+**** Key assets\n and visibility (e.g. glowing) <<milan>><<done>>
+**** Key pickup\n and possession <<milan>><<done>>
 
 ** 4. Core Game Flow <<prog>>
 *** Game state\n management <<milan>><<prog>>
@@ -115,22 +115,22 @@ endlegend
 **** Introduction/cutscene <<charlie>>
 **** Alternate-world transitions <<charlie>><<prog>>
 **** Active gameplay <<milan>><<prog>>
-**** Victory state
-**** Defeat state <<gefen>>
+**** Victory state <<lisa>><<prog>>
+**** Defeat state <<lisa>><<done>>
 **** Defeat/game over cutscene <<charlie>>
 *** Win/lose\n conditions
 **** Escape destination detection
 **** Five-minute time limit
+**** Patience loss condition <<lisa>><<done>>
 **** End-of-game transition
 *** Objective system <<lisa>>
 **** Objective tracking <<lisa>>
 **** Objective display
-*** Game restart <<charlie>>
+*** Game restart <<charlie_lisa>><<prog>>
 
 ** 5. Timer <<charlie_gefen>><<prog>>
 *** Timer logic <<charlie>><<done>>
-*** Timer UI <<charlie>><<done>>
-*** Timer expiry\n and defeat handling <<gefen>>
+*** Timer expiry\n and defeat handling <<lisa>><<prog>>
 
 ** 6. Spell System \n To be decided\n which spells <<milan>><<prog>>
 *** Spell system\n foundation <<milan>><<done>>
@@ -149,24 +149,42 @@ endlegend
 *** Patience thresholds\n and effects <<charlie>><<prog>>
 
 ** 8. Events\n and Interactions <<jack>><<prog>>
-*** Bread dispenser <<jack>><<prog>>
+*** Bread dispenser <<jack>><<done>>
+**** Visuals <<jack>><<done>>
+***** Dispenser animations: \n RISE, IDLE, SHAKE<<jack>><<done>>
+***** Bread animations: \n FLOAT, SPIN <<jack>><<done>>
+**** Functionality <<jack>><<done>>
+***** Trigger zone <<jack>><<done>>
+***** Interact button <<jack>><<done>>
+***** Dispenses bread <<jack>><<done>>
+***** Bread distracts geese <<jack>><<done>>
 *** Tall grass <<jack>><<prog>>
+**** Visuals <<jack>><<prog>>
+***** Becomes transparent when player \nwalks through it <<jack>><<done>>
+***** Grass sways when player \nwalks through it <<jack>><<prog>>
+***** Chasing geese are confused\n when player hides <<jack>><<prog>>
+**** Functionality <<jack>><<done>>
+***** Geese cannot detect player <<jack>><<done>>
+
 
 ** 9. User Interface <<prog>>
 *** Start screen <<milan>><<prog>>
 *** Controls/tutorial screen <<gefen>>
 *** Gameplay HUD <<milan_charlie>><<done>>
-**** Timer <<charlie>><<done>>
+**** Timer <<charlie_lisa>><<done>>
+***** Decimal representation <<lisa>><<done>>
+***** Hourglass <<charlie>><<done>>
 **** patience ring <<charlie>><<done>>
 **** Spell-tome\n interface <<milan>><<done>>
-*** Victory screen
-*** Defeat screen
+*** Victory screen <<lisa>><<done>>
+*** Defeat screen <<lisa>><<done>>
 
 ** 10. Audio and\n Dialogue
-*** Background music
-*** Goose honking
-*** Environmental sound effects
-*** Spell sound effects
-*** Event and transition sound effects
-*** Speech bubbles/subtitles
+*** Audio handler <<jack>><<prog>>
+**** Background music
+**** Goose honking <<jack>><<prog>>
+**** Environmental sound effects <<jack>><<prog>>
+**** Spell sound effects
+**** Event and transition sound effects
+**** Speech bubbles/subtitles
 @endwbs

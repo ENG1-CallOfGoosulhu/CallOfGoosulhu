@@ -16,12 +16,14 @@ import java.util.List;
 
 /** Draws the map's tall objects and the entities in depth order, so whatever is lower on screen is in front. */
 public class DepthRenderer {
-    private record YSortedTile(TiledMapTile tile, float x, float y, float scaleX, float scaleY, boolean flipX, boolean flipY, float sortY) {}
+    private record YSortedTile(TiledMapTile tile, float x, float y, float scaleX, float scaleY, boolean flipX, boolean flipY, float sortY, boolean grassLayer) {}
 
     // Tiles that are not sorted based on Y
     private final int[] flatLayers;
     // Tiles that are sorted based on Y, duh
     private final List<YSortedTile> ySortedTiles = new ArrayList<>();
+    // How transparent the tall grass tiles are drawn, duh
+    private float grassAlpha = 1f;
 
     public DepthRenderer(TiledMap map) {
         List<Integer> flat = new ArrayList<>();
@@ -30,9 +32,10 @@ public class DepthRenderer {
         for (int i = 0; i < layers.size(); i++) {
             MapLayer layer = layers.get(i);
             boolean ySort = layer.getProperties().get("ySort", false, Boolean.class);
+            boolean grassLayer = layer.getProperties().get("tall_grass", false, Boolean.class);
 
             if (layer instanceof TiledMapTileLayer tiles) {
-                if (ySort) addYSortedTiles(tiles);
+                if (ySort) addYSortedTiles(tiles, grassLayer);
                 else flat.add(i);
             } else if (ySort) {
                 addObjects(layer);
@@ -42,7 +45,7 @@ public class DepthRenderer {
         ySortedTiles.sort((a, b) -> Float.compare(b.sortY(), a.sortY()));
     }
 
-    private void addYSortedTiles(TiledMapTileLayer layer) {
+    private void addYSortedTiles(TiledMapTileLayer layer, boolean grassLayer) {
         float tw = layer.getTileWidth();
         float th = layer.getTileHeight();
 
@@ -57,7 +60,7 @@ public class DepthRenderer {
                 while (y < layer.getHeight() && layer.getCell(x, y) != null) {
                     TiledMapTileLayer.Cell cell = layer.getCell(x, y);
                     ySortedTiles.add(new YSortedTile(cell.getTile(), x * tw, y * th, 1f, 1f,
-                        cell.getFlipHorizontally(), cell.getFlipVertically(), base * th));
+                        cell.getFlipHorizontally(), cell.getFlipVertically(), base * th, grassLayer));
                     y++;
                 }
             }
@@ -72,10 +75,14 @@ public class DepthRenderer {
             float sortOffset = tile.getProperties().get("sortOffset", 0f, Float.class);
 
             ySortedTiles.add(new YSortedTile(tile, prop.getX(), prop.getY(), prop.getScaleX(), prop.getScaleY(),
-                prop.isFlipHorizontally(), prop.isFlipVertically(), prop.getY() + sortOffset));
+                prop.isFlipHorizontally(), prop.isFlipVertically(), prop.getY() + sortOffset, false));
         }
     }
 
+    // How transparent grass it drawn
+    public void setGrassAlpha(float alpha){
+        grassAlpha = alpha;
+    }
     /** Layer indices to pass to OrthogonalTiledMapRenderer.render(int[]). */
     public int[] getFlatLayers() {
         return flatLayers;
@@ -112,6 +119,14 @@ public class DepthRenderer {
 
         if (tile.flipX()) { x += w; width = -w; }
         if (tile.flipY()) { y += h; height = -h; }
+
+        // Fading the grass
+        if (tile.grassLayer && grassAlpha < 1f) {
+            batch.setColor(1f, 1f, 1f, grassAlpha);
+            batch.draw(region, x, y, width, height);
+            batch.setColor(1f, 1f, 1f, 1f);
+            return; // NEW
+        }
 
         batch.draw(region, x, y, width, height);
     }

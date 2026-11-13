@@ -1,0 +1,97 @@
+
+bread_dispenser.png
+size: 832, 96
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+dispenser_rise
+  rotate: false
+  xy: 0, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 0
+dispenser_rise
+  rotate: false
+  xy: 64, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 1
+dispenser_rise
+  rotate: false
+  xy: 128, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 2
+dispenser_rise
+  rotate: false
+  xy: 192, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 3
+dispenser_rise
+  rotate: false
+  xy: 256, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 4
+dispenser_rise
+  rotate: false
+  xy: 320, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 5
+dispenser_rise
+  rotate: false
+  xy: 384, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 6
+dispenser_rise
+  rotate: false
+  xy: 448, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 7
+dispenser_rise
+  rotate: false
+  xy: 512, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 8
+dispenser_rise
+  rotate: false
+  xy: 576, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 9
+dispenser_rise
+  rotate: false
+  xy: 640, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 10
+dispenser_idle
+  rotate: false
+  xy: 704, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 0
+dispenser_idle
+  rotate: false
+  xy: 768, 0
+  size: 64, 96
+  orig: 64, 96
+  offset: 0, 0
+  index: 1

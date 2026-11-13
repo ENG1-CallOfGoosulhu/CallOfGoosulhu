@@ -224,7 +224,7 @@
 0,0,0,0,0,0,0,0,1696,1697,1698,1699,1700,0,0,0,0,0,0,0,2585,2586,2587,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="7" name="Interactables" width="52" height="32">
+ <layer id="7" name="InteractableObjects" width="52" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -707,7 +707,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="11" name="Spawns">
+ <objectgroup id="11" name="Spawns" visible="0">
   <object id="223" name="from_campus" type="player_spawn" x="512" y="976">
    <point/>
   </object>
@@ -715,13 +715,13 @@
  <objectgroup id="15" name="Doors">
   <object id="224" name="to_campus" type="door" x="448" y="1012" width="128" height="12">
    <properties>
-    <property name="target_map" value="campus.tmx"/>
-    <property name="target_spawn" value="ron_cooke_main"/>
+    <property name="target_map" value="Outside_campus_cthulhu_props.tmx"/>
+    <property name="target_spawn" value="ron_cooke_exit"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="16" name="Interactables" visible="0">
-  <object id="222" name="keycard_magnetiser" type="interactable" x="153.333" y="214" width="56.6667" height="49.3333">
+ <objectgroup id="16" name="Interactables">
+  <object id="222" name="keycard_magnetiser" type="interactable" x="153.333" y="202.747" width="71.2023" height="60.5866">
    <properties>
     <property name="event" value="magnetise_keycard"/>
     <property name="item" value="keycard_ron_cooke"/>

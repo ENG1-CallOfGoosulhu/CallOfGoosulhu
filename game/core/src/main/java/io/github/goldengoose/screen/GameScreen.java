@@ -12,12 +12,16 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.goldengoose.Cog;
 import io.github.goldengoose.assets.Assets;
+import io.github.goldengoose.assets.CogFonts;
 import io.github.goldengoose.ui.Hud;
 import io.github.goldengoose.ui.PauseMenu;
 import io.github.goldengoose.ui.TomeMenu;
 import io.github.goldengoose.util.InputManager;
+import io.github.goldengoose.util.Utilities;
 import io.github.goldengoose.world.*;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.graphics.Color;
 
 public class GameScreen implements Screen {
     private final Cog game;
@@ -31,25 +35,27 @@ public class GameScreen implements Screen {
 
     private final PauseMenu pauseMenu;
     private final TomeMenu tomeMenu;
-    private final BitmapFont hudFont = new BitmapFont();
+    private final BitmapFont hudFont = Utilities.createFont(CogFonts.CRISTOFORO, 24);
     private final Hud hud;
-
     private final Rectangle viewRect = new Rectangle();
-
     private final GameSession session;
 
     private boolean paused = true;
     private boolean tomeOpen = false;
     private boolean debug = false;
+    private boolean overlayVisible = false;
+    private boolean overlayWon = false;
+    private float overlaySlide = 0f;
+    private BitmapFont overlayFont;
+    private float gameOverTimer = -1f;
+    private boolean gameOverWon = false;
 
     public GameScreen(final Cog game) {
         this.game = game;
         session = new GameSession(game.assets, worldViewport, "Outside_campus_cthulhu_props", "start");
-
         pauseMenu = new PauseMenu(game);
         tomeMenu = new TomeMenu(game, game.assets.getTexture(Assets.SPELL_TOME_EMPTY), session.getSpellTome());
         hud = new Hud(game.assets, 5 * 60);
-
         multiplexer.addProcessor(pauseMenu.getStage());
         multiplexer.addProcessor(session.getSpellTome().getInputProcessor());
         multiplexer.addProcessor(gameInput);
@@ -62,7 +68,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        // Input
         if (!tomeOpen && InputManager.pause()) {
             paused = !paused;
             pauseMenu.setVisible(paused);
@@ -75,12 +80,27 @@ public class GameScreen implements Screen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) debug = !debug;
 
-        // Update
         if (!paused) {
             session.update(delta);
             hud.update(delta, session.getTimer().getSecondsRemaining());
-        }
+            hud.updatePatience(session.getPatienceSystem().getPatience());
 
+            if (session.getTimer().isTimeUp() && gameOverTimer < 0) {
+                gameOverTimer = 2f;
+                gameOverWon = true;
+            }
+            if (session.getPatienceSystem().isTransformed() && gameOverTimer < 0) {
+                session.getPlayer().transformIntoGoose(game.assets.getTexture(Assets.GOOSE_WALK));
+                gameOverTimer = 2f;
+                gameOverWon = false;
+            }
+            if (gameOverTimer > 0) {
+                gameOverTimer -= delta;
+                if (gameOverTimer <= 0) {
+                    showOverlay(gameOverWon);
+                }
+            }
+        }
         // Camera follows the player
         session.getPlayer().getCentre(playerPos);
         OrthographicCamera camera = (OrthographicCamera) worldViewport.getCamera();
@@ -92,14 +112,12 @@ public class GameScreen implements Screen {
 
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
 
-        // World
         session.getArea().render(game.batch, camera, viewRect);
 
         if (debug) renderDebug();
 
-        // HUD
         hudViewport.apply();
-        hud.draw(game.batch, hudViewport, hudFont);
+        hud.draw(game.batch, hudViewport, hudFont, session.getSpellTome(),session.getKeyState());
 
         shapes.setProjectionMatrix(hudViewport.getCamera().combined);
         shapes.begin(ShapeRenderer.ShapeType.Filled);
@@ -111,18 +129,17 @@ public class GameScreen implements Screen {
         session.getSpellTome().drawSprites(game.batch, hudViewport);
         game.batch.end();
 
-        // Menus
-        if (paused) {
+        if (paused && !overlayVisible) {
             Gdx.gl.glEnable(GL20.GL_BLEND);
             shapes.setProjectionMatrix(hudViewport.getCamera().combined);
             shapes.begin(ShapeRenderer.ShapeType.Filled);
             shapes.setColor(0f, 0f, 0f, 0.5f);
             shapes.rect(0, 0, hudViewport.getWorldWidth(), hudViewport.getWorldHeight());
             shapes.end();
-
             pauseMenu.act(delta);
             pauseMenu.draw();
         }
+
         if (tomeOpen) {
             game.batch.setProjectionMatrix(hudViewport.getCamera().combined);
             game.batch.begin();
@@ -130,29 +147,62 @@ public class GameScreen implements Screen {
             game.batch.end();
         }
 
-        //TODO: Remove once game has proper exit feature, this is just for testing
+        if (overlayVisible) {
+            overlaySlide = Math.min(overlaySlide + delta * 2f, 1f);
+            float w = hudViewport.getWorldWidth();
+            float h = hudViewport.getWorldHeight();
+            float panelH = h;
+            float panelY = h - overlaySlide * panelH;
+
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            shapes.setProjectionMatrix(hudViewport.getCamera().combined);
+            shapes.begin(ShapeRenderer.ShapeType.Filled);
+            shapes.setColor(0f, 0f, 0f, 0.7f);
+            shapes.rect(0, panelY, w, panelH);
+            shapes.end();
+
+            String message = overlayWon ? "Congratulations!" : "Game Over";
+            game.batch.setProjectionMatrix(hudViewport.getCamera().combined);
+            game.batch.begin();
+            overlayFont.draw(game.batch, message, 0, panelY + panelH * 0.6f, w, Align.center, false);
+            overlayFont.draw(game.batch, "R - Play Again      M - Menu", 0, panelY + panelH * 0.35f, w, Align.center, false);
+            game.batch.end();
+        }
+
+        if (overlayVisible) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+                game.changeScreen(new GameScreen(game));
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+                game.changeScreen(new MainMenuScreen(game));
+            }
+        }
+
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
     }
 
+    private void showOverlay(boolean won) {
+        if (!overlayVisible) {
+            overlayVisible = true;
+            overlayWon = won;
+            overlayFont = Utilities.createFont(CogFonts.CRISTOFORO, 64);
+            paused = true;
+        }
+    }
+
     private final InputAdapter gameInput = new InputAdapter() {
         @Override
-        public boolean touchDown(int screenX, int screenY,
-                                 int pointer, int button) {
-
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
             if (paused) return false;
-
             if (button == Input.Buttons.LEFT) {
-                worldViewport.unproject(
-                    mouseWorldPosition.set(screenX, screenY)
-                );
-
-                session.getSpellTome().activateSelectedSpell(mouseWorldPosition);
-
+                worldViewport.unproject(mouseWorldPosition.set(screenX, screenY));
+                if (!session.clickDoor(mouseWorldPosition)) {
+                    session.getSpellTome().activateSelectedSpell(mouseWorldPosition);
+                }
                 return true;
             }
-
             return false;
         }
     };
@@ -163,7 +213,6 @@ public class GameScreen implements Screen {
         session.getWorld().renderDebug(shapes);
         shapes.end();
     }
-
 
     @Override
     public void resize(int width, int height) {
@@ -179,8 +228,8 @@ public class GameScreen implements Screen {
         tomeMenu.dispose();
         hudFont.dispose();
         hud.dispose();
+        if (overlayFont != null) overlayFont.dispose();
     }
-
     // Unused overrides
     @Override public void pause() {}
     @Override public void resume() {}
