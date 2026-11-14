@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.goldengoose.assets.Assets;
+import io.github.goldengoose.spells.SpellTome;
+import io.github.goldengoose.world.KeyState;
 
 /** Hourglass timer, patience ring and vignette. (UR_GAME_TIMER, UR_PATIENCE) */
 public class Hud implements Disposable {
@@ -18,6 +20,7 @@ public class Hud implements Disposable {
     private final float totalSeconds;
     private final Hourglass hourglass;
     private final PatienceRing ring;
+    private final KeyCard keyCard;
     private final Texture[] vignettes;
     private float secondsLeft, patience = 1f, clock;
 
@@ -26,6 +29,7 @@ public class Hud implements Disposable {
         secondsLeft = totalSeconds;
         hourglass = new Hourglass(assets);
         ring = new PatienceRing(assets);
+        keyCard = new KeyCard(assets);
         vignettes = new Texture[] {
             assets.getTexture(Assets.VIGNETTE_0), assets.getTexture(Assets.VIGNETTE_1), assets.getTexture(Assets.VIGNETTE_2) };
     }
@@ -44,7 +48,7 @@ public class Hud implements Disposable {
     }
 
     /** Draws the whole HUD on top of the game. (UR_GAME_TIMER, UR_PATIENCE) */
-    public void draw(SpriteBatch batch, Viewport viewport, BitmapFont font) {
+    public void draw(SpriteBatch batch, Viewport viewport, BitmapFont font, SpellTome tome, KeyState keyState) {
         float width = viewport.getWorldWidth(), height = viewport.getWorldHeight();
         float pixel = Math.max(2, Math.round(height / HUD_SCALE));
         float margin = 3 * pixel;
@@ -53,13 +57,26 @@ public class Hud implements Disposable {
         batch.begin();
         drawVignettes(batch, width, height);
 
-        float glassX = margin, glassY = height - margin - Hourglass.HEIGHT * pixel;
-        hourglass.draw(batch, glassX, glassY, pixel);
+        float glassY = height - margin - Hourglass.HEIGHT * pixel;
+        hourglass.draw(batch, margin, glassY, pixel);
         int seconds = MathUtils.ceil(secondsLeft);
-        font.draw(batch, String.format("%d:%02d", seconds / 60, seconds % 60), glassX, glassY - pixel, Hourglass.WIDTH * pixel, Align.center, false);
 
+        if (secondsLeft <= 29f) {
+            float pulse = 0.6f + 0.4f * MathUtils.sin(clock * 6f);
+            font.setColor(pulse, 0f, 0f, 1f);
+
+        } else {
+            font.setColor(Color.WHITE);
+        }
+        font.draw(batch, String.format("%d:%02d", seconds / 60, seconds % 60), margin, glassY - pixel, Hourglass.WIDTH * pixel, Align.center, false);
+        font.setColor(Color.WHITE);
         float ringSize = PatienceRing.SIZE * pixel;
         ring.draw(batch, width - margin - ringSize, height - margin - ringSize, pixel);
+
+        float cardPixel = tome.getPixel(viewport);
+        float cardX = tome.getRight(viewport) - KeyCard.WIDTH * cardPixel;
+        float cardY = tome.getTop(viewport) + 2 * cardPixel;   // 2 tome pixels of padding
+        keyCard.draw(batch, keyState, cardX, cardY, cardPixel);
         batch.end();
     }
 

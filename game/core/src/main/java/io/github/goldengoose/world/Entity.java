@@ -2,6 +2,7 @@ package io.github.goldengoose.world;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.lighting.GameLighting;
 
@@ -11,6 +12,7 @@ import io.github.goldengoose.lighting.GameLighting;
 public abstract class Entity {
     protected final Vector2 position = new Vector2();
     protected Texture texture;
+    private final Rectangle hitbox = new Rectangle();
 
     //----------------
     // Game loop
@@ -46,6 +48,15 @@ public abstract class Entity {
     /** Called every frame before lighting is drawn. Override to give off light. */
     public void emitLight(GameLighting lighting) {}
 
+    /**
+     * Returns the hitbox at its current position
+     * @param out Rectangle to be set
+     * @return Returns the modified out Rectangle
+     */
+    public Rectangle getHitbox(Rectangle out) {
+        return out.set(position.x + getWidth() * 0.25f, position.y, getWidth() * 0.5f, 8f);
+    }
+
     //----------------
     // Position
     //----------------
@@ -67,6 +78,25 @@ public abstract class Entity {
      */
     public void setPosition(float x, float y) {
         position.set(x, y);
+    }
+
+    /**
+     * Move relative to current position
+     * @param dx x-axis movement
+     * @param dy y-axis movement
+     * @param collision Collision map
+     */
+    public void moveBy(float dx, float dy, CollisionMap collision) {
+        if (collision == null) {
+            position.add(dx, dy);
+            return;
+        }
+
+        position.x += dx;
+        if (collision.isBlocked(getHitbox(hitbox))) position.x -= dx;
+
+        position.y += dy;
+        if (collision.isBlocked(getHitbox(hitbox))) position.y -= dy;
     }
 
     /**

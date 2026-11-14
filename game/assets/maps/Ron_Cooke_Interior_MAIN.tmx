@@ -224,7 +224,7 @@
 0,0,0,0,0,0,0,0,1696,1697,1698,1699,1700,0,0,0,0,0,0,0,2585,2586,2587,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="7" name="Interactables" width="52" height="32">
+ <layer id="7" name="InteractableObjects" width="52" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -721,7 +721,7 @@
   </object>
  </objectgroup>
  <objectgroup id="16" name="Interactables">
-  <object id="222" name="keycard_magnetiser" type="interactable" x="153.333" y="214" width="56.6667" height="49.3333">
+  <object id="222" name="keycard_magnetiser" type="interactable" x="153.333" y="202.747" width="71.2023" height="60.5866">
    <properties>
     <property name="event" value="magnetise_keycard"/>
     <property name="item" value="keycard_ron_cooke"/>

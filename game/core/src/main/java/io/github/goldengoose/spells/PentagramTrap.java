@@ -12,6 +12,8 @@ import io.github.goldengoose.lighting.GameLighting;
 import io.github.goldengoose.util.Utilities;
 import io.github.goldengoose.world.Entity;
 import io.github.goldengoose.world.RenderLayer;
+import io.github.goldengoose.audio.AudioManager;
+import io.github.goldengoose.assets.Assets;
 
 public class PentagramTrap extends Entity {
     private static final int FRAME_SIZE = 48;
@@ -25,12 +27,14 @@ public class PentagramTrap extends Entity {
 
     private float lifetime = LIFETIME;
     private boolean triggered = false;
+    private final AudioManager audio;
 
     static Animation<TextureRegion>[] rows;
     static Animation<TextureRegion> grow;
     static Animation<TextureRegion> shimmer;
 
-    public PentagramTrap(Vector2 centre, Texture texture) {
+    public PentagramTrap(Vector2 centre, Texture texture, AudioManager audio) {
+        this.audio = audio;
         this.position.set(centre.x - RADIUS, centre.y - RADIUS);
         this.texture = texture;
         if (rows == null) {
@@ -104,6 +108,7 @@ public class PentagramTrap extends Entity {
             );
             goose.trap(lifetime);
             triggered = true;
+            playTrapSound();
         }
 
     }
@@ -124,9 +129,14 @@ public class PentagramTrap extends Entity {
             goose.setPosition(trapCenter.x - goose.getWidth() / 2f, trapCenter.y - goose.getHeight() / 2f);
             goose.trap(lifetime);
             triggered = true;
+            playTrapSound();
         }
     }
 
+    private void playTrapSound(){
+        if (audio == null) return;
+        audio.playAt(Assets.SFX_PENTAGRAM_TRIGGER, position.x + RADIUS, position.y + RADIUS);
+    }
     public boolean isTriggered() {
         return triggered;
     }

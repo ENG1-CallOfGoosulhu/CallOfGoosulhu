@@ -13,6 +13,7 @@ public class ElderSignSpell extends Spell {
 
         texture = assets.getTexture(Assets.ELDER_SIGN_SPELL);
         name = "Elder Sign";
+        castSound = Assets.SFX_ELDER_SIGN_SPELL;
         description = "Inscribe a dispersing circle on the ground. Geese flee the symbol until it fades.";
 
         range = 120f;

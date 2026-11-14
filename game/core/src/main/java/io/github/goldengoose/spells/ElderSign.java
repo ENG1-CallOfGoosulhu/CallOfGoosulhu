@@ -23,6 +23,9 @@ public class ElderSign extends Entity {
 
     private static final float RADIUS = 24f;
     private static final float LIFETIME = 8f;
+    private static final float SCARE_RADIUS = 300f;
+
+    private final Vector2 otherCentre = new Vector2();
 
     private float lifetime = LIFETIME;
     private boolean triggered = false;
@@ -94,20 +97,6 @@ public class ElderSign extends Entity {
         return RenderLayer.GROUND;
     }
 
-    public void checkGoose(Goose goose) {
-//        if (triggered || lifetime <= 0f) return;
-//
-//        if (position.dst2(goose.getPosition()) <= RADIUS * RADIUS) {
-//            goose.getPosition().set(
-//                position.x - goose.getWidth() / 2f,
-//                position.y - goose.getHeight() / 2f
-//            );
-//            goose.trap(lifetime);
-//            triggered = true;
-//        }
-
-    }
-
     @Override
     public boolean isExpired() {
         return lifetime <= 0f;
@@ -115,16 +104,13 @@ public class ElderSign extends Entity {
 
     @Override
     public void interact(Entity other) {
-//        if (!(other instanceof Goose goose) || triggered || isExpired()) return;
-//
-//        Vector2 trapCenter = getCentre(new Vector2());
-//        Vector2 gooseCenter = goose.getCentre(new Vector2());
-//
-//        if (trapCenter.dst2(gooseCenter) <= RADIUS * RADIUS) {
-//            goose.setPosition(trapCenter.x - goose.getWidth() / 2f, trapCenter.y - goose.getHeight() / 2f);
-//            goose.trap(lifetime);
-//            triggered = true;
-//        }
+        if (isExpired() || !(other instanceof Goose goose)) return;
+
+        getCentre(centre);
+        goose.getCentre(otherCentre);
+        if (centre.dst2(otherCentre) <= SCARE_RADIUS * SCARE_RADIUS) {
+            goose.scareFrom(centre);
+        }
     }
 
     public boolean isTriggered() {

@@ -16,6 +16,7 @@ public abstract class Spell {
 
     protected String name = "";
     protected String description = "";
+    protected String castSound;
 
     public Spell(GameSession session, Assets assets) {
         this.session = session;
@@ -32,11 +33,15 @@ public abstract class Spell {
     public boolean activate(Vector2 worldPos) {
         if (cooldownCounter > 0 ||
             session.getPlayer().getPosition().dst2(worldPos) > range * range) {
+            session.getAudio().play(Assets.SFX_SPELL_FAIL, 0.6f, 0f);
             return false;
         }
 
         cooldownCounter = cooldown;
         triggerEffect(worldPos);
+        if (castSound != null) {
+            session.getAudio().play(castSound, 1f, 0.05f);
+        }
         return true;
     }
 

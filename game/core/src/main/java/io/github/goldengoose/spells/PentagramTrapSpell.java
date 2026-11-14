@@ -11,6 +11,7 @@ public class PentagramTrapSpell extends Spell {
 
         texture = assets.getTexture(Assets.PENTAGRAM_SPELL);
         name = "Pentagram";
+        castSound = Assets.SFX_PENTAGRAM_TRIGGER;
         description = "Inscribe a binding circle on the ground. The first goose to step inside is held until the circle fades.";
 
 
@@ -20,6 +21,6 @@ public class PentagramTrapSpell extends Spell {
 
     @Override
     protected void triggerEffect(Vector2 worldPos) {
-        session.getWorld().addEntity(new PentagramTrap(worldPos, assets.getTexture(Assets.PENTAGRAM)));
+        session.getWorld().addEntity(new PentagramTrap(worldPos, assets.getTexture(Assets.PENTAGRAM), session.getAudio()));
     }
 }
