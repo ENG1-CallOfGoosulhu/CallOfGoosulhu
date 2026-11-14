@@ -2,7 +2,9 @@ package io.github.goldengoose.goose;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import io.github.goldengoose.world.CollisionMap;
 
 /**
  * Goose AI plan:
@@ -39,14 +41,14 @@ public class GooseAI {
     private static final float MAX_IDLE_WAIT = 10f;
 
     // Detection
-    private static final float VISION_RANGE = 150f;
+    private static final float VISION_RANGE = 250f;
     private static final float VISION_HALF_ANGLE_DEGREES = 45f;
     private static final float HEARING_RANGE = 100f;
 
     // Distance from where the Goose will stop following player and start honking
     private static final float HONK_RANGE = 50f;
     // Range from which it will still follow the player, ie simply running far enough won't make the goose forget
-    private static final float FOLLOW_RANGE = 200f;
+    private static final float FOLLOW_RANGE = 300f;
 
     // Geese swarming separation behaviour:
     // Running geese closer than this push each other apart
@@ -110,6 +112,10 @@ public class GooseAI {
     private final Vector2 gooseCentre = new Vector2();
     private final Vector2 playerCentre = new Vector2();
 
+    private final Rectangle box = new Rectangle();
+    private final Vector2 feet = new Vector2();
+    private final Vector2 playerFeet = new Vector2();
+
     public GooseAI(Goose goose) {
         this.goose = goose;
     }
@@ -139,7 +145,7 @@ public class GooseAI {
 
         // Geese can no longer hear/see the player when they are hiding in the tall grass (isHidden())
         boolean playerHidden = goose.getPlayer().isHidden();
-        boolean detected = !playerHidden && (canSeePlayer() || canHearPlayer(true));
+        boolean detected = !playerHidden && (canSeePlayer() || canHearPlayer(true)) && hasLineOfSight();
 
         // TODO: Once we determine how player makes noise, replace true with variable:
 
@@ -232,9 +238,6 @@ public class GooseAI {
             hasIdleTarget = false;
             idleWaiting = false;
             separation.setZero();
-
-            // TODO: Honk at the player.
-
         } else {
             wander(deltaTime);
             applySeparation();
@@ -278,11 +281,19 @@ public class GooseAI {
     private void chooseNewTarget() {
         float angle = MathUtils.random(MathUtils.PI2);
         float distance = MathUtils.random(MIN_WANDER_RANGE, MAX_WANDER_RANGE);
+        float dx = MathUtils.cos(angle) * distance;
+        float dy = MathUtils.sin(angle) * distance;
 
-        idleTarget.set(gooseCentre).add(MathUtils.cos(angle) * distance, MathUtils.sin(angle) * distance);
-
+        idleTarget.set(gooseCentre).add(dx, dy);
         hasIdleTarget = true;
         idleWaiting = false;
+
+        CollisionMap collision = goose.getCollision();
+        goose.getHitbox(box).getCenter(feet);
+        if (collision != null && collision.blocksLine(feet.x, feet.y, feet.x + dx, feet.y + dy)) {
+            idleWaiting = true;
+            waitTimer = MathUtils.random(MIN_IDLE_WAIT, MAX_IDLE_WAIT);
+        }
     }
 
     private boolean canHearPlayer(boolean playerMakingNoise) {
@@ -303,6 +314,15 @@ public class GooseAI {
         toPlayer.nor();
 
         return facingDirection.dot(toPlayer) >= VISION_DOT_THRESHOLD;
+    }
+
+    private boolean hasLineOfSight() {
+        CollisionMap collision = goose.getCollision(); // <- I'm realising I'm calling this a lot, might be worth doing it once?
+        if (collision == null) return true;
+
+        goose.getHitbox(box).getCenter(feet);
+        goose.getPlayer().getHitbox(box).getCenter(playerFeet);
+        return !collision.blocksLine(feet.x, feet.y, playerFeet.x, playerFeet.y);
     }
 
     private boolean moveTo(Vector2 target) {

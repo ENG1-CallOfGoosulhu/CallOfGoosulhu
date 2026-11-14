@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.List;
 public class CollisionMap {
     private final List<Rectangle> rects = new ArrayList<>();
     private final List<Polygon> polygons = new ArrayList<>();
+
+    private final Vector2 segA = new Vector2(), segB = new Vector2();
 
     public CollisionMap(TiledMap map) {
         MapLayer layer = map.getLayers().get("Collision");
@@ -34,6 +37,19 @@ public class CollisionMap {
         }
         for (Polygon p : polygons) {
             if (overlaps(p, box)) return true;
+        }
+        return false;
+    }
+
+    // Using this to prevent goose ai from even trying to move into walls
+    public boolean blocksLine(float x1, float y1, float x2, float y2) {
+        segA.set(x1, y1);
+        segB.set(x2, y2);
+        for (Rectangle r : rects) {
+            if (Intersector.intersectSegmentRectangle(segA, segB, r)) return true;
+        }
+        for (Polygon p : polygons) {
+            if (Intersector.intersectSegmentPolygon(segA, segB, p)) return true;
         }
         return false;
     }
