@@ -35,7 +35,10 @@ public class Goose extends Entity {
         confusedIcon = region;
     }
 
-    private static final int FRAME_SIZE = 32;
+    // Size of each frame
+    private static final int SOURCE_SIZE = 24;
+    // Size to draw them, slightly larger to reduce mixelation
+    private static final float DRAW_SIZE = 36f;
     private static final float WALK_FRAME_TIME = 0.12f;
     private static final float RUN_FRAME_TIME = 0.08f;
 
@@ -60,8 +63,8 @@ public class Goose extends Entity {
     private float stateTime = 0f;
 
     public Goose(Player player, Vector2 position, CollisionMap collision, Assets assets) {
-        walkAnimations = Utilities.createAnimations(assets.getTexture(Assets.GOOSE_WALK), WALK_FRAME_TIME, FRAME_SIZE);
-        runAnimations = Utilities.createAnimations(assets.getTexture(Assets.GOOSE_RUN), RUN_FRAME_TIME, FRAME_SIZE);
+        walkAnimations = Utilities.createAnimations(assets.getTexture(Assets.GOOSE_WALK), WALK_FRAME_TIME, SOURCE_SIZE);
+        runAnimations = Utilities.createAnimations(assets.getTexture(Assets.GOOSE_RUN), RUN_FRAME_TIME, SOURCE_SIZE);
         this.collision = collision;
 
         this.player = player;
@@ -106,9 +109,9 @@ public class Goose extends Entity {
         TextureRegion frame = animations[row].getKeyFrame(stateTime);
 
         if (flip) {
-            batch.draw(frame, position.x + FRAME_SIZE, position.y, -FRAME_SIZE, FRAME_SIZE);
+            batch.draw(frame, position.x + DRAW_SIZE, position.y, -DRAW_SIZE, DRAW_SIZE);
         } else {
-            batch.draw(frame, position.x, position.y, FRAME_SIZE, FRAME_SIZE);
+            batch.draw(frame, position.x, position.y, DRAW_SIZE, DRAW_SIZE);
         }
 
         if (gooseAI.isAlerted()) {
@@ -131,7 +134,7 @@ public class Goose extends Entity {
         float h = icon.getRegionHeight() * pop * ICON_SCALE;
         float bob = (float) Math.sin(elapsed * 6f) * ICON_BOB;
         batch.setColor(1f, 1f, 1f, alpha);
-        batch.draw(icon, position.x + FRAME_SIZE / 2f - w / 2f, position.y + FRAME_SIZE + ICON_GAP + bob, w, h);
+        batch.draw(icon, position.x + DRAW_SIZE / 2f - w / 2f, position.y + DRAW_SIZE + ICON_GAP + bob, w, h);
         batch.setColor(1f, 1f, 1f, 1f);
     }
 
@@ -186,12 +189,12 @@ public class Goose extends Entity {
 
     @Override
     public float getWidth() {
-        return FRAME_SIZE;
+        return DRAW_SIZE;
     }
 
     @Override
     public float getHeight() {
-        return FRAME_SIZE;
+        return DRAW_SIZE;
     }
 
     public void trap(float duration) {

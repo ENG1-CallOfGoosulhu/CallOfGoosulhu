@@ -90,7 +90,7 @@ public class Player extends Entity {
     public void transformIntoGoose(Texture gooseTexture) {
         if (!transformed) {
             transformed = true;
-            gooseSprite = new TextureRegion(gooseTexture, 0, 0, 32, 32);
+            gooseSprite = new TextureRegion(gooseTexture, 0, 0, 24, 24);
         }
     }
 
@@ -153,7 +153,7 @@ public class Player extends Entity {
     @Override
     public void render(SpriteBatch batch) {
         if (transformed) {
-            batch.draw(gooseSprite, position.x, position.y);
+            batch.draw(gooseSprite, position.x, position.y, 36f, 36f);
             return;
         }
 
