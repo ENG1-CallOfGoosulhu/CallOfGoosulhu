@@ -96,6 +96,7 @@ public class GameSession implements Disposable {
         player.setPosition(tmp.x, tmp.y);
         audio.playAreaMusic(areaName);
         player.setAudio(audio);
+        player.setInMud(false);
     }
 
     public Area getArea()         { return currentArea; }
