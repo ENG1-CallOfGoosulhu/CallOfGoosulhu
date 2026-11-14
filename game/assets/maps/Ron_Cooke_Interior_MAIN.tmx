@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="52" height="32" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#140e1e" nextlayerid="19" nextobjectid="386">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="52" height="32" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#140e1e" nextlayerid="20" nextobjectid="413">
  <properties>
   <property name="name" value="Ron Cooke Hub"/>
   <property name="theme" value="cthulhu"/>
@@ -585,6 +585,89 @@
   <object id="355" x="743.876" y="661.899" width="23.1093" height="26.7581"/>
   <object id="384" x="34.3658" y="436.808" width="169.568" height="21.2525"/>
   <object id="385" x="197.151" y="473.887" width="49.2878" height="20.3482"/>
+ </objectgroup>
+ <objectgroup id="19" name="GooseSpawns">
+  <object id="386" x="338.112" y="946.602">
+   <point/>
+  </object>
+  <object id="387" x="115.15" y="863.626">
+   <point/>
+  </object>
+  <object id="388" x="212.238" y="860.804">
+   <point/>
+  </object>
+  <object id="389" x="52.4949" y="623.166">
+   <point/>
+  </object>
+  <object id="390" x="52.4949" y="670.016">
+   <point/>
+  </object>
+  <object id="391" x="46.2858" y="480.921">
+   <point/>
+  </object>
+  <object id="392" x="177.805" y="483.179">
+   <point/>
+  </object>
+  <object id="393" x="436.893" y="187.966">
+   <point/>
+  </object>
+  <object id="394" x="550.914" y="185.143">
+   <point/>
+  </object>
+  <object id="395" x="548.657" y="298.036">
+   <point/>
+  </object>
+  <object id="396" x="445.925" y="296.342">
+   <point/>
+  </object>
+  <object id="397" x="657.598" y="194.175">
+   <point/>
+  </object>
+  <object id="398" x="707.27" y="193.61">
+   <point/>
+  </object>
+  <object id="399" x="654.775" y="299.165">
+   <point/>
+  </object>
+  <object id="400" x="705.012" y="298.6">
+   <point/>
+  </object>
+  <object id="401" x="819.598" y="143.938">
+   <point/>
+  </object>
+  <object id="402" x="1045.95" y="137.164">
+   <point/>
+  </object>
+  <object id="403" x="1052.72" y="282.231">
+   <point/>
+  </object>
+  <object id="404" x="1060.62" y="372.545">
+   <point/>
+  </object>
+  <object id="405" x="1161.66" y="163.129">
+   <point/>
+  </object>
+  <object id="406" x="1294.87" y="150.711">
+   <point/>
+  </object>
+  <object id="407" x="1279.63" y="331.903">
+   <point/>
+  </object>
+  <object id="408" x="1167.31" y="344.886">
+   <point/>
+  </object>
+  <object id="409" x="1399.86" y="360.691">
+   <point/>
+  </object>
+  <object id="410" x="1410.59" y="106.683">
+   <point/>
+  </object>
+  <object id="411" x="839.354" y="650.26">
+   <point/>
+  </object>
+  <object id="412" x="999.097" y="642.922">
+   <point/>
+  </object>
  </objectgroup>
  <objectgroup color="#e6c35a" id="10" name="Lights" visible="0">
   <properties>
