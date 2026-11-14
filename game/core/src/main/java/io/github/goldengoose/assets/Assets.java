@@ -30,6 +30,8 @@ public class Assets {
     public static final String VIGNETTE_2 = "ui/vignette_2.png";
     public static final String CONFUSED_ICON = "question_mark.png";
     public static final String ALERT_ICON = "honk.png";
+    public static final String GOOSE_NORMAL = "cutscene/goose_normal.png";
+    public static final String PORTAL = "cutscene/portal.png";
     private final AssetManager manager = new AssetManager();
 
     public void load() {
@@ -58,6 +60,8 @@ public class Assets {
         manager.load(VIGNETTE_2, Texture.class);
         manager.load(CONFUSED_ICON, Texture.class);
         manager.load(ALERT_ICON, Texture.class);
+        manager.load(GOOSE_NORMAL, Texture.class);
+        manager.load(PORTAL, Texture.class);
         manager.finishLoading();
     }
 
