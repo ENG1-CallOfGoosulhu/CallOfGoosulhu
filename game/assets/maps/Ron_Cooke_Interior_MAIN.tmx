@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="52" height="32" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#140e1e" nextlayerid="19" nextobjectid="384">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="52" height="32" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#140e1e" nextlayerid="19" nextobjectid="386">
  <properties>
   <property name="name" value="Ron Cooke Hub"/>
   <property name="theme" value="cthulhu"/>
@@ -529,7 +529,7 @@
   <object id="150" name="Theatre seats 2" type="prop" x="1392" y="210.669" width="160" height="19.0646"/>
   <object id="151" name="Theatre seats 3" type="prop" x="1392" y="258.403" width="112" height="19.0646"/>
   <object id="152" name="Theatre seats 4" type="prop" x="1392" y="305.869" width="64" height="19.8648"/>
-  <object id="153" name="Desk row 1" type="prop" x="28" y="402" width="184" height="34"/>
+  <object id="153" name="Desk row 1" type="prop" x="28" y="408.331" width="184" height="27.6695"/>
   <object id="154" name="Group table 1" type="prop" x="84" y="594" width="128" height="50"/>
   <object id="155" name="Desk row 2" type="prop" x="62" y="797.748" width="160" height="28.2517"/>
   <object id="156" name="Broken desk 1" type="prop" x="148" y="884.89" width="94" height="26.4277"/>
@@ -580,9 +580,11 @@
   <object id="350" x="429.365" y="240.474" width="150.387" height="30.15"/>
   <object id="351" x="428.276" y="139.853" width="152.203" height="27.9705"/>
   <object id="352" x="697.657" y="559.975" width="24.3256" height="25.2986"/>
-  <object id="353" x="730.01" y="570.921" width="54.0028" height="21.893"/>
+  <object id="353" x="730.01" y="575.895" width="54.0028" height="16.919"/>
   <object id="354" x="695.468" y="662.142" width="25.0553" height="27.0014"/>
   <object id="355" x="743.876" y="661.899" width="23.1093" height="26.7581"/>
+  <object id="384" x="34.3658" y="436.808" width="169.568" height="21.2525"/>
+  <object id="385" x="197.151" y="473.887" width="49.2878" height="20.3482"/>
  </objectgroup>
  <objectgroup color="#e6c35a" id="10" name="Lights" visible="0">
   <properties>
