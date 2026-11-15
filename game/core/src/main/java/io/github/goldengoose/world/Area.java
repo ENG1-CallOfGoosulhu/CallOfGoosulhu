@@ -88,9 +88,12 @@ public class Area implements Disposable {
     }
 
     private void checkMudPuddles() {
-        if (mudLayer == null) return;
-
         Player player = world.getPlayer();
+        if (mudLayer == null){
+            player.setInMud(false);
+            return;
+        }
+
         player.getHitbox(feet);
 
         int tileX = (int) ((feet.x + feet.width / 2f) / mudLayer.getTileWidth());

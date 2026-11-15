@@ -855,11 +855,11 @@
   </object>
  </objectgroup>
  <objectgroup id="19" name="Doors">
-  <object id="987" x="363.077" y="1316.87" width="76.8477" height="50.6828">
+  <object id="987" name="Ian_Wand_Door" x="363.077" y="1316.87" width="76.8477" height="50.6828">
    <properties>
     <property name="locked" type="bool" value="true"/>
-    <property name="target_map" value="ian_wand.tmx"/>
-    <property name="target_spawn" value="front"/>
+    <property name="target_map" value="Ian_Wand_Interior_MAIN.tmx"/>
+    <property name="target_spawn" value="from_campus"/>
    </properties>
   </object>
   <object id="1013" name="ron_cooke_door" x="1074.44" y="1048.5" width="60.0657" height="54.6812">
