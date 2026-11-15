@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import io.github.goldengoose.Cog;
 import io.github.goldengoose.screen.MainMenuScreen;
 import io.github.goldengoose.assets.CogFonts;
@@ -120,7 +119,7 @@ public class PauseMenu {
 
     public boolean isTutorialOpen() { return tutorialOpen; }
 
-    public void setVisible(boolean visible) { table.setVisible(visible); }
+    public void setVisible(boolean visible) { stage.getRoot().setVisible(visible); }
 
     public void closeTutorial() {
         tutorialOpen = false;
