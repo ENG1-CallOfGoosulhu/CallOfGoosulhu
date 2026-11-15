@@ -9,6 +9,11 @@ import io.github.goldengoose.world.Entity;
 import io.github.goldengoose.world.GameWorld;
 import io.github.goldengoose.world.KeyState;
 
+/**
+ * Keycard magnetiser in Ron Cooke's staff room. If the player stands at it with the unmagnetised
+ * keycard and presses E, the keycard becomes magnetised and can open Ian Wand. Shows the E prompt
+ * while the player is in range.
+ */
 public class KeycardMagnetiser extends HiddenEvent {
     // Prompt animation
     private static final float PROMPT_GAP = -20f;

@@ -12,6 +12,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.goldengoose.assets.CogFonts;
 import io.github.goldengoose.util.Utilities;
 
+/**
+ * The tutorial book, opened with the ? button on the main menu and pause menu. Two pages covering
+ * controls, the goal, mechanics and things to watch out for. Switch pages with the arrow keys.
+ */
 public class TutMenu {
     private static final float SCALE_X = 6f;
     private static final float SCALE_Y = 4.5f;

@@ -5,6 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The hint at the top of the screen. Picks a message from where the player is and how far along they
+ * are, and fades each one out after a few seconds.
+ */
 public class ObjectiveSystem {
 
     private String currentObjective = "";

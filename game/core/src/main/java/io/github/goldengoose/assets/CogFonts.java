@@ -1,5 +1,8 @@
 package io.github.goldengoose.assets;
 
+/**
+ * The fonts the game uses, each linked to its file.
+ */
 public enum CogFonts {
     UNCIALANTIQUA("fonts/UncialAntiqua-Regular.ttf");
 

@@ -4,11 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
 /**
- * Class to handle player input
- * <p>
- * TODO: Possibly store keybind settings and use those instead of hard-coded keys
- * TODO: Possibly allow arrow keys alongside WASD
- * </p>
+ * All the game's keyboard controls in one place: WASD to move, E to interact, T for the tome, and P or
+ * Esc to pause.
  */
 public class InputManager {
     public static boolean pause() {

@@ -6,6 +6,10 @@ import com.badlogic.gdx.utils.Disposable;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.world.KeyState;
 
+/**
+ * HUD icon for the keycard. Appears once the player picks it up and swaps to the magnetised version
+ * after the magnetiser.
+ */
 public class KeyCard implements Disposable {
     public static final int WIDTH = 50, HEIGHT = 33;
 

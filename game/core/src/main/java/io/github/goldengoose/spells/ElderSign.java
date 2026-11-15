@@ -16,6 +16,10 @@ import io.github.goldengoose.audio.AudioManager;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.world.RenderLayer;
 
+/**
+ * The glowing circle placed by the Elder Sign spell. Geese within SCARE_RADIUS run away from it until
+ * it fades after LIFETIME seconds.
+ */
 public class ElderSign extends Entity {
     private static final int FRAME_SIZE = 48;
     private static final float GROW_FRAME_TIME = 0.07f;

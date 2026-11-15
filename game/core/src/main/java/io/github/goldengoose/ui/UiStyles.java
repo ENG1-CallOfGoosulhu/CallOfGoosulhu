@@ -6,6 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 
+/**
+ * Shared label and button styles so all menu text looks the same.
+ */
 public final class UiStyles {
     private UiStyles() {}
 

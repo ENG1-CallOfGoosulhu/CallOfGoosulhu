@@ -25,6 +25,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * UR_PAUSE_GAME, FR_PAUSE: "Player can pause the game at any time and game starts paused"
+ *
+ * The pause menu (P or Esc), with Quit to Menu, Quit to Desktop and the tutorial book.
  */
 public class PauseMenu {
     private final Stage stage;

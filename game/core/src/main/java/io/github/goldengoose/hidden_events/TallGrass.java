@@ -13,17 +13,9 @@ import java.util.List;
 /**
  * FR_HIDE: "Makes the avatar undetectable in tall grass  for 30 seconds"
  *
- * Makes the player hide in tall grass (For how long?) - 3 seconds like req1 says?
- *
- * Have given every layer of "tall grass" in the map collision objects a new property boolean "tall_grass".
- * Code collects these flags.
- *
- * While the player is hidden:
- *   - the goose AI cannot see or hear the player (needs a hidden flag on Player + a check in GooseAI)
- *   - the grass is drawn semi-transparent (needs support in DepthRenderer, which draws the
- *     ySort layers; this class only says HOW transparent via getFadeAlpha())
+ * Hides the player from geese while they stand in tall grass, and fades the grass so they can still
+ * see themselves. Tall grass is marked with the "tall_grass" property on the map's collision objects.
  */
-
 public class TallGrass extends HiddenEvent {
 
     // Layer property that marks a tall grass layer in Tiled

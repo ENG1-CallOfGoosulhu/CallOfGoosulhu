@@ -6,6 +6,10 @@ import io.github.goldengoose.player.Player;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.world.GameSession;
 
+/**
+ * Base class for every spell in the tome. Checks the range and cooldown and plays the cast or fail
+ * sound.
+ */
 public abstract class Spell {
     protected Texture texture;
     protected float range;

@@ -9,13 +9,9 @@ import io.github.goldengoose.world.CollisionMap;
 /**
  * UR_GEESE, FR_GOOSE_CHASE: "Geese will swarm and obstruct the player until they are fed or an item is used on them."
  *
- * Goose AI plan:
- * IDLE: Wander around the campus, has cone-like visual detection, circular audial detection
- * ALERT: possibly not needed
- * CHASING: Chasing the player
- * SWARMING: Attempt to surround the player
+ * Decides what each goose does: wanders until it sees or hears the player, then chases and swarms
+ * them. Geese go for bread instead of the player, and run from Elder Signs.
  */
-
 public class GooseAI {
     enum GooseState {
         IDLE,

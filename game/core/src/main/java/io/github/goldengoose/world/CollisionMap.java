@@ -17,6 +17,8 @@ import java.util.List;
 
 /**
  * FR_BOUNDS: "System will prevent the avatar from being able to leave the map or pass through solid objects"
+ *
+ * Reads the boxes and shapes on the map's Collision layer and checks entity collisions.
  */
 public class CollisionMap {
     private final List<Rectangle> rects = new ArrayList<>();

@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import io.github.goldengoose.assets.CogFonts;
 
+/**
+ * Helpers used across the game. Makes fonts stay the same size on any monitor, and splits sprite
+ * sheets into animations.
+ */
 public class Utilities {
     private static final float REFERENCE_SCREEN_HEIGHT = 1080f;
     public static final float UI_WIDTH = 640f;

@@ -6,6 +6,9 @@ import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.world.GameSession;
 import io.github.goldengoose.world.GameWorld;
 
+/**
+ * The Elder Sign spell in the tome. Casting it places an ElderSign where the player clicks.
+ */
 public class ElderSignSpell extends Spell {
 
     public ElderSignSpell(GameSession session, Assets assets) {

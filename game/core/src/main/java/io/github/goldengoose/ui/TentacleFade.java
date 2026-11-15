@@ -9,6 +9,10 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import io.github.goldengoose.assets.Assets;
 
+/**
+ * Black fade with zooming, shaking tentacles drawn over the whole screen. Used by both cutscenes and
+ * the zoom at the end of the game.
+ */
 public class TentacleFade {
     private static final float SHAKE = 6f;
     private static final float START_ZOOM = 1.8f;

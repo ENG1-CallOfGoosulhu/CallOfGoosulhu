@@ -2,6 +2,8 @@ package io.github.goldengoose;
 
 /**
  * UR_GAME_TIMER: "The game lasts up to 5 real world minutes"
+ *
+ * Counts down the 5-minute timer and says when time is up.
  */
 public class GameTimer {
     private float secondsRemaining;

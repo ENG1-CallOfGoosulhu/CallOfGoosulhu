@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
+/**
+ * Every file path the game loads (images, maps, music and sound effects) in one place. load() loads
+ * them all once at start-up.
+ */
 public class Assets {
     //---------------------------------------------------------------------------------//
     // IMAGES

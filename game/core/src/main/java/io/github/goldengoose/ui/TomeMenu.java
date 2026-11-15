@@ -17,6 +17,10 @@ import io.github.goldengoose.spells.Spell;
 import io.github.goldengoose.spells.SpellTome;
 import io.github.goldengoose.util.Utilities;
 
+/**
+ * The open spell tome (T key). Shows the selected spell's icon on the left page and its name and
+ * description on the right.
+ */
 public class TomeMenu {
     private static final float REFERENCE_WIDTH = 800f;
     private static final float SCALE_X = 6f;

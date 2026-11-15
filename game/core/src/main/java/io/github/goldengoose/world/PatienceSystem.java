@@ -6,6 +6,9 @@ import java.util.List;
 
 /**
  * FR_PATIENCE: "Will reduce the patience level on each nearby honk and refill when in a “safe” zone."
+ *
+ * Drains patience while geese are chasing or swarming the player (trapped geese don't count), and it
+ * refills when they are not. When it runs out the player turns into a goose.
  */
 public class PatienceSystem {
 

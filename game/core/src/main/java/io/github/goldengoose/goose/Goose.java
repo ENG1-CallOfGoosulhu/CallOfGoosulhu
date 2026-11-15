@@ -13,6 +13,10 @@ import io.github.goldengoose.world.Entity;
 import io.github.goldengoose.util.Utilities;
 import io.github.goldengoose.audio.AudioManager;
 
+/**
+ * Cthulhu goose on the map. Draws its walking and running animations. Where it goes and what it does
+ * is decided by GooseAI.
+ */
 public class Goose extends Entity {
     //------------
     // CONSTANTS

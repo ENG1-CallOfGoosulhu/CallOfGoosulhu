@@ -32,6 +32,10 @@ import io.github.goldengoose.world.DepthRenderer;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Cutscene that plays when the game ends, win or lose. The tentacles fade, the player wakes up by the
+ * lake, speech bubbles pop up, then they walk home before the game over screen. Space skips it.
+ */
 public class EndCutsceneScreen implements Screen {
     private static final float WAKE_TIME = 2f;
     private static final float STAND_START = 3f;

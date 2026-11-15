@@ -21,6 +21,11 @@ import io.github.goldengoose.util.InputManager;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Stores persistent per playthrough info, like player, timer, spell tome, patience, objectives, audio
+ * and keycard state. Moves the player between maps when they use a door, and shows the E prompt next
+ * to doors.
+ */
 public class GameSession implements Disposable {
     private static final float DOOR_RANGE = 48f;
     private static final float PROMPT_GAP = -20f;

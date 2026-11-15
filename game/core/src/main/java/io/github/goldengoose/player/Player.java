@@ -16,6 +16,8 @@ import java.util.Arrays;
 /**
  * UR_AVATAR: "The player will control an avatar representing an undergraduate student" <br>
  * FR_MOVE_PLAYER: "The system shall move the avatar in eight directions via the keyboard" <br>
+ *
+ * The student the player controls. Walks in 8 directions with WASD using the Amelia sprite sheet.
  */
 public class Player extends Entity {
     //------------

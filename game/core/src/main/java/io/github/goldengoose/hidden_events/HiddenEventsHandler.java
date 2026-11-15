@@ -7,17 +7,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * UR_HIDDEN_EVENTS: The map contains 5 (2 for A1) hidden events including
+ * UR_HIDDEN_EVENTS: "The map contains 5 hidden events including: hiding spots, tall grass, mud, bread dispenser, boss event" (2 implement in A1 though).
  *
- * The handler for hidden events
- *
- * It does three things:
- *   1. register(): puts an event into the world and listens to it.
- *   2. Counts the number of triggers, which feeds the "hidden events triggered" counter
- *   3. Remembers the latest feedback text for a few seconds so the HUD can show
- *      it (mostly testing purposes)
+ * Keeps track of the hidden events on a map. It adds each event to the world, counts how many have
+ * been triggered, and remembers the latest message for a few seconds so the HUD can show it (doesn't
+ * currently though).
  */
-
 public class HiddenEventsHandler implements HiddenEvent.Listener {
     private static final float MESSAGE_DURATION = 3f;
 

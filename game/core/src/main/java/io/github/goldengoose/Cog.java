@@ -7,6 +7,10 @@ import io.github.goldengoose.screen.MainMenuScreen;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.audio.AudioManager;
 
+/**
+ * The main game class. Loads the assets, holds the shared SpriteBatch and switches between screens.
+ * changeScreen() waits until the next frame, so a screen is never disposed while it is still drawing.
+ */
 public class Cog extends Game {
     public SpriteBatch batch;
     public Assets assets;

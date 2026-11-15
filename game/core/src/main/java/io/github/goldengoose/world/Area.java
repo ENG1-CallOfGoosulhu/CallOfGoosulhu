@@ -31,6 +31,9 @@ import java.util.List;
 
 /**
  * UR_CAMPUS_MAP: "The game must take place on a UoY campus-style map with limits to where the player should be able to go"
+ *
+ * One map (campus, Ron Cooke or Ian Wand) loaded from Tiled, with collisions, doors, lighting,
+ * mud, tall grass, hidden events and the portal (in Ian Wand).
  */
 public class Area implements Disposable {
     private final String name;

@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * All the entities in the current map (player, geese, bread, spell circles and pickups). Updates them,
+ * lets them interact, and passes them onto drawing and lighting.
+ */
 public class GameWorld {
     private final List<Entity> entities = new ArrayList<>();
     private final List<Entity> depthEntities = new ArrayList<>();

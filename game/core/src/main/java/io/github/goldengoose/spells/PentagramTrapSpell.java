@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 import io.github.goldengoose.assets.Assets;
 import io.github.goldengoose.world.GameSession;
 
+/**
+ * The Pentagram spell in the tome. Casting it places a PentagramTrap where the player clicks.
+ */
 public class PentagramTrapSpell extends Spell {
 
     public PentagramTrapSpell(GameSession session, Assets assets) {

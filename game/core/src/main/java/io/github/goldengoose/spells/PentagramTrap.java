@@ -15,6 +15,10 @@ import io.github.goldengoose.world.RenderLayer;
 import io.github.goldengoose.audio.AudioManager;
 import io.github.goldengoose.assets.Assets;
 
+/**
+ * The glowing circle placed by the Pentagram spell. The first goose to walk into it is held in place
+ * until it fades after LIFETIME seconds.
+ */
 public class PentagramTrap extends Entity {
     private static final int FRAME_SIZE = 48;
     private static final float GROW_FRAME_TIME = 0.07f;

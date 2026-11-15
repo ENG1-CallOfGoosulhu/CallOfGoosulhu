@@ -29,6 +29,9 @@ import com.badlogic.gdx.graphics.Color;
 /**
  * UR_WIN: "The player must get to the escape portal by dispersing the obstructing geese, before the timer ends, to win." (See portal)
  * FR_TIMER_COUNTDOWN: "The system shall end the game once timer is up"
+ *
+ * The main gameplay screen. Updates and draws the current map, HUD, pause menu and spell tome, and
+ * runs the ending: time up or patience gone or portal end, then the zoom, tentacles and end cutscene.
  */
 public class GameScreen implements Screen {
     private static final float ENDING_LENGTH = 3f;

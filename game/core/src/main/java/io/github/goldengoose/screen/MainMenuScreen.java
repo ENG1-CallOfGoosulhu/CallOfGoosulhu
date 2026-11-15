@@ -25,6 +25,9 @@ import static io.github.goldengoose.assets.Assets.TUT_BUTTON;
 import io.github.goldengoose.ui.TutMenu;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
+/**
+ * The title screen, with Play, Quit and the tutorial book button.
+ */
 public class MainMenuScreen implements Screen {
     private static final float MENU_HEIGHT = 480f;
     private static final float MENU_WIDTH = 640f;
