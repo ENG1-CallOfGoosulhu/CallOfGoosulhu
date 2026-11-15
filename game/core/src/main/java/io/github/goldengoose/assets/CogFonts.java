@@ -1,7 +1,7 @@
 package io.github.goldengoose.assets;
 
 public enum CogFonts {
-    CRISTOFORO("fonts/Cristoforo.ttf");
+    UNCIALANTIQUA("fonts/UncialAntiqua-Regular.ttf");
 
     private final String path;
     CogFonts(final String path) {

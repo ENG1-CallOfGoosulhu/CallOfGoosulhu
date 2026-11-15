@@ -24,9 +24,9 @@ public class TutMenu {
     private static final Color INK = new Color(0.23f, 0.15f, 0.2f, 1f);
     private static final Color INK_FADED = new Color(0.23f, 0.15f, 0.2f, 0.4f);
 
-    private final BitmapFont titleFont = Utilities.createFont(CogFonts.CRISTOFORO, 28);
-    private final BitmapFont bodyFont = Utilities.createFont(CogFonts.CRISTOFORO, 16);
-    private final BitmapFont arrowFont = Utilities.createFont(CogFonts.CRISTOFORO, 20);
+    private final BitmapFont titleFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 22);
+    private final BitmapFont bodyFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 10);
+    private final BitmapFont arrowFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 20);
     private final GlyphLayout layout = new GlyphLayout();
 
     private final Texture texture;

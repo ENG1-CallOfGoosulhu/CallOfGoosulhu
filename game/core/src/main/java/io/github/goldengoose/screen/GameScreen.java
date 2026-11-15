@@ -35,8 +35,8 @@ public class GameScreen implements Screen {
 
     private final PauseMenu pauseMenu;
     private final TomeMenu tomeMenu;
-    private final BitmapFont hudFont = Utilities.createFont(CogFonts.CRISTOFORO, 24);
-    private final BitmapFont objectiveFont = Utilities.createFont(CogFonts.CRISTOFORO, 40);    private final Hud hud;
+    private final BitmapFont hudFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 24);
+    private final BitmapFont objectiveFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 40);    private final Hud hud;
     private final Rectangle viewRect = new Rectangle();
     private final GameSession session;
 
@@ -223,7 +223,7 @@ public class GameScreen implements Screen {
         if (!overlayVisible) {
             overlayVisible = true;
             overlayWon = won;
-            overlayFont = Utilities.createFont(CogFonts.CRISTOFORO, 64);
+            overlayFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 64);
             paused = true;
         }
     }

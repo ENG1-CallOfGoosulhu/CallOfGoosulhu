@@ -25,8 +25,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class PauseMenu {
     private final Stage stage;
-    private final BitmapFont titleFont = Utilities.createFont(CogFonts.CRISTOFORO, 48);
-    private final BitmapFont buttonFont = Utilities.createFont(CogFonts.CRISTOFORO, 16);
+    private final BitmapFont titleFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 48);
+    private final BitmapFont buttonFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 16);
 
     private final Table table = new Table();
 

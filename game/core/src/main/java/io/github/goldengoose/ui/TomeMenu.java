@@ -31,8 +31,8 @@ public class TomeMenu {
     private static final float PAGE_PADDING = 2f;
     private static final Color INK = new Color(0.23f, 0.15f, 0.2f, 1f);
 
-    private final BitmapFont titleFont = Utilities.createFont(CogFonts.CRISTOFORO, 28);
-    private final BitmapFont bodyFont = Utilities.createFont(CogFonts.CRISTOFORO, 16);
+    private final BitmapFont titleFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 22);
+    private final BitmapFont bodyFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 14);
     private final GlyphLayout layout = new GlyphLayout();
 
     private final Texture texture;

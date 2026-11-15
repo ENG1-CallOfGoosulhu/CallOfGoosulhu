@@ -49,7 +49,7 @@ public class MainMenuScreen implements Screen {
     }
 
     private void createMenu() {
-        menuFont = Utilities.createFont(CogFonts.CRISTOFORO, 64);
+        menuFont = Utilities.createFont(CogFonts.UNCIALANTIQUA, 64);
 
         Label title = new Label("Call of Goosulhu", UiStyles.label(menuFont));
         TextButton playButton = new TextButton("PLAY", UiStyles.button(menuFont));

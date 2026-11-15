@@ -34,7 +34,7 @@ public class GameOverScreen implements Screen {
         stage = new Stage(new ScreenViewport(), game.batch);
         Gdx.input.setInputProcessor(stage);
 
-        font = Utilities.createFont(CogFonts.CRISTOFORO, 64);
+        font = Utilities.createFont(CogFonts.UNCIALANTIQUA, 64);
 
         String message = won ? "Congratulations!\nYou Escaped The Goosulhu!" : "Better Luck Next Time";
 
